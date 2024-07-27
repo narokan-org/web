@@ -47,6 +47,8 @@ export async function riskImportService(
     const blockBlobClient = containerClient.getBlockBlobClient(file.name);
     await blockBlobClient.uploadData(fileBuffer);
 
+    // TODO: The file should be sent to an Azure Storage queue. Other functions would process off this queue to actually process the files. For now, we'll simply process immediately and store into Cosmos DB.
+
     return {
       status: 200,
       body: "File uploaded successfully.",
