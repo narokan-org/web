@@ -1,3 +1,5 @@
+############# api #############
+
 # Logs
 logs
 *.log
@@ -98,4 +100,24 @@ __blobstorage__
 __queuestorage__
 __azurite_db*__.json
 
+############# ui #############
+
+# Output
+.output
+.vercel
+/ui/.svelte-kit
+/ui/build
+
+# OS
 .DS_Store
+Thumbs.db
+
+# Env
+.env
+.env.*
+!.env.example
+!.env.test
+
+# Vite
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
