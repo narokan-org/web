@@ -1,5 +1,5 @@
 {
-	"name": "basel-ui",
+	"name": "my-app",
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
@@ -15,6 +15,7 @@
 		"test:unit": "vitest"
 	},
 	"devDependencies": {
+		"@azure/static-web-apps-cli": "^2.0.1",
 		"@playwright/test": "^1.28.1",
 		"@sveltejs/adapter-auto": "^3.0.0",
 		"@sveltejs/kit": "^2.0.0",
@@ -26,7 +27,7 @@
 		"globals": "^15.0.0",
 		"prettier": "^3.1.1",
 		"prettier-plugin-svelte": "^3.1.2",
-		"svelte": "^4.2.7",
+		"svelte": "^5.0.0-next.1",
 		"svelte-adapter-azure-swa": "^0.20.1",
 		"svelte-check": "^3.6.0",
 		"typescript": "^5.0.0",
