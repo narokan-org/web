@@ -1,10 +1,6 @@
 {
 	"routes": [
 		{
-			"route": "/*",
-			"rewrite": "/index.html"
-		},
-		{
 			"route": "/.auth/login/twitter",
 			"statusCode": 404
 		},
@@ -15,6 +11,10 @@
 		{
 			"route": "/login",
 			"redirect": "/.auth/login/aad"
+		},
+		{
+			"route": "/*",
+			"rewrite": "/index.html"
 		}
 	]
 }
