@@ -18,14 +18,14 @@ jobs:
       run:
         working-directory: ui
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         name: Checkout
         with:
           submodules: true
           lfs: false
 
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: "20.16.0"
 
@@ -43,7 +43,7 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
           app_location: "./ui"
-          output_location: "ui/dist"
+          output_location: "ui/build"
           skip_app_build: true
           skip_api_build: true
 
