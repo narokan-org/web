@@ -1,11 +1,25 @@
 {
 	"routes": [
 		{
+			"route": "/login",
+			"rewrite": "/.auth/login/aad",
+			"allowedRoles": ["anonymous", "authenticated"]
+		},
+		{
+			"route": "/.auth/login/github",
+			"statusCode": 404
+		},
+		{
+			"route": "/.auth/login/twitter",
+			"statusCode": 404
+		},
+		{
 			"route": "/*",
 			"allowedRoles": ["anonymous", "authenticated"]
 		}
 	],
 	"navigationFallback": {
-		"rewrite": "index.html"
+		"rewrite": "index.html",
+		"exclude": ["/images/*.{png,jpg,gif}", "/css/*"]
 	}
 }
