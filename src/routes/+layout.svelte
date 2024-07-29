@@ -1,5 +1,6 @@
-<script context="module">
-	import { t, loadTranslations } from '$lib/translations';
+<script>
+	import { loadTranslations } from '$lib/translations';
+	import Header from '$lib/components/header/header.svelte';
 	import '../app.css';
 
 	/** @type {import('@sveltejs/kit').Load} */
@@ -12,5 +13,7 @@
 		return {};
 	};
 </script>
+
+<Header />
 
 <slot></slot>

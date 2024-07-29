@@ -1,9 +1,8 @@
 <script>
 	import { page } from '$app/stores';
-	import { t, locale } from '$lib/translations';
+	import { t } from '$lib/translations';
 	import { Navbar, NavBrand, NavLi, NavUl, NavHamburger } from 'flowbite-svelte';
 	$: activeUrl = $page.url.pathname;
-	console.log(`currenLocale is ${$locale}`);
 </script>
 
 <Navbar>
@@ -14,6 +13,6 @@
 	</NavBrand>
 	<NavHamburger />
 	<NavUl {activeUrl}>
-		<NavLi href="/login">{$t('common.login')}</NavLi>
+		<NavLi href="/.auth/login/aad">{$t('common.login')}</NavLi>
 	</NavUl>
 </Navbar>
