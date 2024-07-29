@@ -13,6 +13,7 @@
 	</NavBrand>
 	<NavHamburger />
 	<NavUl {activeUrl}>
+		<NavLi href="/.auth/logout">{$t('common.logout')}</NavLi>
 		<NavLi href="/.auth/login/aad">{$t('common.login')}</NavLi>
 	</NavUl>
 </Navbar>

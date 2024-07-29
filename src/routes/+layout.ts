@@ -4,4 +4,6 @@ export const load = async ({ url }) => {
 	const { pathname } = url;
 
 	await loadTranslations('en', pathname);
+
+	return {};
 };
