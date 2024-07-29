@@ -8,7 +8,7 @@ export const load = async ({ cookies }) => {
 
 	if (token) {
 		try {
-			console.log(token);
+			console.log('the token is: ', token);
 			claims = jwtDecode(token);
 			console.log('claims:', claims);
 			isLoggedIn = true;
