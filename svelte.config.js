@@ -23,10 +23,6 @@ const config = {
 					{
 						route: '/.auth/login/twitter',
 						statusCode: 404
-					},
-					{
-						route: '/*',
-						allowedRoles: ['anonymous', 'authenticated']
 					}
 				]
 			}
