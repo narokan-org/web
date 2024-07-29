@@ -31,3 +31,13 @@ User's Claims:
   }]
 }]
 ```
+
+### Debugging in Azure Static Web Apps
+
+The instance of basel has application insights configured. By going to app-basel-dev application insights instance, you can enter a query such as the below to find more information about your query:
+
+```
+traces
+| where message contains "Failed to decode token:"
+| order by timestamp desc
+```
