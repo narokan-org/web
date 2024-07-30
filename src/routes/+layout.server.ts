@@ -24,6 +24,7 @@ export const load = async ({ request, cookies }) => {
 };
 
 function decodeByHeader(request: Request) {
+	console.log('Decoding by header');
 	const header = request.headers.get('x-ms-client-principal');
 
 	if (!header) {
@@ -39,6 +40,7 @@ function decodeByHeader(request: Request) {
 }
 
 function decodeByCookie(cookies: Cookies) {
+	console.log('Decoding by cookie');
 	const token = cookies.get('StaticWebAppsAuthCookie');
 
 	if (!token) {
