@@ -41,7 +41,6 @@ function decodeByCookie(cookies: Cookies) {
 	const token = cookies.get('StaticWebAppsAuthCookie');
 
 	if (!token) {
-		console.error('No token found');
 		return null;
 	}
 
