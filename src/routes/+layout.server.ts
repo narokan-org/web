@@ -1,20 +1,27 @@
+import { fail } from '@sveltejs/kit';
 import { jwtDecode } from 'jwt-decode';
 
-export const load = async ({ cookies }) => {
+export const load = async ({ request, cookies }) => {
 	console.log('load for auth');
-	const token = cookies.get('StaticWebAppsAuthCookie');
+	const header = request.headers.get('x-ms-client-principal');
+
+	if (!header) {
+		console.error('No header found');
+		fail(500);
+		return;
+	}
+
+	const encoded = Buffer.from(header!, 'base64');
+	const decoded = encoded.toString('ascii');
+	console.log('decoded token is:', JSON.parse(decoded));
+
 	let isLoggedIn = false;
 	let claims = null;
 
-	if (token) {
-		try {
-			console.log('the token is: ', token);
-			claims = jwtDecode(token);
-			console.log('claims:', claims);
-			isLoggedIn = true;
-		} catch (error) {
-			console.error('Failed to decode token:', error);
-		}
+	try {
+		isLoggedIn = false;
+	} catch (error) {
+		console.error('Failed to decode token:', error);
 	}
 
 	return { isLoggedIn, claims };
