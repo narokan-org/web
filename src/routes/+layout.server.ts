@@ -1,5 +1,4 @@
 import { fail } from '@sveltejs/kit';
-import { jwtDecode } from 'jwt-decode';
 
 export const load = async ({ request, cookies }) => {
 	console.log('load for auth');
@@ -12,18 +11,14 @@ export const load = async ({ request, cookies }) => {
 	}
 
 	const encoded = Buffer.from(header!, 'base64');
-	const decoded = encoded.toString('ascii');
-	console.log('plain decoded token is:', decoded);
-	console.log('decoded token is:', JSON.parse(decoded));
+	const decoded: {
+		identityProvider: string;
+		userId: string;
+		userDetails: string;
+		userRoles: string[];
+	} = JSON.parse(encoded.toString('ascii'));
 
-	let isLoggedIn = false;
-	let claims = null;
-
-	try {
-		isLoggedIn = false;
-	} catch (error) {
-		console.error('Failed to decode token:', error);
-	}
-
-	return { isLoggedIn, claims };
+	const isLoggedIn = decoded !== null;
+	console.log(`returning: ${JSON.stringify({ isLoggedIn, decoded })}`);
+	return { isLoggedIn, decoded };
 };
