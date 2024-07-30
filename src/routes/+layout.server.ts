@@ -13,6 +13,7 @@ export const load = async ({ request, cookies }) => {
 
 	const encoded = Buffer.from(header!, 'base64');
 	const decoded = encoded.toString('ascii');
+	console.log('plain decoded token is:', decoded);
 	console.log('decoded token is:', JSON.parse(decoded));
 
 	let isLoggedIn = false;
