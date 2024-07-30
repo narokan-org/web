@@ -10,6 +10,7 @@ export interface JwtPayload {
 }
 
 export const load = async ({ request, cookies }) => {
+	// For production, x-ms-client-principal is passed to the server in the request headers. For local development that is not the case so we decode the cookie directly. This is a limitation of swa cli currently
 	const user = isProduction ? decodeByHeader(request) : decodeByCookie(cookies);
 
 	if (!user) {

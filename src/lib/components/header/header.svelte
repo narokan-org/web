@@ -17,6 +17,12 @@
 	<NavHamburger />
 	<NavUl {activeUrl}>
 		{#if isLoggedIn}
+			<NavLi href="/dashboard">{$t('common.dashboard')}</NavLi>
+			<NavLi href="/risks">{$t('common.risks')}</NavLi>
+			<NavLi href="/controls">{$t('common.controls')}</NavLi>
+			<NavLi href="/assessments">{$t('common.assessments')}</NavLi>
+			<NavLi href="/entities">{$t('common.entities')}</NavLi>
+			<NavLi href="/settings">{$t('common.settings')}</NavLi>
 			<NavLi href="/.auth/logout">{$t('common.logout')}</NavLi>
 		{:else}
 			<NavLi href="/.auth/login/aad">{$t('common.login')}</NavLi>

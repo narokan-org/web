@@ -1,5 +1,11 @@
 {
 	"appName": "Basel",
+	"assessments": "Assessments",
+	"controls": "Controls",
+	"dashboard": "Dashboard",
+	"entities": "Entities",
 	"login": "Login",
-	"logout": "Logout"
+	"logout": "Logout",
+	"risks": "Risks",
+	"settings": "Settings"
 }
