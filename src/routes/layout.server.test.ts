@@ -1,6 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
 import { load } from './+layout.server';
-import { fail } from '@sveltejs/kit';
 
 describe('layout.server', () => {
 	it('should log error if x-ms-client-principal is missing', async () => {
