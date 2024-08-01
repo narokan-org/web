@@ -7,13 +7,9 @@ vi.mock('@sveltejs/kit', () => ({
 
 describe('login page', () => {
 	it('redirects to the azure login page', async () => {
-		const mockUrl = {
-			origin: 'http://localhost:3000'
-		};
-
-		await load({ url: mockUrl });
+		load();
 
 		const { redirect } = await import('@sveltejs/kit');
-		expect(redirect).toHaveBeenCalledWith(301, 'http://localhost:3000/.auth/login/aad');
+		expect(redirect).toHaveBeenCalledWith(301, '/.auth/login/aad');
 	});
 });
