@@ -12,6 +12,8 @@ Basel uses the [azure static web apps (swa) cli](https://azure.github.io/static-
 
 `npm install -g @azure/static-web-apps-cli`
 
+Place a file called `staticwebapp.config.json` at the root of the repo and add an empty `{}` inside of it. This is a temporary fix necessary to get the app running locally.
+
 ### Authentication
 
 Basel uses SWA auth. With local development you'll be met with a login screen and you'll enter the following details in the form.
