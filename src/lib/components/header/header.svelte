@@ -23,9 +23,9 @@
 			<NavLi href="/assessments">{$t('common.assessments')}</NavLi>
 			<NavLi href="/entities">{$t('common.entities')}</NavLi>
 			<NavLi href="/settings">{$t('common.settings')}</NavLi>
-			<NavLi href="/.auth/logout">{$t('common.logout')}</NavLi>
+			<NavLi href="/logout">{$t('common.logout')}</NavLi>
 		{:else}
-			<NavLi href="/.auth/login/aad">{$t('common.login')}</NavLi>
+			<NavLi href="/login">{$t('common.login')}</NavLi>
 		{/if}
 	</NavUl>
 </Navbar>
