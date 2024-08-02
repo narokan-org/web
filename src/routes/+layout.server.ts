@@ -9,14 +9,20 @@ export interface JwtPayload {
 	userRoles: string[];
 }
 
-export const load = async ({ request, cookies }) => {
+export const load = async ({ locals, fetch, request, cookies }) => {
 	// For production, x-ms-client-principal is passed to the server in the request headers. For local development that is not the case so we decode the cookie directly. This is a limitation of swa cli currently.
-	const user = isProduction() ? decodeByHeader(request) : decodeByCookie(cookies);
+	const jwtUser = isProduction() ? decodeByHeader(request) : decodeByCookie(cookies);
 
-	if (!user) {
-		console.error('Could not find user.');
+	if (!jwtUser) {
+		console.error('User is not logged in.');
 		fail(500);
 		return;
+	}
+
+	let user = await locals.userService.getUser(jwtUser.userId);
+
+	if (!user) {
+		user = await locals.userService.createUser({ id: jwtUser.userId, email: jwtUser.userDetails });
 	}
 
 	return { isLoggedIn: true, user };

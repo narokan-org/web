@@ -29,5 +29,15 @@
 			"mode": "production"
 		}
 	},
-	"entities": {}
+	"entities": {
+		"users": {
+			"source": "dbo.User",
+			"permissions": [
+				{
+					"actions": ["read", "create", "update"],
+					"role": "authenticated"
+				}
+			]
+		}
+	}
 }

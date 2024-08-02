@@ -22,3 +22,6 @@ vite.config.ts.timestamp-*
 
 # Not sure why this is needed for local developmen just yet.
 staticwebapp.config.json
+__azurite_db_blob__.json
+__blobstorage__
+__queuestorage__

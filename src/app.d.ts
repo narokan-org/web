@@ -4,7 +4,9 @@
 declare global {
 	namespace App {
 		// interface Error {}
-		// interface Locals {}
+		interface Locals {
+			userService: import('$lib/services/user-service');
+		}
 		// interface PageData {}
 		// interface PageState {}
 		// interface Platform {}

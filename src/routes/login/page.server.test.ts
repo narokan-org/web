@@ -7,13 +7,9 @@ vi.mock('@sveltejs/kit', () => ({
 
 describe('login page', () => {
 	it('redirects to the azure login page', async () => {
-		const origin = 'http://localhost';
-		load({ url: new URL(origin) });
+		load();
 
 		const { redirect } = await import('@sveltejs/kit');
-		expect(redirect).toHaveBeenCalledWith(
-			301,
-			'/.auth/login/aad?post_login_redirect_uri=http%3A%2F%2Flocalhost%2Fapi%2Fuser%2Foauthcallback'
-		);
+		expect(redirect).toHaveBeenCalledWith(301, '/.auth/login/aad');
 	});
 });
