@@ -13,10 +13,6 @@ const config = {
 			customStaticWebAppConfig: {
 				routes: [
 					{
-						route: '/api/*',
-						allowedRoles: ['authenticated']
-					},
-					{
 						route: '/login',
 						rewrite: '/.auth/login/aad',
 						allowedRoles: ['anonymous', 'authenticated']
