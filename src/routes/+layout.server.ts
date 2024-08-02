@@ -19,13 +19,13 @@ export const load = async ({ locals, fetch, request, cookies }) => {
 		return;
 	}
 
-	let user = await locals.userService.getUser(jwtUser.userId);
+	// let user = await locals.userService.getUser(jwtUser.userId);
 
-	if (!user) {
-		user = await locals.userService.createUser({ id: jwtUser.userId, email: jwtUser.userDetails });
-	}
+	// if (!user) {
+	// 	user = await locals.userService.createUser({ id: jwtUser.userId, email: jwtUser.userDetails });
+	// }
 
-	return { isLoggedIn: true, user };
+	return { isLoggedIn: true, jwtUser };
 };
 
 function decodeByHeader(request: Request) {
