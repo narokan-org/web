@@ -9,8 +9,13 @@ const config = {
 
 	kit: {
 		adapter: azure({
+			apiDir: './api',
 			customStaticWebAppConfig: {
 				routes: [
+					{
+						route: '/api/sample',
+						allowedRoles: ['authenticated']
+					},
 					{
 						route: '/login',
 						rewrite: '/.auth/login/aad',
