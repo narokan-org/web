@@ -13,7 +13,7 @@ const config = {
 			customStaticWebAppConfig: {
 				routes: [
 					{
-						route: '/api/sample',
+						route: '/api/*',
 						allowedRoles: ['authenticated']
 					},
 					{
