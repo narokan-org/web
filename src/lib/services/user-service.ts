@@ -40,7 +40,14 @@ export class UserService {
 
 		if (!response.ok) {
 			console.debug(`Failed to create user with id ${user.id}`);
-			console.debug(`Response is ${response.status} ${response.statusText}`);
+			const contentType = response.headers.get('Content-Type');
+			if (contentType && contentType.includes('application/json')) {
+				const jsonResponse = await response.json();
+				console.debug(`Response is ${JSON.stringify(jsonResponse)}`);
+			} else {
+				const textResponse = await response.text();
+				console.debug(`Response is ${textResponse}`);
+			}
 			return null;
 		}
 
