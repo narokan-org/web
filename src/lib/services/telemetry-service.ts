@@ -5,13 +5,15 @@ export class TelemetryService {
 	private appInsights: ApplicationInsights;
 
 	constructor() {
+		console.log('inside constructor of telemetry service');
 		this.appInsights = new ApplicationInsights({
 			config: {
 				enableDebug: !isProduction(),
-				instrumentationKey: process.env.APPLICATION_INSIGHTS_INSTRUMENTATION_KEY
+				connectionString: process.env.APPLICATION_INSIGHTS_CONNECTION_STRING
 			}
 		});
 
+		console.log('Getting ready to load app insights');
 		this.appInsights.loadAppInsights();
 		console.log('TelemetryService initialized');
 	}
