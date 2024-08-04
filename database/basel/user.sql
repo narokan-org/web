@@ -1,0 +1,7 @@
+DROP TABLE IF EXISTS [dbo].[User];
+
+CREATE TABLE [dbo].[User] (
+    id UNIQUEIDENTIFIER DEFAULT NEWID() PRIMARY KEY,
+    user_id CHAR(32) NOT NULL,
+    email VARCHAR(255) NOT NULL
+);

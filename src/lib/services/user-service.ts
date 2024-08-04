@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid';
 import type { DBUser } from '$lib/common/entities/db-user';
 import type { User } from '$lib/common/models/user';
 import { parseDBResponse } from '$lib/utils/utils';
@@ -26,7 +27,8 @@ export class UserService {
 
 	async createUser(user: User): Promise<User | null> {
 		const dbUser: DBUser = {
-			id: user.id,
+			id: uuidv4(),
+			user_id: user.id,
 			email: user.email
 		};
 		console.log(`Creating user ${JSON.stringify(user)}`);
