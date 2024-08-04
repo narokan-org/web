@@ -38,7 +38,7 @@ export class UserService {
 			body: JSON.stringify(dbUser)
 		});
 
-		console.log(response);
+		console.log('Response from createUser:', response);
 
 		if (!response.ok) {
 			console.debug(`Failed to create user with id ${user.id}`);
