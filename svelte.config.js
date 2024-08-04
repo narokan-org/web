@@ -24,11 +24,6 @@ const config = {
 					{
 						route: '/.auth/login/twitter',
 						statusCode: 404
-					},
-					{
-						route: '/*',
-						serve: '/index.html',
-						statusCode: 200
 					}
 				]
 			}
