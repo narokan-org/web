@@ -10,6 +10,7 @@ export class UserService {
 
 		if (!response.ok) {
 			console.debug(`Failed to get user with id ${id}`);
+			console.error(response);
 			return null;
 		}
 
@@ -36,6 +37,8 @@ export class UserService {
 			},
 			body: JSON.stringify(dbUser)
 		});
+
+		console.log(response);
 
 		if (!response.ok) {
 			console.debug(`Failed to create user with id ${user.id}`);
