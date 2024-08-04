@@ -40,6 +40,7 @@ export class UserService {
 
 		if (!response.ok) {
 			console.debug(`Failed to create user with id ${user.id}`);
+			console.debug(`Response is ${await response.json()}`);
 			return null;
 		}
 
