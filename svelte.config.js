@@ -9,24 +9,7 @@ const config = {
 
 	kit: {
 		adapter: azure({
-			apiDir: './api',
-			customStaticWebAppConfig: {
-				routes: [
-					{
-						route: '/login',
-						rewrite: '/.auth/login/aad',
-						allowedRoles: ['anonymous', 'authenticated']
-					},
-					{
-						route: '/.auth/login/github',
-						statusCode: 404
-					},
-					{
-						route: '/.auth/login/twitter',
-						statusCode: 404
-					}
-				]
-			}
+			apiDir: './api'
 		})
 	}
 };
