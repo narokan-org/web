@@ -9,7 +9,6 @@ const config = {
 
 	kit: {
 		adapter: azure({
-			apiDir: './api',
 			customStaticWebAppConfig: {
 				routes: [
 					{
