@@ -2,9 +2,7 @@
 	"$schema": "https://aka.ms/azure/static-web-apps-cli/schema",
 	"configurations": {
 		"basel": {
-			"apiLocation": "./api",
 			"outputLocation": "./build/static",
-			"apiBuildCommand": "npm run build",
 			"appBuildCommand": "npm run build",
 			"run": "vite dev",
 			"appDevserverUrl": "http://localhost:5173"

@@ -15,6 +15,7 @@
 		"test:unit": "vitest"
 	},
 	"dependencies": {
+		"@microsoft/applicationinsights-web": "^3.3.0",
 		"jwt-decode": "^4.0.0",
 		"sveltekit-i18n": "^2.4.2"
 	},

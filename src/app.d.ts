@@ -6,6 +6,7 @@ declare global {
 		// interface Error {}
 		interface Locals {
 			userService: import('$lib/services/user-service');
+			telemetryService: import('$lib/services/telemetry-service');
 		}
 		// interface PageData {}
 		// interface PageState {}
