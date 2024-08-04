@@ -1,13 +1,9 @@
 import type { DBUser } from '$lib/common/entities/db-user';
 import type { User } from '$lib/common/models/user';
 import { parseDBResponse } from '$lib/utils/utils';
-import type { TelemetryService } from './telemetry-service';
 
 export class UserService {
-	constructor(
-		private fetchFn: typeof fetch,
-		private telemetryService: TelemetryService
-	) {}
+	constructor(private fetchFn: typeof fetch) {}
 
 	async getUser(id: string): Promise<User | null> {
 		const response = await this.fetchFn(`/data-api/rest/users/id/${id}`);
@@ -40,12 +36,6 @@ export class UserService {
 				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify(dbUser)
-		});
-		console.log('Logging using telemetry service');
-
-		this.telemetryService.trackEvent('createUserResponse', {
-			status: response.status.toString(),
-			body: await response.json()
 		});
 
 		if (!response.ok) {
