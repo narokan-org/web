@@ -41,6 +41,7 @@ export class UserService {
 			},
 			body: JSON.stringify(dbUser)
 		});
+		console.log('Logging using telemetry service');
 
 		this.telemetryService.trackEvent('createUserResponse', {
 			status: response.status.toString(),

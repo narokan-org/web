@@ -13,6 +13,7 @@ export class TelemetryService {
 		});
 
 		this.appInsights.loadAppInsights();
+		console.log('TelemetryService initialized');
 	}
 
 	trackEvent(eventName: string, properties?: { [key: string]: string }) {
