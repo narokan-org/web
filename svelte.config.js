@@ -13,11 +13,6 @@ const config = {
 			customStaticWebAppConfig: {
 				routes: [
 					{
-						route: '/*',
-						serve: '/index.html',
-						statusCode: 200
-					},
-					{
 						route: '/login',
 						rewrite: '/.auth/login/aad',
 						allowedRoles: ['anonymous', 'authenticated']
@@ -29,6 +24,11 @@ const config = {
 					{
 						route: '/.auth/login/twitter',
 						statusCode: 404
+					},
+					{
+						route: '/*',
+						serve: '/index.html',
+						statusCode: 200
 					}
 				]
 			}
