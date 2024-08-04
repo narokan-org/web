@@ -42,10 +42,8 @@ jobs:
           az staticwebapp create \
             --name ${{ env.AZURE_STATIC_WEB_APP_NAME }} \
             --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} \
-            --source https://github.com/${{ github.repository }} \
+            --source-control-type None
             --location ${{ secrets.AZURE_LOCATION }} \
-            --branch main \
-            --token ${{ secrets.AZURE_GITHUB_TOKEN }}
 
       - name: Get Deployment Token
         id: get_token
