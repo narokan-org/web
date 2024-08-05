@@ -1,24 +1,27 @@
-import { v4 as uuidv4 } from 'uuid';
 import type { DBUser } from '$lib/common/entities/db-user';
 import type { User } from '$lib/common/models/user';
 import { parseDBResponse } from '$lib/utils/utils';
+import type { LoggingService } from './logging-service';
 
 export class UserService {
-	constructor(private fetchFn: typeof fetch) {}
+	constructor(
+		private fetchFn: typeof fetch,
+		private log: LoggingService
+	) {}
 
 	async getUser(id: string): Promise<User | null> {
 		const response = await this.fetchFn(`/data-api/rest/User/Id/${id}`);
 
 		if (!response.ok) {
-			console.debug(`Failed to get user with id ${id}`);
-			console.error(response);
+			this.log.debug(`Failed to get user with id ${id}`);
+			this.log.error(response);
 			return null;
 		}
 
 		const user = (await parseDBResponse<DBUser>(response))?.[0];
 
 		if (!user) {
-			console.debug(`User with id ${id} not found`);
+			this.log.debug(`User with id ${id} not found`);
 			return null;
 		}
 
@@ -30,7 +33,7 @@ export class UserService {
 			id: user.id,
 			email: user.email
 		};
-		console.log(`Creating user ${JSON.stringify(dbUser)}`);
+
 		const response = await this.fetchFn(`/data-api/rest/User`, {
 			method: 'POST',
 			headers: {
@@ -40,15 +43,7 @@ export class UserService {
 		});
 
 		if (!response.ok) {
-			console.debug(`Failed to create user with id ${user.id}`);
-			const contentType = response.headers.get('Content-Type');
-			if (contentType && contentType.includes('application/json')) {
-				const jsonResponse = await response.json();
-				console.debug(`Response is ${JSON.stringify(jsonResponse)}`);
-			} else {
-				const textResponse = await response.text();
-				console.debug(`Response is ${textResponse}`);
-			}
+			this.log.error(response);
 			return null;
 		}
 

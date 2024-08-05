@@ -5,6 +5,7 @@ declare global {
 	namespace App {
 		// interface Error {}
 		interface Locals {
+			loggingService: import('$lib/services/logging-service');
 			userService: import('$lib/services/user-service');
 			telemetryService: import('$lib/services/telemetry-service');
 		}
