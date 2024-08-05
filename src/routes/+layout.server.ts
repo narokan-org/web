@@ -3,7 +3,7 @@ import { isProduction } from '$lib/utils/utils.js';
 import { fail, type Cookies } from '@sveltejs/kit';
 import { jwtDecode } from 'jwt-decode';
 
-export const load = async ({ locals, fetch, request, cookies }) => {
+export const load = async ({ locals, request, cookies }) => {
 	// For production, x-ms-client-principal is passed to the server in the request headers. For local development that is not the case so we decode the cookie directly. This is a limitation of swa cli currently.
 	const jwtUser = isProduction()
 		? decodeByHeader(locals, request)

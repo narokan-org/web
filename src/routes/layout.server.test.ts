@@ -10,10 +10,15 @@ describe('layout.server', () => {
 			}
 		};
 		const cookies = { get: vi.fn() };
+		const consoleErrorSpy = vi.fn();
+		const locals = {
+			loggingService: {
+				debug: vi.fn(),
+				error: consoleErrorSpy
+			}
+		};
 
-		const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
-
-		await load({ request, cookies });
+		await load({ locals, request, cookies });
 
 		expect(consoleErrorSpy).toHaveBeenCalledTimes(1);
 	});
@@ -21,12 +26,17 @@ describe('layout.server', () => {
 	it('should log error if StaticWebAppsAuthCookie is missing', async () => {
 		process.env.NODE_ENV = 'development';
 
+		const consoleErrorSpy = vi.fn();
+		const locals = {
+			loggingService: {
+				debug: vi.fn(),
+				error: consoleErrorSpy
+			}
+		};
 		const request = {};
 		const cookies = { get: vi.fn().mockReturnValue(null) };
 
-		const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
-
-		await load({ request, cookies });
+		await load({ locals, request, cookies });
 
 		expect(consoleErrorSpy).toHaveBeenCalledTimes(1);
 	});
@@ -43,6 +53,16 @@ describe('layout.server', () => {
 		const jsonString = JSON.stringify(expected);
 		const base64Encoded = Buffer.from(jsonString).toString('base64');
 
+		const locals = {
+			userService: {
+				getUser: vi.fn(),
+				createUser: vi.fn()
+			},
+			loggingService: {
+				debug: vi.fn(),
+				error: vi.fn()
+			}
+		};
 		const request = {
 			headers: {
 				get: vi.fn().mockReturnValue(base64Encoded)
@@ -50,10 +70,10 @@ describe('layout.server', () => {
 		};
 		const cookies = { get: vi.fn() };
 
-		const result = await load({ request, cookies });
+		const result = await load({ locals, request, cookies });
 
 		expect(result?.isLoggedIn).toBe(true);
-		expect(result?.user).toEqual(expected);
+		expect(result?.jwtUser).toEqual(expected);
 	});
 
 	it('should return user from cookie', async () => {
@@ -68,12 +88,22 @@ describe('layout.server', () => {
 		const jsonString = JSON.stringify(expected);
 		const base64Encoded = Buffer.from(jsonString).toString('base64');
 
+		const locals = {
+			userService: {
+				getUser: vi.fn(),
+				createUser: vi.fn()
+			},
+			loggingService: {
+				debug: vi.fn(),
+				error: vi.fn()
+			}
+		};
 		const request = {};
 		const cookies = { get: vi.fn().mockReturnValue(base64Encoded) };
 
-		const result = await load({ request, cookies });
+		const result = await load({ locals, request, cookies });
 
 		expect(result?.isLoggedIn).toBe(true);
-		expect(result?.user).toEqual(expected);
+		expect(result?.jwtUser).toEqual(expected);
 	});
 });
