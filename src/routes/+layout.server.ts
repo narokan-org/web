@@ -1,13 +1,7 @@
+import type { JwtPayload } from '$lib/common/models/jwt-payload';
 import { isProduction } from '$lib/utils/utils.js';
 import { fail, type Cookies } from '@sveltejs/kit';
 import { jwtDecode } from 'jwt-decode';
-
-export interface JwtPayload {
-	identityProvider: string;
-	userId: string;
-	userDetails: string;
-	userRoles: string[];
-}
 
 export const load = async ({ locals, fetch, request, cookies }) => {
 	// For production, x-ms-client-principal is passed to the server in the request headers. For local development that is not the case so we decode the cookie directly. This is a limitation of swa cli currently.
