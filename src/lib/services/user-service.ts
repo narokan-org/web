@@ -31,7 +31,7 @@ export class UserService {
 			user_id: user.id,
 			email: user.email
 		};
-		console.log(`Creating user ${JSON.stringify(user)}`);
+		console.log(`Creating user ${JSON.stringify(dbUser)}`);
 		const response = await this.fetchFn(`/data-api/rest/users`, {
 			method: 'POST',
 			headers: {
