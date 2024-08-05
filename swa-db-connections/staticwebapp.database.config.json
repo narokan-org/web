@@ -30,7 +30,7 @@
 		}
 	},
 	"entities": {
-		"users": {
+		"User": {
 			"source": "dbo.User",
 			"permissions": [
 				{

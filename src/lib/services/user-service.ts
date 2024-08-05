@@ -7,7 +7,7 @@ export class UserService {
 	constructor(private fetchFn: typeof fetch) {}
 
 	async getUser(id: string): Promise<User | null> {
-		const response = await this.fetchFn(`/data-api/rest/users/id/${id}`);
+		const response = await this.fetchFn(`/data-api/rest/User/Id/${id}`);
 
 		if (!response.ok) {
 			console.debug(`Failed to get user with id ${id}`);
@@ -31,7 +31,7 @@ export class UserService {
 			email: user.email
 		};
 		console.log(`Creating user ${JSON.stringify(dbUser)}`);
-		const response = await this.fetchFn(`/data-api/rest/users`, {
+		const response = await this.fetchFn(`/data-api/rest/User`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
