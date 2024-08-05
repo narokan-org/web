@@ -10,12 +10,13 @@ export interface JwtPayload {
 }
 
 export const load = async ({ locals, fetch, request, cookies }) => {
-	console.log('Loading layout');
 	// For production, x-ms-client-principal is passed to the server in the request headers. For local development that is not the case so we decode the cookie directly. This is a limitation of swa cli currently.
-	const jwtUser = isProduction() ? decodeByHeader(request) : decodeByCookie(cookies);
+	const jwtUser = isProduction()
+		? decodeByHeader(locals, request)
+		: decodeByCookie(locals, cookies);
 
 	if (!jwtUser) {
-		console.error('User is not logged in.');
+		locals.loggingService.error('User is not logged in.');
 		fail(500);
 		return;
 	}
@@ -29,8 +30,9 @@ export const load = async ({ locals, fetch, request, cookies }) => {
 	return { isLoggedIn: true, jwtUser };
 };
 
-function decodeByHeader(request: Request) {
-	console.log('Decoding by header');
+function decodeByHeader(locals: App.Locals, request: Request) {
+	locals.loggingService.debug('Decoding by header');
+
 	const header = request.headers.get('x-ms-client-principal');
 
 	if (!header) {
@@ -43,8 +45,9 @@ function decodeByHeader(request: Request) {
 	return decoded;
 }
 
-function decodeByCookie(cookies: Cookies) {
-	console.log('Decoding by cookie');
+function decodeByCookie(locals: App.Locals, cookies: Cookies) {
+	locals.loggingService.debug('Decoding by cookie');
+
 	const token = cookies.get('StaticWebAppsAuthCookie');
 
 	if (!token) {

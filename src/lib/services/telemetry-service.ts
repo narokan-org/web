@@ -1,11 +1,11 @@
 import { isProduction } from '$lib/utils/utils';
 import { ApplicationInsights } from '@microsoft/applicationinsights-web';
+import type { LoggingService } from './logging-service';
 
 export class TelemetryService {
 	private appInsights: ApplicationInsights;
 
-	constructor() {
-		console.log('inside constructor of telemetry service');
+	constructor(private log: LoggingService) {
 		this.appInsights = new ApplicationInsights({
 			config: {
 				enableDebug: !isProduction(),
@@ -14,6 +14,7 @@ export class TelemetryService {
 		});
 
 		this.appInsights.loadAppInsights();
+		this.log.debug('Application Insights initialized');
 	}
 
 	trackEvent(eventName: string, properties?: { [key: string]: string }) {
