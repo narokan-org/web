@@ -7,7 +7,7 @@ export class UserService {
 	constructor(private fetchFn: typeof fetch) {}
 
 	async getUser(id: string): Promise<User | null> {
-		const response = await this.fetchFn(`/data-api/rest/users/id/${id}`);
+		const response = await this.fetchFn(`/data-api/rest/users/user_id/${id}`);
 
 		if (!response.ok) {
 			console.debug(`Failed to get user with id ${id}`);
