@@ -22,7 +22,7 @@ export class UserService {
 			return null;
 		}
 
-		return { id: user.id, email: user.email };
+		return { id: user.user_id, email: user.email };
 	}
 
 	async createUser(user: User): Promise<User | null> {
