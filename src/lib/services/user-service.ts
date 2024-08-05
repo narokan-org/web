@@ -27,7 +27,6 @@ export class UserService {
 
 	async createUser(user: User): Promise<User | null> {
 		const dbUser: DBUser = {
-			id: uuidv4(),
 			user_id: user.id,
 			email: user.email
 		};
