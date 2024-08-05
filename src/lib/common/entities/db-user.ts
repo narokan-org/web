@@ -1,4 +1,4 @@
 export interface DBUser {
-	user_id: string;
+	id: string;
 	email: string;
 }

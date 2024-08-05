@@ -7,7 +7,7 @@ export class UserService {
 	constructor(private fetchFn: typeof fetch) {}
 
 	async getUser(id: string): Promise<User | null> {
-		const response = await this.fetchFn(`/data-api/rest/users/user_id/${id}`);
+		const response = await this.fetchFn(`/data-api/rest/users/id/${id}`);
 
 		if (!response.ok) {
 			console.debug(`Failed to get user with id ${id}`);
@@ -22,12 +22,12 @@ export class UserService {
 			return null;
 		}
 
-		return { id: user.user_id, email: user.email };
+		return { id: user.id, email: user.email };
 	}
 
 	async createUser(user: User): Promise<User | null> {
 		const dbUser: DBUser = {
-			user_id: user.id,
+			id: user.id,
 			email: user.email
 		};
 		console.log(`Creating user ${JSON.stringify(dbUser)}`);
