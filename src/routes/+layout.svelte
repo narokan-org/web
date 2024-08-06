@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { setContext } from 'svelte';
-	import Header from '$lib/components/header/header.svelte';
+	import Header from '$lib/components/header/index.svelte';
 	import '../app.css';
 
 	import { isLoggedIn, userClaims } from '$lib/stores/auth';
@@ -14,4 +14,6 @@
 
 <Header />
 
-<slot></slot>
+<main class="mx-4">
+	<slot></slot>
+</main>

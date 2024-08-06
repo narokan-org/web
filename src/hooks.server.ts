@@ -5,7 +5,7 @@ import { LoggingService } from '$lib/services/logging-service';
 
 export const handle: Handle = async ({ event, resolve }) => {
 	event.locals.loggingService = new LoggingService();
-	event.locals.telemetryService = new TelemetryService(event.locals.telemetryService);
+	event.locals.telemetryService = new TelemetryService(event.locals.loggingService);
 	event.locals.userService = new UserService(event.fetch, event.locals.loggingService);
 
 	const response = await resolve(event);

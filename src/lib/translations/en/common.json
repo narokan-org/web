@@ -1,11 +1,35 @@
 {
 	"appName": "Basel",
-	"assessments": "Assessments",
-	"controls": "Controls",
-	"dashboard": "Dashboard",
-	"entities": "Entities",
-	"login": "Login",
-	"logout": "Logout",
-	"risks": "Risks",
-	"settings": "Settings"
+	"components": {
+		"header": {
+			"assessments": "Assessments",
+			"controls": "Controls",
+			"dashboard": "Dashboard",
+			"entities": "Entities",
+			"login": "Login",
+			"logout": "Logout",
+			"risks": "Risks",
+			"settings": "Settings"
+		}
+	},
+	"pages": {
+		"assessments": {
+			"heading": "Assessments"
+		},
+		"controls": {
+			"heading": "Controls"
+		},
+		"dashboard": {
+			"heading": "Dashboard"
+		},
+		"entities": {
+			"heading": "Entities"
+		},
+		"risks": {
+			"heading": "Risks"
+		},
+		"settings": {
+			"heading": "Settings"
+		}
+	}
 }
