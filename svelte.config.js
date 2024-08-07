@@ -18,6 +18,14 @@ const config = {
 				},
 				routes: [
 					{
+						route: '/dashboard',
+						allowedRoles: ['authenticated']
+					},
+					{
+						route: '/risks',
+						allowedRoles: ['authenticated']
+					},
+					{
 						route: '/login',
 						rewrite: '/.auth/login/aad',
 						allowedRoles: ['anonymous', 'authenticated']
