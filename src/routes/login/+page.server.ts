@@ -7,8 +7,10 @@ export const load = ({ locals, request, cookies }) => {
 
 	locals.loggingService.debug(`Adding post_login_redirect_uri=${storedRedirectUrl}`);
 
+	const redirectUrl = new URL(storedRedirectUrl, request.url).toString();
+
 	throw redirect(
 		302,
-		`/.auth/login/aad?post_login_redirect_uri=${encodeURIComponent(storedRedirectUrl)}`
+		`/.auth/login/aad?post_login_redirect_uri=${encodeURIComponent(redirectUrl)}`
 	);
 };
