@@ -9,7 +9,7 @@ export class TelemetryService {
 		this.appInsights = new ApplicationInsights({
 			config: {
 				enableDebug: !isProduction(),
-				connectionString: process.env.APPLICATION_INSIGHTS_CONNECTION_STRING
+				connectionString: process.env.APPLICATIONINSIGHTS_CONNECTION_STRING
 			}
 		});
 
