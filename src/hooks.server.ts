@@ -25,11 +25,15 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 		if (!user) {
 			const redirectUrl = event.url.pathname + event.url.search;
+
 			event.locals.loggingService.debug(`Creating redirect url cookie: ${redirectUrl}`);
+
 			event.cookies.set('basel-redirect-url', redirectUrl, {
 				path: '/',
 				httpOnly: true
 			});
+
+			event.locals.loggingService.debug(`User is not logged in. Redirecting to login page.`);
 
 			throw redirect(302, '/login');
 		}

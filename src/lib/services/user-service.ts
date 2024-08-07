@@ -19,7 +19,7 @@ export class UserService {
 			: this.decodeByCookie(locals, cookies);
 
 		if (!jwtUser) {
-			this.log.error('User is not logged in.');
+			this.log.info('User is not logged in.');
 			return null;
 		}
 
@@ -73,7 +73,7 @@ export class UserService {
 		const header = request.headers.get('x-ms-client-principal');
 
 		if (!header) {
-			this.log.error('x-ms-client-principal header is missing');
+			this.log.info('x-ms-client-principal header is missing');
 			return null;
 		}
 
@@ -89,6 +89,7 @@ export class UserService {
 		const token = cookies.get('StaticWebAppsAuthCookie');
 
 		if (!token) {
+			this.log.info('StaticWebAppsAuthCookie cookie is missing');
 			return null;
 		}
 
