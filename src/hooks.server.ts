@@ -2,6 +2,7 @@ import { redirect, type Handle } from '@sveltejs/kit';
 import { UserService } from '$lib/services/user-service';
 import { TelemetryService } from '$lib/services/telemetry-service';
 import { LoggingService } from '$lib/services/logging-service';
+import { isProduction } from '$lib/utils/utils';
 
 export const handle: Handle = async ({ event, resolve }) => {
 	event.locals.loggingService = new LoggingService();
@@ -13,15 +14,21 @@ export const handle: Handle = async ({ event, resolve }) => {
 		'/controls',
 		'/dashboard',
 		'/entities',
-		'/logout',
 		'/risks',
 		'/settings'
 	];
 
 	if (protectedRoutes.includes(event.url.pathname)) {
-		const user = await event.locals.userService.getUser();
+		const user = event.locals.userService.getLocalUser(event.locals, event.request, event.cookies);
 
 		if (!user) {
+			const redirectUrl = event.url.pathname + event.url.search;
+			event.cookies.set('basel-redirect-url', redirectUrl, {
+				path: '/',
+				httpOnly: true,
+				secure: isProduction()
+			});
+
 			throw redirect(302, '/login');
 		}
 	}
