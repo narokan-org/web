@@ -18,11 +18,27 @@ const config = {
 				},
 				routes: [
 					{
+						route: '/assessments',
+						allowedRoles: ['authenticated']
+					},
+					{
+						route: '/controls',
+						allowedRoles: ['authenticated']
+					},
+					{
 						route: '/dashboard',
 						allowedRoles: ['authenticated']
 					},
 					{
+						route: '/entities',
+						allowedRoles: ['authenticated']
+					},
+					{
 						route: '/risks',
+						allowedRoles: ['authenticated']
+					},
+					{
+						route: '/settings',
 						allowedRoles: ['authenticated']
 					},
 					{
