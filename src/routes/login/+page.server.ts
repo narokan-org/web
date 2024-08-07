@@ -1,7 +1,8 @@
 import { redirect } from '@sveltejs/kit';
 
 export const load = ({ locals, request, cookies }) => {
-	const storedRedirectUrl = cookies.get('basel-redirect-url') ?? '/';
+	const storedRedirectUrl =
+		cookies.get('basel-redirect-url') ?? request.headers.get('X-Basel-Redirect-Url') ?? '/';
 
 	cookies.delete('basel-redirect-url', { path: '/', httpOnly: true });
 

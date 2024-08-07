@@ -29,7 +29,8 @@ export const handle: Handle = async ({ event, resolve }) => {
 				status: 302,
 				headers: {
 					Location: '/login',
-					'Set-Cookie': `basel-redirect-url=${redirectUrl};Path=/; HttpOnly; SameSite=Lax`
+					'Set-Cookie': `basel-redirect-url=${redirectUrl};Path=/; HttpOnly; SameSite=Lax`,
+					'X-Basel-Redirect-Url': redirectUrl
 				}
 			});
 		}
