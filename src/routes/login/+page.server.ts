@@ -1,6 +1,8 @@
 import { redirect } from '@sveltejs/kit';
 
 export const load = ({ locals, request, cookies }) => {
+	locals.loggingService.debug(`Headers received: ${request.headers}`);
+
 	const storedRedirectUrl =
 		cookies.get('basel-redirect-url') ?? request.headers.get('X-Basel-Redirect-Url') ?? '/';
 
