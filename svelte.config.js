@@ -10,6 +10,12 @@ const config = {
 	kit: {
 		adapter: azure({
 			customStaticWebAppConfig: {
+				responseOverrides: {
+					401: {
+						redirect: '/.auth/login/aad?post_login_redirect_uri=.referrer',
+						statusCode: 302
+					}
+				},
 				routes: [
 					{
 						route: '/login',
