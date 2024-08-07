@@ -23,6 +23,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 		if (!user) {
 			const redirectUrl = event.url.pathname + event.url.search;
+			event.locals.loggingService.debug(`Creating redirect url cookie: ${redirectUrl}`);
 			event.cookies.set('basel-redirect-url', redirectUrl, {
 				path: '/',
 				httpOnly: true,
