@@ -6,10 +6,9 @@ export const load = ({ locals, request, cookies }) => {
 
 	cookies.delete('basel-redirect-url', { path: '/', httpOnly: true });
 
-	locals.loggingService.debug(`Adding post_login_redirect_uri=${storedRedirectUrl}`);
-
 	const redirectUrl = new URL(storedRedirectUrl, request.url).toString();
 
+	locals.loggingService.debug(`Adding post_login_redirect_uri=${redirectUrl}`);
 	throw redirect(
 		302,
 		`/.auth/login/aad?post_login_redirect_uri=${encodeURIComponent(redirectUrl)}`
