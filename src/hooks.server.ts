@@ -26,8 +26,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 			event.locals.loggingService.debug(`Creating redirect url cookie: ${redirectUrl}`);
 			event.cookies.set('basel-redirect-url', redirectUrl, {
 				path: '/',
-				httpOnly: true,
-				secure: isProduction()
+				httpOnly: true
 			});
 
 			throw redirect(302, '/login');
