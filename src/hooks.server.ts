@@ -18,6 +18,8 @@ export const handle: Handle = async ({ event, resolve }) => {
 		'/settings'
 	];
 
+	event.locals.loggingService.debug(`Visiting route: ${event.url.pathname}`);
+
 	if (protectedRoutes.includes(event.url.pathname)) {
 		const user = event.locals.userService.getLocalUser(event.locals, event.request, event.cookies);
 
