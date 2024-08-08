@@ -9,7 +9,8 @@
 			"login": "Login",
 			"logout": "Logout",
 			"risks": "Risks",
-			"settings": "Settings"
+			"settings": "Settings",
+			"signup": "Try for free"
 		},
 		"tableSearch": {
 			"placeholder": "Search"

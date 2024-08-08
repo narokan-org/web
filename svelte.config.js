@@ -66,8 +66,11 @@ const config = {
 					},
 					{
 						route: '/login',
-						rewrite: '/.auth/login/aad',
-						allowedRoles: ['anonymous', 'authenticated']
+						redirect: `/.auth/login/${process.env.NODE_ENV === 'production' ? 'aadb2c_sign_in' : 'aad'}`
+					},
+					{
+						route: '/logout',
+						redirect: `/.auth/logout`
 					},
 					{
 						route: '/.auth/login/github',
