@@ -13,7 +13,24 @@ const config = {
 				auth: {
 					identityProviders: {
 						customOpenIdConnectProviders: {
-							aadb2c: {
+							aadb2c_sign_in: {
+								registration: {
+									clientIdSettingName: 'AADB2C_PROVIDER_CLIENT_ID',
+									clientCredential: {
+										clientSecretSettingName: 'AADB2C_PROVIDER_CLIENT_SECRET'
+									},
+									openIdConnectConfiguration: {
+										wellKnownOpenIdConfiguration:
+											'https://baselapp.b2clogin.com/baselapp.onmicrosoft.com/B2C_1_Basel_Sign_In/v2.0/.well-known/openid-configuration'
+									}
+								},
+								login: {
+									nameClaimType: 'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name',
+									scopes: [],
+									loginParameterNames: []
+								}
+							},
+							aadb2c_sign_up: {
 								registration: {
 									clientIdSettingName: 'AADB2C_PROVIDER_CLIENT_ID',
 									clientCredential: {
@@ -67,6 +84,10 @@ const config = {
 					{
 						route: '/login',
 						redirect: `/.auth/login/${process.env.NODE_ENV === 'production' ? 'aadb2c_sign_in' : 'aad'}`
+					},
+					{
+						route: '/signup',
+						redirect: `/.auth/login/aadb2c_sign_up`
 					},
 					{
 						route: '/logout',
