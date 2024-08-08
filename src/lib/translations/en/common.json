@@ -10,6 +10,9 @@
 			"logout": "Logout",
 			"risks": "Risks",
 			"settings": "Settings"
+		},
+		"tableSearch": {
+			"placeholder": "Search"
 		}
 	},
 	"pages": {
@@ -26,7 +29,21 @@
 			"heading": "Entities"
 		},
 		"risks": {
-			"heading": "Risks"
+			"heading": "Risks",
+			"importRisksButton": "Import Risks",
+			"table": {
+				"heading1": "Category/Type",
+				"heading2": "Risk Name",
+				"heading3": "Process",
+				"heading4": "Entity",
+				"heading5": "Description",
+				"heading6": "Inherent Risk",
+				"heading7": "Controls",
+				"heading8": "Residual Risk",
+				"heading9": "Treatment",
+				"heading10": "Last Assessed",
+				"searchPlaceholder": "Search"
+			}
 		},
 		"settings": {
 			"heading": "Settings"
