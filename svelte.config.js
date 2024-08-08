@@ -52,7 +52,7 @@ const config = {
 				},
 				responseOverrides: {
 					401: {
-						redirect: `/.auth/login/${process.env.NODE_ENV === 'production' ? 'aadb2c' : 'aad'}?post_login_redirect_uri=.referrer`,
+						redirect: `/.auth/login/${process.env.NODE_ENV === 'production' ? 'aadb2c_sign_in' : 'aad'}?post_login_redirect_uri=.referrer`,
 						statusCode: 302
 					}
 				},
