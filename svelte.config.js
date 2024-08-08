@@ -25,7 +25,7 @@ const config = {
 									}
 								},
 								login: {
-									nameClaimType: 'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name',
+									nameClaimType: 'email',
 									scopes: ['openid', 'profile', 'offline_access'],
 									loginParameterNames: []
 								}
@@ -42,7 +42,7 @@ const config = {
 									}
 								},
 								login: {
-									nameClaimType: 'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name',
+									nameClaimType: 'email',
 									scopes: ['openid', 'profile', 'offline_access'],
 									loginParameterNames: []
 								}
