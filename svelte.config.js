@@ -58,6 +58,26 @@ const config = {
 				},
 				routes: [
 					{
+						route: '/login',
+						redirect: `/.auth/login/${process.env.BASEL_ENVIRONMENT === 'production' ? 'aadb2c_sign_in' : 'aad'}`
+					},
+					{
+						route: '/signup',
+						redirect: `/.auth/login/aadb2c_sign_up`
+					},
+					{
+						route: '/logout',
+						redirect: `/.auth/logout`
+					},
+					{
+						route: '/.auth/login/github',
+						statusCode: 404
+					},
+					{
+						route: '/.auth/login/twitter',
+						statusCode: 404
+					},
+					{
 						route: '/assessments',
 						allowedRoles: ['authenticated']
 					},
@@ -80,26 +100,6 @@ const config = {
 					{
 						route: '/settings',
 						allowedRoles: ['authenticated']
-					},
-					{
-						route: '/login',
-						redirect: `/.auth/login/${process.env.NODE_ENV === 'production' ? 'aadb2c_sign_in' : 'aad'}`
-					},
-					{
-						route: '/signup',
-						redirect: `/.auth/login/aadb2c_sign_up`
-					},
-					{
-						route: '/logout',
-						redirect: `/.auth/logout`
-					},
-					{
-						route: '/.auth/login/github',
-						statusCode: 404
-					},
-					{
-						route: '/.auth/login/twitter',
-						statusCode: 404
 					}
 				]
 			}
