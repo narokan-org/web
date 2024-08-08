@@ -10,6 +10,6 @@ describe('login page', () => {
 		load();
 
 		const { redirect } = await import('@sveltejs/kit');
-		expect(redirect).toHaveBeenCalledWith(301, '/.auth/login/aad');
+		expect(redirect).toHaveBeenCalledWith(302, '/.auth/login/aad');
 	});
 });
