@@ -20,7 +20,9 @@ Thumbs.db
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 
-# Not sure why this is needed for local developmen just yet.
+coverage
+
+# Not sure why this is needed for local development just yet.
 staticwebapp.config.json
 __azurite_db_blob__.json
 __blobstorage__
