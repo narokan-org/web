@@ -1,7 +1,8 @@
 <script>
+	import { Navbar, NavBrand, NavLi, NavUl, Button } from 'flowbite-svelte';
+	import { ChevronDownOutline } from 'flowbite-svelte-icons';
 	import { page } from '$app/stores';
 	import { t } from '$lib/translations';
-	import { Navbar, NavBrand, NavLi, NavUl, NavHamburger, Button } from 'flowbite-svelte';
 	import { useAuth } from '$lib/hooks/useAuth';
 
 	const { isLoggedIn } = useAuth();
@@ -32,6 +33,16 @@
 			<NavLi href="/settings">{$t('common.components.header.settings')}</NavLi>
 			<NavLi href="/logout">{$t('common.components.header.logout')}</NavLi>
 		{:else}
+			<NavLi class="cursor-pointer">
+				{$t('common.components.header.features')}<ChevronDownOutline
+					class="w-6 h-6 ms-2 text-primary-800 dark:text-white inline"
+				/>
+			</NavLi>
+			<NavLi class="cursor-pointer">
+				{$t('common.components.header.solutions')}<ChevronDownOutline
+					class="w-6 h-6 ms-2 text-primary-800 dark:text-white inline"
+				/>
+			</NavLi>
 			<NavLi href="/pricing">{$t('common.components.header.pricing')}</NavLi>
 		{/if}
 	</NavUl>

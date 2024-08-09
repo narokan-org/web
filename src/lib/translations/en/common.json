@@ -6,12 +6,14 @@
 			"controls": "Controls",
 			"dashboard": "Dashboard",
 			"entities": "Entities",
+			"features": "Features",
 			"login": "Log In",
 			"logout": "Logout",
 			"pricing": "Pricing",
 			"risks": "Risks",
 			"settings": "Settings",
-			"signup": "Try for free"
+			"signup": "Try for free",
+			"solutions": "Solutions"
 		},
 		"tableSearch": {
 			"placeholder": "Search"
