@@ -1,7 +1,7 @@
 <script>
 	import { page } from '$app/stores';
 	import { t } from '$lib/translations';
-	import { Navbar, NavBrand, NavLi, NavUl, NavHamburger } from 'flowbite-svelte';
+	import { Navbar, NavBrand, NavLi, NavUl, NavHamburger, Button } from 'flowbite-svelte';
 	import { useAuth } from '$lib/hooks/useAuth';
 
 	const { isLoggedIn } = useAuth();
@@ -14,8 +14,15 @@
 			>{$t('common.appName')}</span
 		>
 	</NavBrand>
-	<NavHamburger />
-	<NavUl {activeUrl}>
+	{#if !isLoggedIn}
+		<div class="flex md:order-2">
+			<NavUl>
+				<NavLi class="mr-4" href="/login">{$t('common.components.header.login')}</NavLi>
+			</NavUl>
+			<Button href="/signup">{$t('common.components.header.signup')}</Button>
+		</div>
+	{/if}
+	<NavUl {activeUrl} class="order-1">
 		{#if isLoggedIn}
 			<NavLi href="/dashboard">{$t('common.components.header.dashboard')}</NavLi>
 			<NavLi href="/risks">{$t('common.components.header.risks')}</NavLi>
@@ -26,8 +33,6 @@
 			<NavLi href="/logout">{$t('common.components.header.logout')}</NavLi>
 		{:else}
 			<NavLi href="/pricing">{$t('common.components.header.pricing')}</NavLi>
-			<NavLi href="/login">{$t('common.components.header.login')}</NavLi>
-			<NavLi href="/signup">{$t('common.components.header.signup')}</NavLi>
 		{/if}
 	</NavUl>
 </Navbar>
