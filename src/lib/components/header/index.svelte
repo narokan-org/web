@@ -25,6 +25,7 @@
 			<NavLi href="/settings">{$t('common.components.header.settings')}</NavLi>
 			<NavLi href="/logout">{$t('common.components.header.logout')}</NavLi>
 		{:else}
+			<NavLi href="/pricing">{$t('common.components.header.pricing')}</NavLi>
 			<NavLi href="/login">{$t('common.components.header.login')}</NavLi>
 			<NavLi href="/signup">{$t('common.components.header.signup')}</NavLi>
 		{/if}
