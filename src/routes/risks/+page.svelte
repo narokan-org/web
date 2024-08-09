@@ -1,14 +1,13 @@
 <script lang="ts">
-	import Heading from '$lib/components/heading/index.svelte';
+	import { Button, Heading } from 'flowbite-svelte';
 	import TableSearch from '$lib/components/table-search/index.svelte';
-	import Button from '$lib/components/button/index.svelte';
 	import { t } from '$lib/translations';
 
 	let items: {}[] = [];
 </script>
 
 <div>
-	<Heading level={2} text={$t('common.pages.risks.heading')} />
+	<Heading level={2}>{$t('common.pages.risks.heading')}</Heading>
 
 	<TableSearch
 		placeholder={$t('common.pages.risks.table.searchPlaceholder')}
@@ -29,7 +28,7 @@
 
 	{#if items.length === 0}
 		<div class="flex justify-center mt-44">
-			<Button text={$t('common.pages.risks.importRisksButton')}></Button>
+			<Button>{$t('common.pages.risks.importRisksButton')}</Button>
 		</div>
 	{/if}
 </div>

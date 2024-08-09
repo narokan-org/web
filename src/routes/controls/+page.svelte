@@ -1,8 +1,8 @@
 <script lang="ts">
-	import Heading from '$lib/components/heading/index.svelte';
+	import { Heading } from 'flowbite-svelte';
 	import { t } from '$lib/translations';
 </script>
 
 <div>
-	<Heading level={2} text={$t('common.pages.controls.heading')} />
+	<Heading level={2}>{$t('common.pages.controls.heading')}</Heading>
 </div>

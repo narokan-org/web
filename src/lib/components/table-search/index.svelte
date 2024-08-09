@@ -1,18 +1,14 @@
 <script lang="ts">
 	import {
-		Table,
 		TableBody,
 		TableBodyCell,
 		TableBodyRow,
-		TableHead,
 		TableHeadCell,
-		Checkbox,
 		TableSearch
 	} from 'flowbite-svelte';
-	import { writable } from 'svelte/store';
 	import { t } from '$lib/translations';
 
-	export let placeholder: string = t('common.components.tableSearch.placeholder');
+	export let placeholder: string = $t('common.components.tableSearch.placeholder');
 	export let headings: string[] = [];
 	export let items: { [key: string]: any }[] = [];
 
