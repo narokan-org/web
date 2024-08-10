@@ -16,14 +16,12 @@ export class UserService {
 		const response = await this.fetchFn('/.auth/me');
 
 		if (!response.ok) {
-			this.log.error(`Failed to get local user: ${JSON.stringify(response)}`);
 			return null;
 		}
 
 		const localUser: LocalUserPayload = await response.json();
 
 		if (!localUser.clientPrincipal) {
-			this.log.info('User is not logged in.');
 			return null;
 		}
 
@@ -33,7 +31,6 @@ export class UserService {
 	async getUser(id: string): Promise<User | null> {
 		const role = await this.getUserRole();
 		if (!role) {
-			this.log.error('Failed to get user role');
 			return null;
 		}
 
@@ -44,15 +41,12 @@ export class UserService {
 		});
 
 		if (!response.ok) {
-			this.log.debug(`Failed to get user with id ${id}`);
-			this.log.error(response);
 			return null;
 		}
 
 		const user = (await parseDBResponse<DBUser>(response))?.[0];
 
 		if (!user) {
-			this.log.debug(`User with id ${id} not found`);
 			return null;
 		}
 
@@ -62,7 +56,6 @@ export class UserService {
 	async createUser(user: User): Promise<User | null> {
 		const role = await this.getUserRole();
 		if (!role) {
-			this.log.error('Failed to get user role');
 			return null;
 		}
 
@@ -82,9 +75,6 @@ export class UserService {
 		});
 
 		if (!response.ok) {
-			this.log.error(
-				`Failed to create user status and status text: ${response.status} ${response.statusText} ${await response.text()}`
-			);
 			return null;
 		}
 
@@ -95,14 +85,12 @@ export class UserService {
 		const localUser = await this.getLocalUser();
 
 		if (!localUser) {
-			this.log.error('Failed to get local user');
 			return null;
 		}
 
 		const role = localUser.clientPrincipal.userRoles.find((r) => r === 'authenticated');
 
 		if (!role) {
-			this.log.error('User is not authenticated');
 			return null;
 		}
 
