@@ -12,6 +12,12 @@ export class UserService {
 		private log: LoggingService
 	) {}
 
+	async testAuthFetch() {
+		this.log.debug('testAuthFetch');
+		const response = await this.fetchFn('/.auth/me');
+		this.log.debug(`testAuthFetch ${await response.json()}`);
+	}
+
 	getLocalUser(locals: App.Locals, request: Request, cookies: Cookies): JwtPayload | null {
 		// For production, x-ms-client-principal is passed to the server in the request headers. For local development that is not the case so we decode the cookie directly. This is a limitation of swa cli currently.
 		const jwtUser = isProduction()

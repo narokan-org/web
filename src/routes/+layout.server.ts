@@ -1,6 +1,7 @@
 import { redirect } from '@sveltejs/kit';
 
 export const load = async ({ locals, request, cookies }) => {
+	await locals.userService.testAuthFetch();
 	const localUser = locals.userService.getLocalUser(locals, request, cookies);
 
 	if (!localUser) {
