@@ -90,6 +90,9 @@ export class UserService {
 
 		if (!response.ok) {
 			this.log.error(`Failed to create user: ${JSON.stringify(response)}`);
+			this.log.error(
+				`Failed to create user status and status text: ${response.status} ${response.statusText}`
+			);
 			return null;
 		}
 
