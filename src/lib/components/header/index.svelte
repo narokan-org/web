@@ -1,11 +1,15 @@
-<script>
+<script lang="ts">
+	import { getContext } from 'svelte';
+	import type { Writable } from 'svelte/store';
 	import { Navbar, NavBrand, NavLi, NavUl, Button } from 'flowbite-svelte';
 	import { ChevronDownOutline } from 'flowbite-svelte-icons';
+	import type { User } from '$lib/common/models/user';
 	import { page } from '$app/stores';
 	import { t } from '$lib/translations';
-	import { useAuth } from '$lib/hooks/useAuth';
 
-	const { isLoggedIn } = useAuth();
+	const { isLoggedIn, user } = getContext<{ isLoggedIn: Writable<boolean>; user: Writable<User> }>(
+		'auth'
+	);
 	$: activeUrl = $page.url.pathname;
 </script>
 
@@ -15,7 +19,7 @@
 			>{$t('common.appName')}</span
 		>
 	</NavBrand>
-	{#if !isLoggedIn}
+	{#if !$isLoggedIn}
 		<div class="flex md:order-2">
 			<NavUl>
 				<NavLi class="mr-4" href="/login">{$t('common.components.header.login')}</NavLi>
@@ -24,7 +28,7 @@
 		</div>
 	{/if}
 	<NavUl {activeUrl} class="order-1">
-		{#if isLoggedIn}
+		{#if $isLoggedIn && $user && $user.onboarded}
 			<NavLi href="/dashboard">{$t('common.components.header.dashboard')}</NavLi>
 			<NavLi href="/risks">{$t('common.components.header.risks')}</NavLi>
 			<NavLi href="/controls">{$t('common.components.header.controls')}</NavLi>
@@ -32,7 +36,7 @@
 			<NavLi href="/entities">{$t('common.components.header.entities')}</NavLi>
 			<NavLi href="/settings">{$t('common.components.header.settings')}</NavLi>
 			<NavLi href="/logout">{$t('common.components.header.logout')}</NavLi>
-		{:else}
+		{:else if !$isLoggedIn}
 			<NavLi class="cursor-pointer">
 				{$t('common.components.header.features')}<ChevronDownOutline
 					class="w-6 h-6 ms-2 text-primary-800 dark:text-white inline"

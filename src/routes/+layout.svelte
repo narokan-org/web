@@ -1,15 +1,18 @@
 <script lang="ts">
 	import { setContext } from 'svelte';
+	import { writable } from 'svelte/store';
 	import Header from '$lib/components/header/index.svelte';
+	import type { User } from '$lib/common/models/user';
 	import '../app.css';
 
-	import { isLoggedIn, userClaims } from '$lib/stores/auth';
-	export let data: { isLoggedIn: boolean; claims: any };
+	export let data: { isLoggedIn: boolean; user: User };
+	const isLoggedIn = writable(false);
+	const user = writable<User>();
 
 	isLoggedIn.set(data.isLoggedIn);
-	userClaims.set(data.claims);
+	user.set(data.user);
 
-	setContext('auth', { isLoggedIn: data.isLoggedIn, claims: data.claims });
+	setContext('auth', { isLoggedIn, user });
 </script>
 
 <Header />

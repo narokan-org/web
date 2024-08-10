@@ -2,5 +2,6 @@ DROP TABLE IF EXISTS [dbo].[User];
 
 CREATE TABLE [dbo].[User] (
     Id CHAR(32) NOT NULL UNIQUE,
-    Email VARCHAR(255) NOT NULL
+    Email VARCHAR(255) NOT NULL,
+    Onboarded BIT NOT NULL DEFAULT 0
 );

@@ -42,13 +42,14 @@ export class UserService {
 			return null;
 		}
 
-		return { id: user.Id, email: user.Email };
+		return { id: user.Id, email: user.Email, onboarded: user.Onboarded };
 	}
 
 	async createUser(user: User): Promise<User | null> {
 		const dbUser: DBUser = {
 			Id: user.id,
-			Email: user.email
+			Email: user.email,
+			Onboarded: user.onboarded
 		};
 
 		const response = await this.fetchFn(`/data-api/rest/User`, {
@@ -78,6 +79,7 @@ export class UserService {
 		}
 
 		const encoded = Buffer.from(header!, 'base64');
+		locals.loggingService.debug(`Decoded header: ${encoded.toString('ascii')}`);
 		const decoded: JwtPayload = JSON.parse(encoded.toString('ascii'));
 
 		return decoded;
@@ -92,7 +94,9 @@ export class UserService {
 			this.log.info('StaticWebAppsAuthCookie cookie is missing');
 			return null;
 		}
-
+		locals.loggingService.debug(
+			`Decoded jwt: ${JSON.stringify(jwtDecode(token, { header: true }))}`
+		);
 		let decoded: JwtPayload = jwtDecode(token, { header: true });
 
 		return decoded;
