@@ -1,9 +1,9 @@
 import type { Cookies } from '@sveltejs/kit';
 import { jwtDecode } from 'jwt-decode';
 import type { DBUser } from '$lib/common/entities/db-user';
-import type { JwtPayload } from '$lib/common/models/jwt-payload';
+import type { LocalUserPayload } from '$lib/common/models/local-user-payload';
 import type { User } from '$lib/common/models/user';
-import { isProduction, parseDBResponse } from '$lib/utils/utils';
+import { parseDBResponse } from '$lib/utils/utils';
 import type { LoggingService } from './logging-service';
 
 export class UserService {
@@ -12,24 +12,26 @@ export class UserService {
 		private log: LoggingService
 	) {}
 
-	async testAuthFetch() {
-		this.log.debug('testAuthFetch');
+	async getLocalUser(
+		locals: App.Locals,
+		request: Request,
+		cookies: Cookies
+	): Promise<LocalUserPayload | null> {
 		const response = await this.fetchFn('/.auth/me');
-		this.log.debug(`testAuthFetch ${JSON.stringify(await response.json())}`);
-	}
 
-	getLocalUser(locals: App.Locals, request: Request, cookies: Cookies): JwtPayload | null {
-		// For production, x-ms-client-principal is passed to the server in the request headers. For local development that is not the case so we decode the cookie directly. This is a limitation of swa cli currently.
-		const jwtUser = isProduction()
-			? this.decodeByHeader(locals, request)
-			: this.decodeByCookie(locals, cookies);
+		if (!response.ok) {
+			this.log.error(`Failed to get local user: ${JSON.stringify(response)}`);
+			return null;
+		}
 
-		if (!jwtUser) {
+		const localUser: LocalUserPayload = await response.json();
+
+		if (!localUser.clientPrincipal) {
 			this.log.info('User is not logged in.');
 			return null;
 		}
 
-		return jwtUser;
+		return localUser;
 	}
 
 	async getUser(id: string): Promise<User | null> {
@@ -72,39 +74,5 @@ export class UserService {
 		}
 
 		return user;
-	}
-
-	private decodeByHeader(locals: App.Locals, request: Request) {
-		locals.loggingService.debug('Decoding by header');
-
-		const header = request.headers.get('x-ms-client-principal');
-
-		if (!header) {
-			this.log.info('x-ms-client-principal header is missing');
-			return null;
-		}
-
-		const encoded = Buffer.from(header!, 'base64');
-		locals.loggingService.debug(`Decoded header: ${encoded.toString('ascii')}`);
-		const decoded: JwtPayload = JSON.parse(encoded.toString('ascii'));
-
-		return decoded;
-	}
-
-	private decodeByCookie(locals: App.Locals, cookies: Cookies) {
-		locals.loggingService.debug('Decoding by cookie');
-
-		const token = cookies.get('StaticWebAppsAuthCookie');
-
-		if (!token) {
-			this.log.info('StaticWebAppsAuthCookie cookie is missing');
-			return null;
-		}
-		locals.loggingService.debug(
-			`Decoded jwt: ${JSON.stringify(jwtDecode(token, { header: true }))}`
-		);
-		let decoded: JwtPayload = jwtDecode(token, { header: true });
-
-		return decoded;
 	}
 }
