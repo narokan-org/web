@@ -3,7 +3,7 @@ import { redirect } from '@sveltejs/kit';
 
 export const load = async ({ locals, request, cookies }) => {
 	const localUser = await locals.userService.getLocalUser(locals, request, cookies);
-	console.log(localUser);
+	locals.loggingService.debug(`Local user: ${JSON.stringify(localUser)}`);
 
 	if (!localUser) {
 		return { isLoggedIn: false };
