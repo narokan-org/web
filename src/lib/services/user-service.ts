@@ -15,7 +15,7 @@ export class UserService {
 	async testAuthFetch() {
 		this.log.debug('testAuthFetch');
 		const response = await this.fetchFn('/.auth/me');
-		this.log.debug(`testAuthFetch ${await response.json()}`);
+		this.log.debug(`testAuthFetch ${JSON.stringify(await response.json())}`);
 	}
 
 	getLocalUser(locals: App.Locals, request: Request, cookies: Cookies): JwtPayload | null {
