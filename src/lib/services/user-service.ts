@@ -71,8 +71,6 @@ export class UserService {
 			Email: user.email,
 			Onboarded: user.onboarded
 		};
-		this.log.debug(`Creating user: ${JSON.stringify(dbUser)}`);
-		this.log.debug(`User has a role of ${role}`);
 
 		const response = await this.fetchFn(`/data-api/rest/User`, {
 			method: 'POST',
@@ -80,16 +78,10 @@ export class UserService {
 				'Content-Type': 'application/json',
 				'X-MS-API-ROLE': role
 			},
-			body: JSON.stringify({
-				Id: user.id,
-				Email: user.email
-			})
+			body: JSON.stringify(dbUser)
 		});
 
-		this.log.error(`Create user response: ${JSON.stringify(response)}`);
-
 		if (!response.ok) {
-			this.log.error(`Failed to create user: ${JSON.stringify(response)}`);
 			this.log.error(
 				`Failed to create user status and status text: ${response.status} ${response.statusText} ${await response.text()}`
 			);
