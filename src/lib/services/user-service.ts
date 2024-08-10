@@ -12,11 +12,7 @@ export class UserService {
 		private log: LoggingService
 	) {}
 
-	async getLocalUser(
-		locals: App.Locals,
-		request: Request,
-		cookies: Cookies
-	): Promise<LocalUserPayload | null> {
+	async getLocalUser(): Promise<LocalUserPayload | null> {
 		const response = await this.fetchFn('/.auth/me');
 
 		if (!response.ok) {
@@ -35,7 +31,17 @@ export class UserService {
 	}
 
 	async getUser(id: string): Promise<User | null> {
-		const response = await this.fetchFn(`/data-api/rest/User/Id/${id}`);
+		const role = await this.getUserRole();
+		if (!role) {
+			this.log.error('Failed to get user role');
+			return null;
+		}
+
+		const response = await this.fetchFn(`/data-api/rest/User/Id/${id}`, {
+			headers: {
+				'X-MS-API-ROLE': role
+			}
+		});
 
 		if (!response.ok) {
 			this.log.debug(`Failed to get user with id ${id}`);
@@ -54,6 +60,12 @@ export class UserService {
 	}
 
 	async createUser(user: User): Promise<User | null> {
+		const role = await this.getUserRole();
+		if (!role) {
+			this.log.error('Failed to get user role');
+			return null;
+		}
+
 		const dbUser: DBUser = {
 			Id: user.id,
 			Email: user.email,
@@ -64,7 +76,8 @@ export class UserService {
 		const response = await this.fetchFn(`/data-api/rest/User`, {
 			method: 'POST',
 			headers: {
-				'Content-Type': 'application/json'
+				'Content-Type': 'application/json',
+				'X-MS-API-ROLE': role
 			},
 			body: JSON.stringify({
 				Id: user.id,
@@ -80,5 +93,23 @@ export class UserService {
 		}
 
 		return user;
+	}
+
+	private async getUserRole(): Promise<string | null> {
+		const localUser = await this.getLocalUser();
+
+		if (!localUser) {
+			this.log.error('Failed to get local user');
+			return null;
+		}
+
+		const role = localUser.clientPrincipal.userRoles.find((r) => r === 'authenticated');
+
+		if (!role) {
+			this.log.error('User is not authenticated');
+			return null;
+		}
+
+		return role;
 	}
 }
