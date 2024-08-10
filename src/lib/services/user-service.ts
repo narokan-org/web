@@ -59,6 +59,7 @@ export class UserService {
 			Email: user.email,
 			Onboarded: user.onboarded
 		};
+		this.log.debug(`Creating user: ${JSON.stringify(dbUser)}`);
 
 		const response = await this.fetchFn(`/data-api/rest/User`, {
 			method: 'POST',
@@ -69,7 +70,7 @@ export class UserService {
 		});
 
 		if (!response.ok) {
-			this.log.error(response);
+			this.log.error(`Failed to create user: ${JSON.stringify(response)}`);
 			return null;
 		}
 
