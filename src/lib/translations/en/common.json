@@ -32,6 +32,31 @@
 		"entities": {
 			"heading": "Entities"
 		},
+		"onboarding": {
+			"heading": "Welcome to Basel",
+			"roleInputLabel": "What is your role?",
+			"roleInputPlaceholder": "Select your role in the company",
+			"roleOption1": "Manager",
+			"roleOption2": "Analyst",
+			"roleOption3": "C-Level",
+			"roleOption4": "Specialist",
+			"roleOption5": "Director",
+			"roleOption6": "Stakeholder",
+			"roleOption7": "Other",
+			"subheading": "Set up your workspace. Workspaces are shared environments where teams can work together.",
+			"submitButton": "Create Workspace",
+			"teamSizeInputLabel": "What is the size of your team?",
+			"teamSizeInputPlaceholder": "Select team size",
+			"teamSizeOption1": "1-5",
+			"teamSizeOption2": "6-10",
+			"teamSizeOption3": "11-15",
+			"teamSizeOption4": "16+",
+			"workspaceNameInputLabel": "Workspace name",
+			"workspaceNameInputPlaceholder": "Team workspace",
+			"workspaceLocationInputLabel": "Workspace will be hosted in",
+			"workspaceLocationInputOption1": "United States",
+			"workspaceLocationInputOption2": "Europe"
+		},
 		"risks": {
 			"heading": "Risks",
 			"importRisksButton": "Import Risks",
