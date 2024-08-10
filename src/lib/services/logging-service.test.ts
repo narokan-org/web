@@ -18,12 +18,22 @@ describe('LoggingService', () => {
 
 	it('should log with timestamp', () => {
 		const message = 'Info message';
-
+		process.env.NODE_ENV = 'development';
 		loggingService.info(message);
 
 		const timestampRegex = /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z/;
 		expect(console.log).toHaveBeenCalledWith(expect.stringMatching(timestampRegex));
 	});
+
+	it('should not log with timestamp in production', () => {
+		const message = 'Info message';
+		process.env.NODE_ENV = 'production';
+		loggingService.info(message);
+
+		const timestampRegex = /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z/;
+		expect(console.log).toHaveBeenCalledWith(expect.not.stringMatching(timestampRegex));
+	});
+
 	it('should log with tag', () => {
 		const message = 'Info message';
 
