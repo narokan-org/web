@@ -17,7 +17,7 @@ export const load = async ({ locals, request, cookies }) => {
 		return { isLoggedIn: false };
 	}
 
-	let user = await locals.userService.getUser(email);
+	let user = await locals.userService.getUser(localUser.clientPrincipal.userId);
 
 	if (!user) {
 		user = await locals.userService.createUser({
