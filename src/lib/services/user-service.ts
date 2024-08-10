@@ -66,8 +66,13 @@ export class UserService {
 			headers: {
 				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify(dbUser)
+			body: JSON.stringify({
+				Id: user.id,
+				Email: user.email
+			})
 		});
+
+		this.log.error(`Create user response: ${JSON.stringify(response)}`);
 
 		if (!response.ok) {
 			this.log.error(`Failed to create user: ${JSON.stringify(response)}`);
