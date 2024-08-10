@@ -72,6 +72,7 @@ export class UserService {
 			Onboarded: user.onboarded
 		};
 		this.log.debug(`Creating user: ${JSON.stringify(dbUser)}`);
+		this.log.debug(`User has a role of ${role}`);
 
 		const response = await this.fetchFn(`/data-api/rest/User`, {
 			method: 'POST',

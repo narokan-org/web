@@ -1,8 +1,8 @@
 import { isProduction } from '$lib/utils/utils';
 import { redirect } from '@sveltejs/kit';
 
-export const load = async ({ locals, request, cookies }) => {
-	const localUser = await locals.userService.getLocalUser(locals, request, cookies);
+export const load = async ({ locals, request }) => {
+	const localUser = await locals.userService.getLocalUser();
 	locals.loggingService.debug(`Local user: ${JSON.stringify(localUser)}`);
 
 	if (!localUser) {
