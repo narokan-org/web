@@ -35,64 +35,72 @@
 	}
 </script>
 
-<div>
-	<Heading level={2}>{$t('common.pages.onboarding.heading')}</Heading>
+<div class="flex flex-col items-center justify-center min-h-screen w-full">
+	<div class="max-w-[400px]">
+		<Heading class="text-2xl" level={2}>{$t('common.pages.onboarding.heading')}</Heading>
 
-	<P>{$t('common.pages.onboarding.subheading')}</P>
+		<P class="text-lg mt-2">{$t('common.pages.onboarding.subheading')}</P>
 
-	<form on:submit={handleSubmit}>
-		<div>
-			<Label for="workspace-name-input"
-				>{$t('common.pages.onboarding.workspaceNameInputLabel')}</Label
+		<form on:submit={handleSubmit}>
+			<div class="mt-6">
+				<Label class="text-sm" for="workspace-name-input"
+					>{$t('common.pages.onboarding.workspaceNameInputLabel')}</Label
+				>
+				<Input
+					id="workspace-name-input"
+					class="text-sm mt-2"
+					placeholder={$t('common.pages.onboarding.workspaceNameInputPlaceholder')}
+					required
+					maxlength="16"
+					bind:value={workspaceName}
+				/>
+			</div>
+
+			<div class="mt-6 flex items-center">
+				<Label class="text-sm" for="workspace-location-input"
+					>{$t('common.pages.onboarding.workspaceLocationInputLabel')}</Label
+				>
+				<Select
+					class="text-sm ml-2 max-w-48"
+					id="workspace-location-input"
+					items={workspaceLocations}
+					bind:value={workspaceLocation}
+				/>
+			</div>
+
+			<Hr class="mt-6" />
+
+			<div class="mt-6">
+				<Label class="text-sm" for="team-size-input">
+					{$t('common.pages.onboarding.teamSizeInputLabel')}
+				</Label>
+				<Select
+					id="team-size-input"
+					class="mt-2 text-sm"
+					items={workspaceTeamSizes}
+					placeholder={$t('common.pages.onboarding.teamSizeInputPlaceholder')}
+					bind:value={workspaceTeamSize}
+				/>
+			</div>
+
+			<div class="mt-6">
+				<Label class="text-sm" for="role-input">
+					{$t('common.pages.onboarding.roleInputLabel')}
+				</Label>
+				<Select
+					id="role-input"
+					class="mt-2 text-sm"
+					items={roles}
+					placeholder={$t('common.pages.onboarding.roleInputPlaceholder')}
+					bind:value={role}
+				/>
+			</div>
+
+			<Hr class="mt-6" />
+
+			<Button class="w-full mt-6 text-sm" type="submit"
+				>{$t('common.pages.onboarding.submitButton')}</Button
 			>
-			<Input
-				id="workspace-name-input"
-				placeholder={$t('common.pages.onboarding.workspaceNameInputPlaceholder')}
-				required
-				maxlength="16"
-				bind:value={workspaceName}
-			/>
-		</div>
-
-		<div>
-			<Label for="workspace-location-input"
-				>{$t('common.pages.onboarding.workspaceLocationInputLabel')}</Label
-			>
-			<Select
-				id="workspace-location-input"
-				items={workspaceLocations}
-				bind:value={workspaceLocation}
-			/>
-		</div>
-
-		<Hr />
-
-		<div>
-			<Label for="team-size-input">
-				{$t('common.pages.onboarding.teamSizeInputLabel')}
-			</Label>
-			<Select
-				id="team-size-input"
-				items={workspaceTeamSizes}
-				placeholder={$t('common.pages.onboarding.teamSizeInputPlaceholder')}
-				bind:value={workspaceTeamSize}
-			/>
-		</div>
-
-		<div>
-			<Label for="role-input">
-				{$t('common.pages.onboarding.roleInputLabel')}
-			</Label>
-			<Select
-				id="role-input"
-				items={roles}
-				placeholder={$t('common.pages.onboarding.roleInputPlaceholder')}
-				bind:value={role}
-			/>
-		</div>
-
-		<Hr />
-
-		<Button type="submit">{$t('common.pages.onboarding.submitButton')}</Button>
-	</form>
+		</form>
+	</div>
 </div>

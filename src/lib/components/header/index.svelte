@@ -11,14 +11,17 @@
 		'auth'
 	);
 	$: activeUrl = $page.url.pathname;
+	$: isOnboardingPath = $page.url.pathname === '/onboarding';
 </script>
 
 <Navbar>
-	<NavBrand href="/">
-		<span class="self-center whitespace-nowrap text-xl font-semibold dark:text-white"
-			>{$t('common.appName')}</span
-		>
-	</NavBrand>
+	{#if !isOnboardingPath}
+		<NavBrand href="/">
+			<span class="self-center whitespace-nowrap text-xl font-semibold dark:text-white"
+				>{$t('common.appName')}</span
+			>
+		</NavBrand>
+	{/if}
 	{#if !$isLoggedIn}
 		<div class="flex md:order-2">
 			<NavUl>
