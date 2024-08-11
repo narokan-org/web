@@ -4,5 +4,7 @@
 </script>
 
 <div>
-	<Heading level={2}>{$t('common.pages.assessments.heading')}</Heading>
+	<Heading data-testid="assessments-heading" level={2}
+		>{$t('common.pages.assessments.heading')}</Heading
+	>
 </div>

@@ -7,7 +7,7 @@
 </script>
 
 <div>
-	<Heading level={2}>{$t('common.pages.risks.heading')}</Heading>
+	<Heading data-testid="risks-heading" level={2}>{$t('common.pages.risks.heading')}</Heading>
 
 	<TableSearch
 		placeholder={$t('common.pages.risks.table.searchPlaceholder')}

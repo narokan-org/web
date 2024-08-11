@@ -37,7 +37,9 @@
 
 <div class="flex flex-col items-center justify-center min-h-screen w-full">
 	<div class="max-w-[400px]">
-		<Heading class="text-2xl" level={2}>{$t('common.pages.onboarding.heading')}</Heading>
+		<Heading data-testid="onboarding-heading" class="text-2xl" level={2}
+			>{$t('common.pages.onboarding.heading')}</Heading
+		>
 
 		<P class="text-lg mt-2">{$t('common.pages.onboarding.subheading')}</P>
 
