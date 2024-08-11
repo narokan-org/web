@@ -41,14 +41,19 @@
 			>{$t('common.pages.onboarding.heading')}</Heading
 		>
 
-		<P class="text-lg mt-2">{$t('common.pages.onboarding.subheading')}</P>
+		<P data-testid="onboarding-subheading" class="text-lg mt-2"
+			>{$t('common.pages.onboarding.subheading')}</P
+		>
 
 		<form on:submit={handleSubmit}>
 			<div class="mt-6">
-				<Label class="text-sm" for="workspace-name-input"
-					>{$t('common.pages.onboarding.workspaceNameInputLabel')}</Label
+				<Label
+					data-testid="onboarding-workspace-name-label"
+					class="text-sm"
+					for="workspace-name-input">{$t('common.pages.onboarding.workspaceNameInputLabel')}</Label
 				>
 				<Input
+					data-testid="onboarding-workspace-name-input"
 					id="workspace-name-input"
 					class="text-sm mt-2"
 					placeholder={$t('common.pages.onboarding.workspaceNameInputPlaceholder')}
@@ -59,10 +64,14 @@
 			</div>
 
 			<div class="mt-6 flex items-center">
-				<Label class="text-sm" for="workspace-location-input"
+				<Label
+					data-testid="onboarding-workspace-location-label"
+					class="text-sm"
+					for="workspace-location-input"
 					>{$t('common.pages.onboarding.workspaceLocationInputLabel')}</Label
 				>
 				<Select
+					data-testid="onboarding-workspace-location-input"
 					class="text-sm ml-2 max-w-48"
 					id="workspace-location-input"
 					items={workspaceLocations}
@@ -73,10 +82,11 @@
 			<Hr class="mt-6" />
 
 			<div class="mt-6">
-				<Label class="text-sm" for="team-size-input">
+				<Label data-testid="onboarding-team-size-label" class="text-sm" for="team-size-input">
 					{$t('common.pages.onboarding.teamSizeInputLabel')}
 				</Label>
 				<Select
+					data-testid="onboarding-team-size-input"
 					id="team-size-input"
 					class="mt-2 text-sm"
 					items={workspaceTeamSizes}
@@ -86,10 +96,11 @@
 			</div>
 
 			<div class="mt-6">
-				<Label class="text-sm" for="role-input">
+				<Label data-testid="onboarding-role-label" class="text-sm" for="role-input">
 					{$t('common.pages.onboarding.roleInputLabel')}
 				</Label>
 				<Select
+					data-testid="onboarding-role-input"
 					id="role-input"
 					class="mt-2 text-sm"
 					items={roles}
@@ -100,7 +111,7 @@
 
 			<Hr class="mt-6" />
 
-			<Button class="w-full mt-6 text-sm" type="submit"
+			<Button data-testid="onboarding-submit-button" class="w-full mt-6 text-sm" type="submit"
 				>{$t('common.pages.onboarding.submitButton')}</Button
 			>
 		</form>
