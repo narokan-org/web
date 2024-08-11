@@ -1,5 +1,3 @@
-import type { Cookies } from '@sveltejs/kit';
-import { jwtDecode } from 'jwt-decode';
 import type { DBUser } from '$lib/common/entities/db-user';
 import type { LocalUserPayload } from '$lib/common/models/local-user-payload';
 import type { User } from '$lib/common/models/user';
