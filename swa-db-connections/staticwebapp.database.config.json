@@ -30,6 +30,15 @@
 		}
 	},
 	"entities": {
+		"Company": {
+			"source": "dbo.Company",
+			"permissions": [
+				{
+					"actions": ["read", "create"],
+					"role": "authenticated"
+				}
+			]
+		},
 		"User": {
 			"source": "dbo.User",
 			"permissions": [

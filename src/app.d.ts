@@ -8,6 +8,7 @@ declare global {
 		interface Locals {
 			loggingService: import('$lib/services/logging-service').LoggingService;
 			userService: import('$lib/services/user-service').UserService;
+			companyService: import('$lib/services/company-service').CompanyService;
 			telemetryService: import('$lib/services/telemetry-service').TelemetryService;
 		}
 		// interface PageData {}
