@@ -13,6 +13,7 @@
 		"format": "prettier --write .",
 		"test:integration": "playwright test",
 		"test:unit": "vitest",
+		"test:unit:watch": "vitest --watch",
 		"test:coverage": "vitest run --coverage",
 		"prepare": "husky && husky install"
 	},

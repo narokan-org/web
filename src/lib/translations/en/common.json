@@ -32,6 +32,18 @@
 		"entities": {
 			"heading": "Entities"
 		},
+		"home": {
+			"feature1Heading": "Build risk reports with AI",
+			"feature1Subheading": "Host code that you don't want to share with the world in private.",
+			"feature2Heading": "Manage mitigation plans",
+			"feature2Subheading": "Host code that you don't want to share with the world in private.",
+			"feature3Heading": "Beta will launch on...",
+			"feature3Subheading": "Host code that you don't want to share with the world in private.",
+			"heading": "Operational Risk Simplified",
+			"subheading": "Manage your risk network on a single platform and rely less on spreadsheets - all in one risk focused interface your team will love.",
+			"waitlistInputPlaceholder": "Email address",
+			"waitlistButton": "Join waitlist"
+		},
 		"onboarding": {
 			"heading": "Welcome to Basel",
 			"roleInputLabel": "What is your role?",

@@ -3,7 +3,11 @@ import defaultTheme from 'tailwindcss/defaultTheme';
 
 /** @type {import('tailwindcss').Config} */
 export default {
-	content: ['./src/**/*.svelte', './node_modules/flowbite-svelte/**/*.{html,js,svelte,ts}'],
+	content: [
+		'./src/**/*.svelte',
+		'./node_modules/flowbite-svelte/**/*.{html,js,svelte,ts}',
+		'./node_modules/flowbite-svelte-icons/**/*.{html,js,svelte,ts}'
+	],
 	darkMode: 'selector',
 	theme: {
 		extend: {
