@@ -5,6 +5,30 @@
 	// import FileChartBarSolid from 'flowbite-svelte-icons/FileChartBarSolid.svelte';
 	import { t } from '$lib/translations';
 	import Feature from '$lib/components/feature/index.svelte';
+
+	let email = '';
+
+	async function handleSignUp(event: Event) {
+		event.preventDefault();
+		const form = event.target as HTMLFormElement;
+
+		const response = await fetch('https://api.getwaitlist.com/api/v1/signup', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				email,
+				waitlist_id: '19478'
+			})
+		});
+
+		if (!response.ok) {
+			return null;
+		}
+
+		form.reset();
+	}
 </script>
 
 <div class="flex flex-col items-center justify-center min-h-screen w-full">
@@ -17,16 +41,20 @@
 				<P data-testid="home-subheading" class="text-xl mt-6"
 					>{$t('common.pages.home.subheading')}</P
 				>
-				<form class="flex flex-row items-end max-w-[450px]">
+				<form class="flex flex-row items-end max-w-[450px]" on:submit={handleSignUp}>
 					<Input
 						required
 						type="email"
+						name="email"
+						bind:value={email}
 						data-testid="home-waitlist-input"
 						class="text-sm mt-8"
 						placeholder={$t('common.pages.home.waitlistInputPlaceholder')}
 					/>
-					<Button data-testid="home-waitlist-button" class="text-xs ml-4 h-10 min-w-[120px]"
-						>{$t('common.pages.home.waitlistButton')}</Button
+					<Button
+						type="submit"
+						data-testid="home-waitlist-button"
+						class="text-xs ml-4 h-10 min-w-[120px]">{$t('common.pages.home.waitlistButton')}</Button
 					>
 				</form>
 			</div>

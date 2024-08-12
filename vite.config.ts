@@ -7,7 +7,8 @@ export default defineConfig({
 		globals: true,
 		environment: 'jsdom',
 		coverage: {
-			reporter: ['text', 'html', 'cobertura']
+			reporter: ['text', 'html', 'cobertura'],
+			include: ['src/**/*.{svelete,ts}']
 		},
 		include: ['src/**/*.test.ts'],
 		setupFiles: ['./setupTests.ts']
