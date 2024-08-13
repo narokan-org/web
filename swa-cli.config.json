@@ -5,7 +5,8 @@
 			"outputLocation": "./build/static",
 			"appBuildCommand": "npm run build",
 			"run": "vite dev",
-			"appDevserverUrl": "http://localhost:5173"
+			"appDevserverUrl": "http://localhost:5173",
+			"dataApiLocation": "swa-db-connections"
 		}
 	}
 }
