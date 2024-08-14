@@ -45,3 +45,7 @@ traces
 ### Querying Entities
 
 Basel uses [SWA DB Connections](https://learn.microsoft.com/en-us/azure/static-web-apps/database-overview) with a mssql backend. We also have an API project exposed in the `/api` folder for azure functions. The intent is to use azure functions to manage more complex tasks. Given that there is some level of re-use between the /api layer and the server side rendered svelte code, we have a `/src/common` folder for common database entities and for client side models.
+
+### Icon Usage
+
+We prefer importing icons with `import MyIcon from 'flowbite-svelte-icons/MyIcon.svelte`. This leads to faster compilation as mentioned here: https://flowbite-svelte.com/icons/svelte-4#Faster_compiling
