@@ -94,10 +94,6 @@ const config = {
 						allowedRoles: ['authenticated']
 					},
 					{
-						route: '/onboarding',
-						allowedRoles: ['authenticated']
-					},
-					{
 						route: '/risks',
 						allowedRoles: ['authenticated']
 					},

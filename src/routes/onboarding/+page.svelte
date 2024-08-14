@@ -29,10 +29,6 @@
 	];
 	roles.sort((a, b) => a.value.localeCompare(b.value));
 	roles.push({ value: 'other', name: $t('common.pages.onboarding.roleOption7') });
-	function handleSubmit(event: Event) {
-		event.preventDefault();
-		console.log('Form submitted', workspaceName, workspaceLocation, workspaceTeamSize, role);
-	}
 </script>
 
 <div class="flex flex-col items-center justify-center min-h-screen w-full">
@@ -45,7 +41,7 @@
 			>{$t('common.pages.onboarding.subheading')}</P
 		>
 
-		<form on:submit={handleSubmit}>
+		<form method="POST">
 			<div class="mt-6">
 				<Label
 					data-testid="onboarding-workspace-name-label"
@@ -56,6 +52,7 @@
 					data-testid="onboarding-workspace-name-input"
 					id="workspace-name-input"
 					class="text-sm mt-2"
+					name="workspace-name"
 					placeholder={$t('common.pages.onboarding.workspaceNameInputPlaceholder')}
 					required
 					maxlength="16"
@@ -74,6 +71,7 @@
 					data-testid="onboarding-workspace-location-input"
 					class="text-sm ml-2 max-w-48"
 					id="workspace-location-input"
+					name="workspace-location"
 					items={workspaceLocations}
 					bind:value={workspaceLocation}
 				/>
@@ -88,6 +86,7 @@
 				<Select
 					data-testid="onboarding-team-size-input"
 					id="team-size-input"
+					name="team-size"
 					class="mt-2 text-sm"
 					items={workspaceTeamSizes}
 					placeholder={$t('common.pages.onboarding.teamSizeInputPlaceholder')}
@@ -102,6 +101,7 @@
 				<Select
 					data-testid="onboarding-role-input"
 					id="role-input"
+					name="role"
 					class="mt-2 text-sm"
 					items={roles}
 					placeholder={$t('common.pages.onboarding.roleInputPlaceholder')}

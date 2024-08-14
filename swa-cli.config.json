@@ -4,14 +4,14 @@
 		"basel-hr": {
 			"outputLocation": "./build/static",
 			"appBuildCommand": "npm run build",
-			"run": "vite dev",
+			"run": "npx vite dev",
 			"appDevserverUrl": "http://localhost:5173",
 			"dataApiLocation": "swa-db-connections"
 		},
 		"basel-no-hr": {
 			"apiLocation": "./build/server",
 			"outputLocation": "./build/static",
-			"run": "vite dev",
+			"run": "npx vite dev",
 			"swaConfigLocation": "./build",
 			"dataApiLocation": "swa-db-connections"
 		}

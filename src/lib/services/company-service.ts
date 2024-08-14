@@ -33,7 +33,7 @@ export class CompanyService {
 		return mapDBCompanyToCompany(dbCompany);
 	}
 
-	async createCompany(company: Company): Promise<Company | null> {
+	async createCompany(company: Omit<Company, 'id'>): Promise<Company | null> {
 		const role = await this.userService.getUserRole();
 
 		if (!role) {
