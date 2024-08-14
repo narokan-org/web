@@ -11,7 +11,7 @@
 		"basel-no-hr": {
 			"apiLocation": "./build/server",
 			"outputLocation": "./build/static",
-			"run": "npx vite dev",
+			"run": "vite dev",
 			"swaConfigLocation": "./build",
 			"dataApiLocation": "swa-db-connections"
 		}
