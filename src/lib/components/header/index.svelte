@@ -2,7 +2,7 @@
 	import { getContext } from 'svelte';
 	import type { Writable } from 'svelte/store';
 	import { Navbar, NavBrand, NavLi, NavUl, Button } from 'flowbite-svelte';
-	import { ChevronDownOutline } from 'flowbite-svelte-icons';
+	import ChevronDownOutline from 'flowbite-svelte-icons/ChevronDownOutline.svelte';
 	import type { User } from '$lib/common/models/user';
 	import { page } from '$app/stores';
 	import { t } from '$lib/translations';
