@@ -3,7 +3,8 @@
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
-		"dev": "swa build && swa start",
+		"dev:hr": "swa build && swa start --config-name basel-hr",
+		"dev:no-hr": "swa build && swa start --config-name basel-no-hr",
 		"build": "vite build",
 		"preview": "vite preview",
 		"test": "npm run test:integration && npm run test:unit",
