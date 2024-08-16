@@ -21,6 +21,7 @@ vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 
 coverage
+test-results
 
 # Not sure why this is needed for local development just yet.
 staticwebapp.config.json
