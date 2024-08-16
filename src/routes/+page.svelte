@@ -3,7 +3,6 @@
 	// import BrainSolid from 'flowbite-svelte-icons/BrainSolid.svelte';
 	// import LockSolid from 'flowbite-svelte-icons/LockSolid.svelte';
 	// import FileChartBarSolid from 'flowbite-svelte-icons/FileChartBarSolid.svelte';
-	// testing s s
 	import { t } from '$lib/translations';
 	import Feature from '$lib/components/feature/index.svelte';
 
