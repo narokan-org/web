@@ -6,14 +6,16 @@
 			"appBuildCommand": "npm run build",
 			"run": "npx vite dev",
 			"appDevserverUrl": "http://localhost:5173",
-			"dataApiLocation": "swa-db-connections"
+			"dataApiLocation": "swa-db-connections",
+			"printConfig": "true"
 		},
 		"basel-no-hr": {
 			"apiLocation": "./build/server",
 			"outputLocation": "./build/static",
 			"run": "npx vite dev",
 			"swaConfigLocation": "./build",
-			"dataApiLocation": "swa-db-connections"
+			"dataApiLocation": "swa-db-connections",
+			"printConfig": "true"
 		}
 	}
 }
