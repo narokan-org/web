@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import { screen, render } from '@testing-library/svelte';
 import userEvent from '@testing-library/user-event';
 import Page from './+page.svelte';
@@ -62,5 +62,12 @@ describe('invite page', () => {
 		await userEvent.click(addAnotherButton);
 
 		expect(addAnotherButton).not.toBeInTheDocument();
+	});
+
+	it('should go to the /dashboard route when skip button is clicked', async () => {
+		render(Page);
+
+		const skipButton = screen.getByTestId('invite-skip-button');
+		expect(skipButton).toHaveAttribute('href', '/dashboard');
 	});
 });
