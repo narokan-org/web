@@ -89,6 +89,14 @@ const config = {
 						route: '/dashboard',
 						allowedRoles: ['authenticated']
 					},
+					// {
+					// 	route: '/onboarding',
+					// 	allowedRoles: ['authenticated']
+					// },
+					// {
+					// 	route: '/invite',
+					// 	allowedRoles: ['authenticated']
+					// },
 					{
 						route: '/entities',
 						allowedRoles: ['authenticated']

@@ -32,7 +32,7 @@
 			<Button href="/signup">{$t('common.components.header.signup')}</Button>
 		</div>
 	{:else}
-		<div class="flex flex-col ml-auto">
+		<div class="flex flex-col ml-auto mt-12">
 			<P data-testid="header-login-status" class="text-sm text-gray-500 block"
 				>{$t('common.components.header.loginStatus')}</P
 			>
