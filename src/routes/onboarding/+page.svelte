@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Button, Heading, Label, P, Input, Select, Hr, A } from 'flowbite-svelte';
+	import { Button, Heading, Label, P, Input, Select, Hr } from 'flowbite-svelte';
 	import { t } from '$lib/translations';
 
 	let workspaceName = '';
