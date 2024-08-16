@@ -21,7 +21,7 @@ describe('LoggingService', () => {
 		process.env.NODE_ENV = 'development';
 		loggingService.info(message);
 
-		const timestampRegex = /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z/;
+		const timestampRegex = /\d{1,2}\/\d{1,2}\/\d{4}, \d{1,2}:\d{2}:\d{2} (AM|PM)/;
 		expect(console.log).toHaveBeenCalledWith(expect.stringMatching(timestampRegex));
 	});
 
