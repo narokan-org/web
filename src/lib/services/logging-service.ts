@@ -6,7 +6,9 @@ export class LoggingService {
 	#tag = '[Basel]';
 
 	private getTimestamp(): string {
-		return isProduction() ? '' : new Date().toISOString();
+		return isProduction()
+			? ''
+			: new Date().toLocaleString('en-US', { timeZone: 'America/Los_Angeles' });
 	}
 
 	private formatMessage(message: LogMessage): string {

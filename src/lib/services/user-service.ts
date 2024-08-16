@@ -1,7 +1,7 @@
 import type { DBUser } from '$lib/common/entities/db-user';
 import type { LocalUserPayload } from '$lib/common/models/local-user-payload';
 import type { User } from '$lib/common/models/user';
-import { mapDBUserToUser } from '$lib/utils/mappers';
+import { mapDBUserToUser, mapUserToDBUser } from '$lib/utils/mappers';
 import { parseDBResponse } from '$lib/utils/utils';
 import type { LoggingService } from './logging-service';
 
@@ -27,7 +27,17 @@ export class UserService {
 		return localUser;
 	}
 
-	async getUser(id: string): Promise<User | null> {
+	async getUser(id?: string): Promise<User | null> {
+		if (!id) {
+			const localUser = await this.getLocalUser();
+
+			if (!localUser) {
+				return null;
+			}
+
+			id = localUser.clientPrincipal.userId;
+		}
+
 		const role = await this.getUserRole();
 		if (!role) {
 			return null;
@@ -78,6 +88,28 @@ export class UserService {
 		}
 
 		return user;
+	}
+
+	async updateUser(user: User): Promise<User | null> {
+		const response = await this.fetchFn(`/data-api/rest/User/Id/${user.id}`, {
+			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(mapUserToDBUser(user))
+		});
+
+		if (!response.ok) {
+			return null;
+		}
+
+		const dbUser = (await parseDBResponse<DBUser>(response))?.[0];
+
+		if (!dbUser) {
+			return null;
+		}
+
+		return mapDBUserToUser(dbUser);
 	}
 
 	async getUserRole(): Promise<string | null> {

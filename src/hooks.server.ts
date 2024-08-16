@@ -21,7 +21,7 @@ export const handleFetch: HandleFetch = async ({ event, request, fetch }) => {
 
 	const responseClone = response.clone();
 	event.locals.loggingService.debug(
-		`Request to ${request.url} returned status ${responseClone.status}`
+		`${request.method} request to ${request.url} returned status ${responseClone.status}`
 	);
 	event.locals.loggingService.debug(`Response status text: ${responseClone.statusText}`);
 	event.locals.loggingService.debug(`Response body: ${await responseClone.text()}`);

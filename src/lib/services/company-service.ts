@@ -35,14 +35,16 @@ export class CompanyService {
 
 	async createCompany(company: Omit<Company, 'id'>): Promise<Company | null> {
 		const role = await this.userService.getUserRole();
+		const currentUser = await this.userService.getUser();
 
-		if (!role) {
+		if (!role || !currentUser) {
 			return null;
 		}
 
-		const newCompany = {
-			Name: company.name
-		} as DBCompany;
+		const newCompany: Partial<DBCompany> = {
+			Name: company.name,
+			CreatedByUser_FK: currentUser.id
+		};
 
 		const response = await this.fetchFn('/data-api/rest/Company', {
 			method: 'POST',

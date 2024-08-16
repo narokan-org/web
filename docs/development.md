@@ -17,13 +17,13 @@ Place a file called `staticwebapp.config.json` at the root of the repo and add a
 Basel uses SWA auth. With local development you'll be met with a login screen and you'll enter the following details in the form.
 
 ```
-User ID: f7224c43998572237a1dc841964cb3bf
-Username: <email> // Use whatever email you want but make sure to replace below too in userDetails.
+User ID: 9a400d60-9ddf-4781-9af7-b8c33973eff1
+Username: nitish.sachar@gmail.com // Use whatever email you want but make sure to replace below too in userDetails.
 User's Claims:
 [{
   "identityProvider": "aad",
-  "userId": "f7224c43998572237a1dc841964cb3bf",
-  "userDetails": "<email>",
+  "userId": "9a400d60-9ddf-4781-9af7-b8c33973eff1",
+  "userDetails": "nitish.sachar@gmail.com",
   "userRoles": ["anonymous", "authenticated"],
   "claims": [{
     "typ": "name",
