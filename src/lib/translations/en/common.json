@@ -44,6 +44,15 @@
 			"waitlistInputPlaceholder": "Email address",
 			"waitlistButton": "Join waitlist"
 		},
+		"invite": {
+			"heading": "Invite people",
+			"subheading": "Invite coworkers to join this workspace",
+			"emailAddressInputPlaceholder": "Email address",
+			"addAnotherButtonLabel": "Add Another",
+			"sendButtonLabel": "Send Invitations",
+			"copyInviteLabel": "Copy invite link",
+			"skipButtonLabel": "Skip"
+		},
 		"onboarding": {
 			"heading": "Welcome to Basel",
 			"roleInputLabel": "What is your role?",
