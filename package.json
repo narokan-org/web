@@ -15,8 +15,7 @@
 		"test:integration": "playwright test",
 		"test:unit": "vitest",
 		"test:unit:watch": "vitest --watch",
-		"test:coverage": "vitest run --coverage",
-		"prepare": "husky && husky install"
+		"test:coverage": "vitest run --coverage"
 	},
 	"dependencies": {
 		"sveltekit-i18n": "^2.4.2"
