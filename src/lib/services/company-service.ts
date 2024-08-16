@@ -1,6 +1,8 @@
 import type { DBCompany } from '$lib/common/entities/db-company';
+import type { DBUserCompanyRelationship } from '$lib/common/entities/db-user-company-relationship';
 import type { Company } from '$lib/common/models/company';
 import { mapDBCompanyToCompany } from '$lib/utils/mappers';
+import { parseDBResponse } from '$lib/utils/utils';
 import type { LoggingService } from './logging-service';
 import type { UserService } from './user-service';
 
@@ -28,7 +30,11 @@ export class CompanyService {
 			return null;
 		}
 
-		const dbCompany: DBCompany = await response.json();
+		const dbCompany = (await parseDBResponse<DBCompany>(response))?.[0];
+
+		if (!dbCompany) {
+			return null;
+		}
 
 		return mapDBCompanyToCompany(dbCompany);
 	}
@@ -59,8 +65,38 @@ export class CompanyService {
 			return null;
 		}
 
-		const dbCompany: DBCompany = await response.json();
+		const dbCompany = (await parseDBResponse<DBCompany>(response))?.[0];
+
+		if (!dbCompany) {
+			return null;
+		}
+
+		await this.associateCompanyWithUser(dbCompany.Id, currentUser.id);
 
 		return mapDBCompanyToCompany(dbCompany);
+	}
+
+	private async associateCompanyWithUser(companyId: number, userId: string): Promise<void> {
+		const role = await this.userService.getUserRole();
+
+		if (!role) {
+			return;
+		}
+
+		const relationship: DBUserCompanyRelationship = {
+			UserId: userId,
+			CompanyId: companyId,
+			Role: 'Administrator'
+		};
+		this.log.debug(`Creating user company relationship ${JSON.stringify(relationship)}`);
+
+		await this.fetchFn(`/data-api/rest/UserCompanyRelationship`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				'X-MS-API-ROLE': role
+			},
+			body: JSON.stringify(relationship)
+		});
 	}
 }

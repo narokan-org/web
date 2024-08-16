@@ -47,6 +47,15 @@
 					"role": "authenticated"
 				}
 			]
+		},
+		"UserCompanyRelationship": {
+			"source": "dbo.UserCompanyRelationship",
+			"permissions": [
+				{
+					"actions": ["read", "create"],
+					"role": "authenticated"
+				}
+			]
 		}
 	}
 }
