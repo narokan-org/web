@@ -25,6 +25,7 @@ export const load = async ({ locals, request }) => {
 			email,
 			onboarded: false
 		});
+		throw redirect(302, '/onboarding');
 	} else if (!user.onboarded && !request.url.includes('/onboarding')) {
 		locals.loggingService.debug('User is not onboarded. Redirecting to onboarding.');
 		throw redirect(302, '/onboarding');
