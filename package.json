@@ -22,6 +22,7 @@
 	},
 	"devDependencies": {
 		"@azure/static-web-apps-cli": "^2.0.1",
+		"@codecov/vite-plugin": "^0.0.1-beta.10",
 		"@playwright/test": "^1.28.1",
 		"@sveltejs/adapter-auto": "^3.0.0",
 		"@sveltejs/kit": "^2.0.0",

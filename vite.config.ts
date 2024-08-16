@@ -1,4 +1,5 @@
 import { sveltekit } from '@sveltejs/kit/vite';
+import { codecovVitePlugin } from '@codecov/vite-plugin';
 import type { ViteDevServer } from 'vite';
 import { defineConfig } from 'vitest/config';
 
@@ -19,7 +20,15 @@ const swaPlugin = () => ({
 });
 
 export default defineConfig({
-	plugins: [swaPlugin(), sveltekit()],
+	plugins: [
+		swaPlugin(),
+		sveltekit(),
+		codecovVitePlugin({
+			enableBundleAnalysis: process.env.CODECOV_TOKEN !== undefined,
+			bundleName: 'basel',
+			uploadToken: process.env.CODECOV_TOKEN
+		})
+	],
 	test: {
 		globals: true,
 		environment: 'jsdom',
