@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
 	import type { Writable } from 'svelte/store';
-	import { Navbar, NavBrand, NavLi, NavUl, Button } from 'flowbite-svelte';
+	import { Navbar, NavBrand, NavLi, NavUl, Button, P } from 'flowbite-svelte';
 	import ChevronDownOutline from 'flowbite-svelte-icons/ChevronDownOutline.svelte';
 	import type { User } from '$lib/common/models/user';
 	import { page } from '$app/stores';
@@ -10,8 +10,10 @@
 	const { isLoggedIn, user } = getContext<{ isLoggedIn: Writable<boolean>; user: Writable<User> }>(
 		'auth'
 	);
+	const onboardingPaths = ['/onboarding', '/invite'];
+
 	$: activeUrl = $page.url.pathname;
-	$: isOnboardingPath = $page.url.pathname === '/onboarding';
+	$: isOnboardingPath = onboardingPaths.includes($page.url.pathname);
 </script>
 
 <Navbar>
@@ -28,6 +30,13 @@
 				<NavLi class="mr-4" href="/login">{$t('common.components.header.login')}</NavLi>
 			</NavUl>
 			<Button href="/signup">{$t('common.components.header.signup')}</Button>
+		</div>
+	{:else}
+		<div class="flex flex-col ml-auto">
+			<P data-testid="header-login-status" class="text-sm text-gray-500 block"
+				>{$t('common.components.header.loginStatus')}</P
+			>
+			<P data-testid="header-user-email" class="text-sm block">{$user.email}</P>
 		</div>
 	{/if}
 	<NavUl {activeUrl} class="order-1">

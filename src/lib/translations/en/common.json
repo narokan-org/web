@@ -8,6 +8,7 @@
 			"entities": "Entities",
 			"features": "Features",
 			"login": "Log In",
+			"loginStatus": "Logged in as:",
 			"logout": "Logout",
 			"pricing": "Pricing",
 			"risks": "Risks",

@@ -25,6 +25,6 @@ export const actions: Actions = {
 
 		await locals.userService.updateUser({ ...currentUser, onboarded: true });
 
-		redirect(302, '/dashboard');
+		redirect(302, '/invite');
 	}
 };
