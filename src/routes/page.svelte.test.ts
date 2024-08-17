@@ -1,8 +1,9 @@
 import { describe, expect, it, vi } from 'vitest';
 import { render, screen } from '@testing-library/svelte';
 import userEvent from '@testing-library/user-event';
-import Page from './+page.svelte';
+import HomePage from './+page.svelte';
 import common from '../lib/translations/en/common.json';
+import { readable, writable } from 'svelte/store';
 
 global.fetch = vi.fn(() =>
 	Promise.resolve(
@@ -17,7 +18,9 @@ global.fetch = vi.fn(() =>
 
 describe('home page', () => {
 	it('should render', () => {
-		render(Page);
+		render(HomePage, {
+			context: new Map([['auth', { isLoggedIn: readable(false), user: readable(null) }]])
+		});
 
 		expect(screen.getByTestId('home-heading')).toHaveTextContent(common.pages.home.heading);
 		expect(screen.getByTestId('home-subheading')).toHaveTextContent(common.pages.home.subheading);
@@ -47,7 +50,9 @@ describe('home page', () => {
 	});
 
 	it('handles form submission', async () => {
-		render(Page);
+		render(HomePage, {
+			context: new Map([['auth', { isLoggedIn: writable(false), user: writable(null) }]])
+		});
 
 		const emailInput = screen.getByTestId('home-waitlist-input');
 		const submitButton = screen.getByTestId('home-waitlist-button');

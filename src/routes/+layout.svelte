@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { setContext } from 'svelte';
 	import { writable } from 'svelte/store';
-	import Header from '$lib/components/header/index.svelte';
+	import Header from '$lib/components/navigation/index.svelte';
 	import type { User } from '$lib/common/models/user';
 	import '../app.css';
 

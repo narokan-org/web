@@ -1,5 +1,6 @@
 import { sveltekit } from '@sveltejs/kit/vite';
 import { codecovSvelteKitPlugin } from '@codecov/sveltekit-plugin';
+import { svelteTesting } from '@testing-library/svelte/vite';
 import type { ViteDevServer } from 'vite';
 import { defineConfig } from 'vitest/config';
 
@@ -23,6 +24,7 @@ export default defineConfig({
 	plugins: [
 		swaPlugin(),
 		sveltekit(),
+		svelteTesting(),
 		codecovSvelteKitPlugin({
 			enableBundleAnalysis: true,
 			bundleName: 'basel',
@@ -34,9 +36,10 @@ export default defineConfig({
 		environment: 'jsdom',
 		coverage: {
 			reporter: ['text', 'html', 'cobertura'],
-			include: ['src/**/*.{svelete,ts}']
+			include: ['src/**/*.{svelete,ts}'],
+			exclude: ['./vitest-setup.ts']
 		},
 		include: ['src/**/*.test.ts'],
-		setupFiles: ['./setupTests.ts']
+		setupFiles: ['./vitest-setup.ts']
 	}
 });

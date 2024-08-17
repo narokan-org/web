@@ -1,18 +1,26 @@
 {
 	"appName": "Basel",
 	"components": {
-		"header": {
+		"navigation": {
 			"assessments": "Assessments",
 			"controls": "Controls",
 			"dashboard": "Dashboard",
+			"docs": "Docs",
 			"entities": "Entities",
 			"features": "Features",
+			"gettingStarted": "Getting Started",
+			"inbox": "Inbox",
 			"login": "Log In",
 			"loginStatus": "Logged in as:",
 			"logout": "Logout",
+			"organization": "Organization",
 			"pricing": "Pricing",
+			"policies": "Policies",
+			"processes": "Processes",
 			"risks": "Risks",
+			"riskRegister": "Risk Register",
 			"settings": "Settings",
+			"trustCenter": "Trust Center",
 			"signup": "Try for free",
 			"solutions": "Solutions"
 		},
