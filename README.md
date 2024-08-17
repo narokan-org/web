@@ -1,7 +1,11 @@
 # Basel
 
 [![Build Status](https://github.com/uioporqwerty/basel/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/uioporqwerty/basel/actions/workflows/ci-cd.yml)
+[![codecov](https://codecov.io/gh/uioporqwerty/basel/graph/badge.svg?token=NMX0XR26DI)](https://codecov.io/gh/uioporqwerty/basel)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/57015ad5df2e418c99622a3226b8fea7)](https://app.codacy.com/gh/uioporqwerty/basel/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
+
+![Code Coverage Tree Graph](https://codecov.io/gh/uioporqwerty/basel/graphs/tree.svg?token=NMX0XR26DI)
+Code Coverage Graph
 
 ## Documentation Index
 
