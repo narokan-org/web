@@ -32,9 +32,9 @@ jobs:
         run: npm run test:coverage
 
       - name: Upload code coverage to Codecov
-        uses: codecov/codecov-action@v4
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
+        uses: codecov/codecov-action@v4.2.0
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
       - name: Build And Deploy
         id: builddeploy
