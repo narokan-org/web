@@ -29,7 +29,13 @@ jobs:
         run: npm run lint
 
       - name: Run unit tests
-        run: npm run test:coverage
+        run: npm run test:coverage --reporter=junit
+
+      - name: Upload test results to Codecov
+        if: ${{ !cancelled() }}
+        uses: codecov/test-results-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
 
       - name: Build And Deploy
         id: builddeploy
