@@ -13,9 +13,9 @@
 		"lint": "prettier --check . && eslint .",
 		"format": "prettier --write .",
 		"test:integration": "playwright test",
-		"test:unit": "vitest --run",
+		"test:unit": "vitest --run --reporter=junit",
 		"test:unit:watch": "vitest --watch",
-		"test:coverage": "vitest run --coverage"
+		"test:coverage": "vitest run --coverage --reporter=junit --output-file=coverage/junit.xml"
 	},
 	"dependencies": {
 		"sveltekit-i18n": "^2.4.2"
