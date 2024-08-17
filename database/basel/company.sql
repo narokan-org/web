@@ -1,9 +1,0 @@
-DROP TABLE IF EXISTS [dbo].[Company];
-
-CREATE TABLE [dbo].[Company] (
-    Id INT IDENTITY(1,1) PRIMARY KEY,
-    Name NVARCHAR(16) NOT NULL,
-    CreatedDate DATETIME DEFAULT GETDATE() NOT NULL,
-    CreatedByUser_FK UNIQUEIDENTIFIER NOT NULL,
-    FOREIGN KEY (CreatedByUser_FK) REFERENCES [dbo].[User](Id)
-);

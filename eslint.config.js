@@ -20,6 +20,11 @@ export default [
 		}
 	},
 	{
+		rules: {
+			'@typescript-eslint/no-unsafe-return': 'off'
+		}
+	},
+	{
 		files: ['**/*.svelte'],
 		languageOptions: {
 			parserOptions: {
