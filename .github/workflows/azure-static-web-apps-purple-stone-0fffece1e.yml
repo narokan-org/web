@@ -16,6 +16,8 @@ jobs:
     name: Build and Deploy Job
     env:
       BASEL_ENVIRONMENT: production
+      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
     steps:
       - uses: actions/checkout@v3
         with:
