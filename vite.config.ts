@@ -1,5 +1,5 @@
 import { sveltekit } from '@sveltejs/kit/vite';
-import { codecovVitePlugin } from '@codecov/vite-plugin';
+import { codecovSvelteKitPlugin } from '@codecov/sveltekit-plugin';
 import type { ViteDevServer } from 'vite';
 import { defineConfig } from 'vitest/config';
 
@@ -23,8 +23,8 @@ export default defineConfig({
 	plugins: [
 		swaPlugin(),
 		sveltekit(),
-		codecovVitePlugin({
-			enableBundleAnalysis: process.env.CODECOV_TOKEN !== undefined,
+		codecovSvelteKitPlugin({
+			enableBundleAnalysis: true,
 			bundleName: 'basel',
 			uploadToken: process.env.CODECOV_TOKEN
 		})
