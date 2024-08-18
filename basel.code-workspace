@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"debug.internalConsoleOptions": "neverOpen",
+		"workbench.editor.labelFormat": "short",
+		"explorer.compactFolders": false,
+		"workbench.tree.indent": 12
+	}
+}
