@@ -5,10 +5,8 @@ import { vi } from 'vitest';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import * as stores from '$app/stores';
 
-export const createMockPage = (
-	page: Partial<Page<Record<string, string>, string | null>> = {}
-): Page<Record<string, string>, string | null> => {
-	const defaultPage = {
+export const createMockPage = (page: Partial<Page> = {}): Page => {
+	const defaultPage: Page = {
 		url: new URL('http://localhost'),
 		params: {},
 		route: {
