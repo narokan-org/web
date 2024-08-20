@@ -1,3 +1,16 @@
 {
-	"recommendations": ["ms-azuretools.vscode-azurefunctions"]
+	"recommendations": [
+		"ms-azuretools.vscode-azurefunctions",
+		"figma.figma-vscode-extension",
+		"codacy-app.codacy",
+		"codecov.codecov",
+		"GitHub.vscode-pull-request-github",
+		"wix.vscode-import-cost",
+		"linear.linear-open-issue",
+		"ms-playwright.playwright",
+		"vitest.explorer",
+		"svelte.svelte-vscode",
+		"ardenivanov.svelte-intellisense",
+		"fivethree.vscode-svelte-snippets"
+	]
 }
