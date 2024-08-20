@@ -11,6 +11,7 @@
 		"vitest.explorer",
 		"svelte.svelte-vscode",
 		"ardenivanov.svelte-intellisense",
-		"fivethree.vscode-svelte-snippets"
+		"fivethree.vscode-svelte-snippets",
+		"pivaszbs.svelte-autoimport"
 	]
 }
