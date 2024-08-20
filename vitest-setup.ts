@@ -2,6 +2,7 @@ import '@testing-library/jest-dom/vitest';
 import { readable } from 'svelte/store';
 import type { Navigation, Page } from '@sveltejs/kit';
 import { vi } from 'vitest';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import * as stores from '$app/stores';
 
 export const createMockPage = (
