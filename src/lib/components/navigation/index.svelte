@@ -28,6 +28,7 @@
 	import type { User } from '$lib/common/models/user';
 	import { page } from '$app/stores';
 	import { t } from '$lib/translations';
+	import { isOnboardingPath } from '$lib/utils/utils';
 
 	const { isLoggedIn, user } = getContext<{ isLoggedIn: Readable<boolean>; user: Readable<User> }>(
 		'auth'
@@ -39,13 +40,10 @@
 		img: '/images/logo.png'
 	};
 
-	const onboardingPaths = ['/onboarding', '/invite'];
-
 	let activeUrl = $page.url.pathname;
-	let isOnboardingPath = onboardingPaths.includes($page.url.pathname);
 </script>
 
-<div class="flex">
+<div class="flex" {...$$restProps}>
 	{#if !$isLoggedIn}
 		<Navbar data-testid="navigation-top-bar">
 			<NavBrand data-testid="navigation-top-bar-logo" href="/">
@@ -81,7 +79,7 @@
 				>
 			</NavUl>
 		</Navbar>
-	{:else if $isLoggedIn && isOnboardingPath}
+	{:else if $isLoggedIn && isOnboardingPath(activeUrl)}
 		<div class="ml-auto mr-12 mt-12">
 			<P data-testid="navigation-login-status" class="text-sm text-gray-500 block"
 				>{$t('common.components.navigation.loginStatus')}</P

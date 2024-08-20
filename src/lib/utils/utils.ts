@@ -8,3 +8,8 @@ export async function parseDBResponse<T>(response: Response): Promise<T[] | null
 
 	return jsonResponse.value as T[];
 }
+
+export function isOnboardingPath(path: string) {
+	const onboardingPaths = ['/onboarding', '/invite'];
+	return onboardingPaths.includes(path);
+}
