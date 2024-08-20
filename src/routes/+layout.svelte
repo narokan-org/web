@@ -11,14 +11,15 @@
 	const isLoggedIn = writable(false);
 	const user = writable<User>();
 
+	const showLoggedInLayout = isLoggedIn && !isOnboardingPath($page.url.pathname);
 	isLoggedIn.set(data.isLoggedIn);
 	user.set(data.user);
 
 	setContext('auth', { isLoggedIn, user });
 </script>
 
-<div class={$isLoggedIn && !isOnboardingPath($page.url.pathname) ? 'flex' : ''}>
-	<Header class={$isLoggedIn && !isOnboardingPath($page.url.pathname) ? 'w-auto' : ''} />
+<div class={showLoggedInLayout ? 'flex' : ''}>
+	<Header class={showLoggedInLayout ? 'w-auto' : ''} />
 
 	<main class="mx-4">
 		<slot></slot>
