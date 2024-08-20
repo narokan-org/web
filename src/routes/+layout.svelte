@@ -11,7 +11,8 @@
 	const isLoggedIn = writable(false);
 	const user = writable<User>();
 
-	const showLoggedInLayout = isLoggedIn && !isOnboardingPath($page.url.pathname);
+	const showLoggedInLayout = $isLoggedIn && !isOnboardingPath($page.url.pathname);
+
 	isLoggedIn.set(data.isLoggedIn);
 	user.set(data.user);
 

@@ -14,10 +14,13 @@
 	);
 
 	let email = '';
+	let isSubmitting = false;
 
 	async function handleSignUp(event: Event) {
 		event.preventDefault();
 		const form = event.target as HTMLFormElement;
+
+		isSubmitting = true;
 
 		const response = await fetch('https://api.getwaitlist.com/api/v1/signup', {
 			method: 'POST',
@@ -29,6 +32,8 @@
 				waitlist_id: '19478'
 			})
 		});
+
+		isSubmitting = false;
 
 		if (!response.ok) {
 			return null;
@@ -60,6 +65,7 @@
 							placeholder={$t('common.pages.home.waitlistInputPlaceholder')}
 						/>
 						<Button
+							disabled={isSubmitting}
 							type="submit"
 							data-testid="home-waitlist-button"
 							class="text-xs ml-4 h-10 min-w-[120px]"
