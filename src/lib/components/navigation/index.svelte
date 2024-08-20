@@ -41,28 +41,18 @@
 
 	const onboardingPaths = ['/onboarding', '/invite'];
 
-	let activeUrl: string;
-	let isOnboardingPath: boolean;
-
-	onMount(() => {
-		const unsubscribe = page.subscribe(($page) => {
-			activeUrl = $page.url.pathname;
-			isOnboardingPath = onboardingPaths.includes($page.url.pathname);
-		});
-		return () => unsubscribe();
-	});
+	let activeUrl = $page.url.pathname;
+	let isOnboardingPath = onboardingPaths.includes($page.url.pathname);
 </script>
 
 <div class="flex">
 	{#if !$isLoggedIn}
 		<Navbar data-testid="navigation-top-bar">
-			{#if !isOnboardingPath}
-				<NavBrand data-testid="navigation-top-bar-logo" href="/">
-					<span class="self-center whitespace-nowrap text-xl font-semibold dark:text-white"
-						>{$t('common.appName')}</span
-					>
-				</NavBrand>
-			{/if}
+			<NavBrand data-testid="navigation-top-bar-logo" href="/">
+				<span class="self-center whitespace-nowrap text-xl font-semibold dark:text-white"
+					>{$t('common.appName')}</span
+				>
+			</NavBrand>
 
 			<div class="flex md:order-2">
 				<NavUl>
@@ -102,50 +92,75 @@
 		<Sidebar data-testid="navigation-side-bar" {activeUrl}>
 			<SidebarWrapper class="bg-white">
 				<SidebarGroup>
-					<SidebarBrand {site} />
-					<SidebarItem label={$t('common.components.navigation.dashboard')} href="">
+					<SidebarBrand data-testid="navigation-side-bar-branding" {site} />
+					<SidebarItem
+						data-testid="navigation-side-bar-dashboard"
+						label={$t('common.components.navigation.dashboard')}
+						href=""
+					>
 						<svelte:fragment slot="icon">
 							<HomeOutline />
 						</svelte:fragment>
 					</SidebarItem>
 
-					<SidebarItem label={$t('common.components.navigation.inbox')} href="/inbox">
+					<SidebarItem
+						data-testid="navigation-side-bar-inbox"
+						label={$t('common.components.navigation.inbox')}
+						href="/inbox"
+					>
 						<svelte:fragment slot="icon">
 							<InboxOutline />
 						</svelte:fragment>
 					</SidebarItem>
 
-					<SidebarItem label={$t('common.components.navigation.trustCenter')} href="/trust-center">
+					<SidebarItem
+						data-testid="navigation-side-bar-trust-center"
+						label={$t('common.components.navigation.trustCenter')}
+						href="/trust-center"
+					>
 						<svelte:fragment slot="icon">
 							<ShieldCheckOutline />
 						</svelte:fragment>
 					</SidebarItem>
 
-					<SidebarDropdownWrapper label={$t('common.components.navigation.risks')}>
+					<SidebarDropdownWrapper
+						data-testid="navigation-side-bar-risks"
+						label={$t('common.components.navigation.risks')}
+					>
 						<svelte:fragment slot="icon">
 							<ShieldOutline />
 						</svelte:fragment>
 						<SidebarDropdownItem
+							data-testid="navigation-side-bar-risk-register"
 							label={$t('common.components.navigation.riskRegister')}
 							href="/risk-register"
 						/>
 						<SidebarDropdownItem
+							data-testid="navigation-side-bar-assessments"
 							label={$t('common.components.navigation.assessments')}
 							href="/assessments"
 						/>
 					</SidebarDropdownWrapper>
 
-					<SidebarItem label={$t('common.components.navigation.controls')} href="/controls">
+					<SidebarItem
+						data-testid="navigation-side-bar-controls"
+						label={$t('common.components.navigation.controls')}
+						href="/controls"
+					>
 						<svelte:fragment slot="icon">
 							<ShieldCheckOutline />
 						</svelte:fragment>
 					</SidebarItem>
 
-					<SidebarDropdownWrapper label={$t('common.components.navigation.organization')}>
+					<SidebarDropdownWrapper
+						data-testid="navigation-side-bar-organization"
+						label={$t('common.components.navigation.organization')}
+					>
 						<svelte:fragment slot="icon">
 							<BuildingOutline />
 						</svelte:fragment>
 						<SidebarDropdownItem
+							data-testid="navigation-side-bar-processes"
 							label={$t('common.components.navigation.processes')}
 							href="/processes"
 						/>
@@ -153,17 +168,25 @@
 				</SidebarGroup>
 
 				<SidebarGroup border>
-					<SidebarDropdownWrapper label={$t('common.components.navigation.docs')}>
+					<SidebarDropdownWrapper
+						data-testid="navigation-side-bar-docs"
+						label={$t('common.components.navigation.docs')}
+					>
 						<svelte:fragment slot="icon">
 							<BookOutline />
 						</svelte:fragment>
 						<SidebarDropdownItem
+							data-testid="navigation-side-bar-policies"
 							label={$t('common.components.navigation.policies')}
 							href="/policies"
 						/>
 					</SidebarDropdownWrapper>
 
-					<SidebarItem label={$t('common.components.navigation.settings')} href="/settings">
+					<SidebarItem
+						data-testid="navigation-side-bar-settings"
+						label={$t('common.components.navigation.settings')}
+						href="/settings"
+					>
 						<svelte:fragment slot="icon">
 							<CogOutline />
 						</svelte:fragment>
