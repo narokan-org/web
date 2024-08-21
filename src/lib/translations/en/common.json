@@ -51,7 +51,12 @@
 			"heading": "Operational Risk Simplified",
 			"subheading": "Manage your risk network on a single platform and rely less on spreadsheets - all in one risk focused interface your team will love.",
 			"waitlistInputPlaceholder": "Email address",
-			"waitlistButton": "Join waitlist"
+			"waitlistButton": "Join waitlist",
+			"loggedIn": {
+				"defaultHeading": "Welcome to Basel",
+				"heading": "Welcome, {{placeholder}}",
+				"subheading": "There's nothing here yet."
+			}
 		},
 		"invite": {
 			"heading": "Invite people",

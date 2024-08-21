@@ -4,6 +4,22 @@ import type { Navigation, Page } from '@sveltejs/kit';
 import { vi } from 'vitest';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import * as stores from '$app/stores';
+import type { User } from '$lib/common/models/user';
+import { faker, simpleFaker } from '@faker-js/faker';
+
+export const createMockUser = (user: Partial<User> = {}): User => {
+	const defaultUser: User = {
+		id: simpleFaker.string.uuid(),
+		email: faker.internet.email(),
+		onboarded: true,
+		name: faker.person.fullName()
+	};
+
+	return {
+		...defaultUser,
+		...user
+	};
+};
 
 export const createMockPage = (page: Partial<Page> = {}): Page => {
 	const defaultPage: Page = {

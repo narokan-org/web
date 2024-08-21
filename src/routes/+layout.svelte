@@ -11,7 +11,7 @@
 	const isLoggedIn = writable(false);
 	const user = writable<User>();
 
-	const showLoggedInLayout = $isLoggedIn && !isOnboardingPath($page.url.pathname);
+	const showLoggedInLayout = data.isLoggedIn && !isOnboardingPath($page.url.pathname);
 
 	isLoggedIn.set(data.isLoggedIn);
 	user.set(data.user);
@@ -22,7 +22,7 @@
 <div class={showLoggedInLayout ? 'flex' : ''}>
 	<Header class={showLoggedInLayout ? 'w-auto' : ''} />
 
-	<main class="mx-4">
+	<main class="mx-4 {showLoggedInLayout ? 'mt-4' : ''}">
 		<slot></slot>
 	</main>
 </div>

@@ -2,7 +2,8 @@ import i18n from 'sveltekit-i18n';
 import type { Config } from 'sveltekit-i18n';
 import lang from './lang.json';
 
-export const config: Config = {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const config: Config<{ placeholder?: string; value?: any; count?: number }> = {
 	initLocale: 'en',
 	translations: {
 		en: { lang }

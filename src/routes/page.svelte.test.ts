@@ -4,6 +4,7 @@ import userEvent from '@testing-library/user-event';
 import HomePage from './+page.svelte';
 import common from '../lib/translations/en/common.json';
 import { readable, writable } from 'svelte/store';
+import { createMockUser } from '../../vitest-setup';
 
 global.fetch = vi.fn(() =>
 	Promise.resolve(
@@ -72,5 +73,34 @@ describe('home page', () => {
 			})
 		});
 		expect(emailInput).toHaveValue('');
+	});
+
+	describe('loggedIn', () => {
+		it('should render', () => {
+			const testUser = createMockUser();
+
+			render(HomePage, {
+				context: new Map([['auth', { isLoggedIn: readable(true), user: readable(testUser) }]])
+			});
+
+			expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(
+				`Welcome, ${testUser.name}`
+			);
+			expect(screen.getByText(common.pages.home.loggedIn.subheading)).toBeInTheDocument();
+		});
+
+		it('should render with default heading when user does not have a name', () => {
+			const testUser = createMockUser({
+				name: ''
+			});
+
+			render(HomePage, {
+				context: new Map([['auth', { isLoggedIn: readable(true), user: readable(testUser) }]])
+			});
+
+			expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(
+				common.pages.home.loggedIn.defaultHeading
+			);
+		});
 	});
 });

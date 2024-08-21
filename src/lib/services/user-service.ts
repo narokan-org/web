@@ -71,7 +71,8 @@ export class UserService {
 		const dbUser: DBUser = {
 			Id: user.id,
 			Email: user.email,
-			Onboarded: user.onboarded
+			Onboarded: user.onboarded,
+			FullName: user.name
 		};
 
 		const response = await this.fetchFn(`/data-api/rest/User`, {

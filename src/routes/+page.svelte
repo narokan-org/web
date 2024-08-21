@@ -9,7 +9,7 @@
 	import type { Readable } from 'svelte/store';
 	import type { User } from '$lib/common/models/user';
 
-	const { isLoggedIn } = getContext<{ isLoggedIn: Readable<boolean>; user: Readable<User> }>(
+	const { isLoggedIn, user } = getContext<{ isLoggedIn: Readable<boolean>; user: Readable<User> }>(
 		'auth'
 	);
 
@@ -105,5 +105,14 @@
 				</Feature>
 			</div>
 		</div>
+	</div>
+{:else}
+	<div class="flex flex-col">
+		<Heading class="text-2xl font-bold"
+			>{$user.name
+				? $t('common.pages.home.loggedIn.heading', { placeholder: $user.name })
+				: $t('common.pages.home.loggedIn.defaultHeading')}</Heading
+		>
+		<P class="mt-2">{$t('common.pages.home.loggedIn.subheading')}</P>
 	</div>
 {/if}

@@ -23,7 +23,8 @@ export const load = async ({ locals, request }) => {
 		user = await locals.userService.createUser({
 			id: localUser.clientPrincipal.userId,
 			email,
-			onboarded: false
+			onboarded: false,
+			name: localUser.clientPrincipal.claims.find((c) => c.typ === 'name')?.val ?? ''
 		});
 		throw redirect(302, '/onboarding');
 	} else if (!user.onboarded && !request.url.includes('/onboarding')) {
