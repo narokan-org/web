@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { Heading, P, Img, Input, Button } from 'flowbite-svelte';
+	import ProgressCard from '$lib/components/progress-card/index.svelte';
 	// import BrainSolid from 'flowbite-svelte-icons/BrainSolid.svelte';
 	// import LockSolid from 'flowbite-svelte-icons/LockSolid.svelte';
 	// import FileChartBarSolid from 'flowbite-svelte-icons/FileChartBarSolid.svelte';
@@ -114,5 +115,26 @@
 				: $t('common.pages.home.loggedIn.defaultHeading')}</Heading
 		>
 		<P class="mt-2">{$t('common.pages.home.loggedIn.subheading')}</P>
+
+		<div class="flex flex-row mt-10 gap-4">
+			<ProgressCard
+				class="min-w-80"
+				heading={$t('common.pages.home.loggedIn.progressCard1Heading')}
+				inProgressItems={0}
+				totalItems={0}
+			/>
+			<ProgressCard
+				class="min-w-80"
+				heading={$t('common.pages.home.loggedIn.progressCard2Heading')}
+				inProgressItems={0}
+				totalItems={0}
+			/>
+			<ProgressCard
+				class="min-w-80"
+				heading={$t('common.pages.home.loggedIn.progressCard3Heading')}
+				inProgressItems={0}
+				totalItems={0}
+			/>
+		</div>
 	</div>
 {/if}

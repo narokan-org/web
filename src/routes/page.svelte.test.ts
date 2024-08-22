@@ -102,5 +102,17 @@ describe('home page', () => {
 				common.pages.home.loggedIn.defaultHeading
 			);
 		});
+
+		it('should render with progress cards', () => {
+			const testUser = createMockUser();
+
+			render(HomePage, {
+				context: new Map([['auth', { isLoggedIn: readable(true), user: readable(testUser) }]])
+			});
+
+			expect(screen.getByText(common.pages.home.loggedIn.progressCard1Heading)).toBeInTheDocument();
+			expect(screen.getByText(common.pages.home.loggedIn.progressCard2Heading)).toBeInTheDocument();
+			expect(screen.getByText(common.pages.home.loggedIn.progressCard3Heading)).toBeInTheDocument();
+		});
 	});
 });

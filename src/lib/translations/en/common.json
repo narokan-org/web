@@ -24,6 +24,9 @@
 			"signup": "Try for free",
 			"solutions": "Solutions"
 		},
+		"progressCard": {
+			"totalProgress": "{{value}}%"
+		},
 		"tableSearch": {
 			"placeholder": "Search"
 		}
@@ -55,7 +58,10 @@
 			"loggedIn": {
 				"defaultHeading": "Welcome to Basel",
 				"heading": "Welcome, {{placeholder}}",
-				"subheading": "There's nothing here yet."
+				"subheading": "There's nothing here yet.",
+				"progressCard1Heading": "Mitigation plans in progress",
+				"progressCard2Heading": "Controls tested",
+				"progressCard3Heading": "Assessments in progress"
 			}
 		},
 		"invite": {
