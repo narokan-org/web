@@ -1,9 +1,23 @@
 <script lang="ts">
-	import { Heading, P, Img, Input, Button } from 'flowbite-svelte';
+	import {
+		Heading,
+		P,
+		Img,
+		Input,
+		Button,
+		Table,
+		TableBody,
+		TableBodyCell,
+		TableBodyRow,
+		TableHead,
+		TableHeadCell
+	} from 'flowbite-svelte';
 	import ProgressCard from '$lib/components/progress-card/index.svelte';
 	// import BrainSolid from 'flowbite-svelte-icons/BrainSolid.svelte';
 	// import LockSolid from 'flowbite-svelte-icons/LockSolid.svelte';
 	// import FileChartBarSolid from 'flowbite-svelte-icons/FileChartBarSolid.svelte';
+	import PlusOutline from 'flowbite-svelte-icons/PlusOutline.svelte';
+	import UploadOutline from 'flowbite-svelte-icons/UploadOutline.svelte';
 	import { getContext } from 'svelte';
 	import { t } from '$lib/translations';
 	import Feature from '$lib/components/feature/index.svelte';
@@ -135,6 +149,74 @@
 				inProgressItems={0}
 				totalItems={0}
 			/>
+		</div>
+
+		<div class="flex flex-row mt-8 gap-8">
+			<div class="flex flex-col">
+				<P class="text-xl font-semibold">{$t('common.pages.home.loggedIn.risksTable.heading')}</P>
+
+				<div class="flex flex-col border mt-4 min-h-96">
+					<Table striped>
+						<TableHead class="uppercase bg-gray-200">
+							<TableHeadCell>{$t('common.pages.home.loggedIn.risksTable.column1')}</TableHeadCell>
+
+							<TableHeadCell>{$t('common.pages.home.loggedIn.risksTable.column2')}</TableHeadCell>
+
+							<TableHeadCell>{$t('common.pages.home.loggedIn.risksTable.column3')}</TableHeadCell>
+
+							<TableHeadCell>{$t('common.pages.home.loggedIn.risksTable.column4')}</TableHeadCell>
+						</TableHead>
+					</Table>
+					<!-- TODO: If there is no data, only then we will show this. Need to figure out that criteria. Same for the other table. -->
+					<div class="flex flex-grow h-full justify-center items-center gap-2">
+						<Button color="alternative"
+							><PlusOutline class="mr-1" />{$t(
+								'common.pages.home.loggedIn.createRiskButton'
+							)}</Button
+						>
+						<Button color="alternative"
+							><UploadOutline class="mr-1" />{$t(
+								'common.pages.home.loggedIn.bulkUploadButton'
+							)}</Button
+						>
+					</div>
+				</div>
+			</div>
+
+			<div class="flex flex-col">
+				<P class="text-xl font-semibold">{$t('common.pages.home.loggedIn.controlsTable.heading')}</P
+				>
+				<div class="flex flex-col border mt-4 min-h-96">
+					<Table striped>
+						<TableHead class="uppercase bg-gray-200">
+							<TableHeadCell>{$t('common.pages.home.loggedIn.controlsTable.column1')}</TableHeadCell
+							>
+
+							<TableHeadCell>{$t('common.pages.home.loggedIn.controlsTable.column2')}</TableHeadCell
+							>
+
+							<TableHeadCell>{$t('common.pages.home.loggedIn.controlsTable.column3')}</TableHeadCell
+							>
+
+							<TableHeadCell>{$t('common.pages.home.loggedIn.controlsTable.column4')}</TableHeadCell
+							>
+						</TableHead>
+					</Table>
+					<!-- TODO: If there is no data, only then we will show this. Need to figure out that criteria. Same for the other table. -->
+					<div class="flex flex-grow h-full justify-center items-center gap-2">
+						<Button color="alternative"
+							><PlusOutline class="mr-1" />{$t(
+								'common.pages.home.loggedIn.createControlButton'
+							)}</Button
+						>
+						<Button color="alternative"
+							><UploadOutline class="mr-1" />{$t(
+								'common.pages.home.loggedIn.bulkUploadButton'
+							)}</Button
+						>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 {/if}

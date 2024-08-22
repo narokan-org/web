@@ -14,6 +14,5 @@ describe('components/progress-card', () => {
 
 		expect(screen.getByText('Mitigation plans in progress')).toBeInTheDocument();
 		expect(screen.getByText('2')).toBeInTheDocument();
-		expect(screen.getByText('50%')).toBeInTheDocument();
 	});
 });

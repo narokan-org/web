@@ -61,7 +61,24 @@
 				"subheading": "There's nothing here yet.",
 				"progressCard1Heading": "Mitigation plans in progress",
 				"progressCard2Heading": "Controls tested",
-				"progressCard3Heading": "Assessments in progress"
+				"progressCard3Heading": "Assessments in progress",
+				"createRiskButton": "Create Risk",
+				"createControlButton": "Create Control",
+				"bulkUploadButton": "Bulk Upload",
+				"risksTable": {
+					"heading": "Risks",
+					"column1": "Risk Factor",
+					"column2": "Owner",
+					"column3": "Status",
+					"column4": "Last Assessed"
+				},
+				"controlsTable": {
+					"heading": "Controls",
+					"column1": "Control Name",
+					"column2": "Owner",
+					"column3": "Status",
+					"column4": "Last Assessed"
+				}
 			}
 		},
 		"invite": {

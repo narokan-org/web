@@ -114,5 +114,21 @@ describe('home page', () => {
 			expect(screen.getByText(common.pages.home.loggedIn.progressCard2Heading)).toBeInTheDocument();
 			expect(screen.getByText(common.pages.home.loggedIn.progressCard3Heading)).toBeInTheDocument();
 		});
+
+		it('should render tables', () => {
+			const testUser = createMockUser();
+
+			render(HomePage, {
+				context: new Map([['auth', { isLoggedIn: readable(true), user: readable(testUser) }]])
+			});
+
+			expect(screen.getByText(common.pages.home.loggedIn.risksTable.heading)).toBeInTheDocument();
+			expect(screen.getByText(common.pages.home.loggedIn.risksTable.column1)).toBeInTheDocument();
+			expect(screen.getAllByText(common.pages.home.loggedIn.risksTable.column2)).toHaveLength(2);
+			expect(screen.getAllByText(common.pages.home.loggedIn.risksTable.column3)).toHaveLength(2);
+			expect(screen.getAllByText(common.pages.home.loggedIn.risksTable.column4)).toHaveLength(2);
+			expect(screen.getByText(common.pages.home.loggedIn.createRiskButton)).toBeInTheDocument();
+			expect(screen.getAllByText(common.pages.home.loggedIn.bulkUploadButton)).toHaveLength(2);
+		});
 	});
 });
