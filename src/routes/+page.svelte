@@ -1,17 +1,5 @@
 <script lang="ts">
-	import {
-		Heading,
-		P,
-		Img,
-		Input,
-		Button,
-		Table,
-		TableBody,
-		TableBodyCell,
-		TableBodyRow,
-		TableHead,
-		TableHeadCell
-	} from 'flowbite-svelte';
+	import { Heading, P, Img, Input, Button, Table, TableHead, TableHeadCell } from 'flowbite-svelte';
 	import ProgressCard from '$lib/components/progress-card/index.svelte';
 	// import BrainSolid from 'flowbite-svelte-icons/BrainSolid.svelte';
 	// import LockSolid from 'flowbite-svelte-icons/LockSolid.svelte';
