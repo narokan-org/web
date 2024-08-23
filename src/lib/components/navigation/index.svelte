@@ -87,8 +87,8 @@
 			<P data-testid="navigation-login-status-user-email" class="text-sm block">{$user.email}</P>
 		</div>
 	{:else}
-		<Sidebar data-testid="navigation-side-bar" {activeUrl}>
-			<SidebarWrapper class="bg-white">
+		<Sidebar class="h-full" data-testid="navigation-side-bar" {activeUrl}>
+			<SidebarWrapper class="bg-white h-full">
 				<SidebarGroup>
 					<SidebarBrand data-testid="navigation-side-bar-branding" {site} />
 					<SidebarItem
