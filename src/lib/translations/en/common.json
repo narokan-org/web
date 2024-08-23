@@ -56,7 +56,6 @@
 			"waitlistInputPlaceholder": "Email address",
 			"waitlistButton": "Join waitlist",
 			"loggedIn": {
-				"defaultHeading": "Welcome to Basel",
 				"heading": "Welcome, {{placeholder}}",
 				"subheading": "There's nothing here yet.",
 				"progressCard1Heading": "Mitigation plans in progress",

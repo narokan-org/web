@@ -2,6 +2,7 @@
 	import { getContext } from 'svelte';
 	import type { Readable } from 'svelte/store';
 	import {
+		Avatar,
 		Navbar,
 		NavBrand,
 		NavLi,
@@ -88,7 +89,7 @@
 		</div>
 	{:else}
 		<Sidebar class="h-full" data-testid="navigation-side-bar" {activeUrl}>
-			<SidebarWrapper class="bg-white h-full">
+			<SidebarWrapper class="bg-white h-full flex flex-col">
 				<SidebarGroup>
 					<SidebarBrand data-testid="navigation-side-bar-branding" {site} />
 					<SidebarItem
@@ -190,6 +191,22 @@
 						</svelte:fragment>
 					</SidebarItem>
 				</SidebarGroup>
+
+				<div class="flex-grow"></div>
+
+				<SidebarGroup border />
+
+				<div class="flex flex-row">
+					<Avatar data-testid="navigation-avatar" rounded>
+						{#if $user.name}
+							{$user.name.charAt(0)}
+						{/if}
+					</Avatar>
+					<div class="flex flex-col ml-4">
+						<P class="text-sm">{$user.name}</P>
+						<P class="text-xs text-gray-500">{$user.email}</P>
+					</div>
+				</div>
 			</SidebarWrapper>
 		</Sidebar>
 	{/if}

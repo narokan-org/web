@@ -5,6 +5,8 @@ import { readable } from 'svelte/store';
 import * as stores from '$app/stores';
 import { createMockPage } from '../../../../vitest-setup';
 import common from '$lib/translations/en/common.json';
+import type { User } from '$lib/common/models/user';
+import { faker } from '@faker-js/faker';
 
 describe('components/navigation', () => {
 	it('should render navigation when not logged in', () => {
@@ -89,7 +91,10 @@ describe('components/navigation', () => {
 			fn(mockPage);
 			return readable(mockPage).subscribe(fn);
 		});
-		const testUser = { email: 'nitish.sachar@gmail.com' };
+		const testUser: Partial<User> = {
+			name: faker.person.fullName(),
+			email: faker.internet.email()
+		};
 
 		render(Navigation, {
 			context: new Map([['auth', { isLoggedIn: readable(true), user: readable(testUser) }]])
@@ -125,5 +130,8 @@ describe('components/navigation', () => {
 		expect(screen.getByTestId('navigation-side-bar-settings')).toHaveTextContent(
 			common.components.navigation.settings
 		);
+		expect(screen.getByTestId('navigation-avatar')).toHaveTextContent(testUser.name![0]);
+		expect(screen.getByText(testUser.name!)).toBeInTheDocument();
+		expect(screen.getByText(testUser.email!)).toBeInTheDocument();
 	});
 });

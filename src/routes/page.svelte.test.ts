@@ -89,20 +89,6 @@ describe('home page', () => {
 			expect(screen.getByText(common.pages.home.loggedIn.subheading)).toBeInTheDocument();
 		});
 
-		it('should render with default heading when user does not have a name', () => {
-			const testUser = createMockUser({
-				name: ''
-			});
-
-			render(HomePage, {
-				context: new Map([['auth', { isLoggedIn: readable(true), user: readable(testUser) }]])
-			});
-
-			expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(
-				common.pages.home.loggedIn.defaultHeading
-			);
-		});
-
 		it('should render with progress cards', () => {
 			const testUser = createMockUser();
 

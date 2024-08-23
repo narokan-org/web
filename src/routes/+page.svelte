@@ -112,9 +112,7 @@
 {:else}
 	<div class="flex flex-col">
 		<Heading class="text-2xl font-bold"
-			>{$user.name
-				? $t('common.pages.home.loggedIn.heading', { placeholder: $user.name })
-				: $t('common.pages.home.loggedIn.defaultHeading')}</Heading
+			>{$t('common.pages.home.loggedIn.heading', { placeholder: $user.name })}</Heading
 		>
 		<P class="mt-2">{$t('common.pages.home.loggedIn.subheading')}</P>
 
@@ -144,7 +142,7 @@
 				<P class="text-xl font-semibold">{$t('common.pages.home.loggedIn.risksTable.heading')}</P>
 
 				<div class="flex flex-col border mt-4 min-h-96">
-					<Table striped>
+					<Table striped class="bg-white">
 						<TableHead class="uppercase bg-gray-200">
 							<TableHeadCell>{$t('common.pages.home.loggedIn.risksTable.column1')}</TableHeadCell>
 
@@ -175,7 +173,7 @@
 				<P class="text-xl font-semibold">{$t('common.pages.home.loggedIn.controlsTable.heading')}</P
 				>
 				<div class="flex flex-col border mt-4 min-h-96">
-					<Table striped>
+					<Table striped class="bg-white">
 						<TableHead class="uppercase bg-gray-200">
 							<TableHeadCell>{$t('common.pages.home.loggedIn.controlsTable.column1')}</TableHeadCell
 							>
