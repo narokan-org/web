@@ -2,10 +2,16 @@ import { type Handle, type HandleFetch } from '@sveltejs/kit';
 import { UserService } from '$lib/services/user-service';
 import { LoggingService } from '$lib/services/logging-service';
 import { CompanyService } from '$lib/services/company-service';
+import { IdentityService } from '$lib/services/identity-service';
 
 export const handle: Handle = async ({ event, resolve }) => {
 	event.locals.loggingService = new LoggingService();
-	event.locals.userService = new UserService(event.fetch, event.locals.loggingService);
+	event.locals.identityService = new IdentityService(event.locals.loggingService);
+	event.locals.userService = new UserService(
+		event.fetch,
+		event.locals.loggingService,
+		event.locals.identityService
+	);
 	event.locals.companyService = new CompanyService(
 		event.fetch,
 		event.locals.loggingService,

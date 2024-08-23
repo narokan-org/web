@@ -18,6 +18,8 @@
 		"test:coverage": "vitest run --coverage --reporter=junit --output-file=coverage/junit.xml"
 	},
 	"dependencies": {
+		"@azure/msal-node": "^2.13.0",
+		"@microsoft/microsoft-graph-client": "^3.0.7",
 		"sveltekit-i18n": "^2.4.2"
 	},
 	"devDependencies": {

@@ -10,6 +10,7 @@ declare global {
 			userService: import('$lib/services/user-service').UserService;
 			companyService: import('$lib/services/company-service').CompanyService;
 			telemetryService: import('$lib/services/telemetry-service').TelemetryService;
+			identityService: import('$lib/services/identity-service').IdentityService;
 		}
 		// interface PageData {}
 		// interface PageState {}

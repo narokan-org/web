@@ -23,7 +23,9 @@ export const actions: Actions = {
 			return fail(500, { message: 'Failed to get current user' });
 		}
 
-		await locals.userService.updateUser({ ...currentUser, onboarded: true });
+		await locals.userService.updateUserAttributes(currentUser.id, {
+			extension_Onboarded: true
+		});
 
 		redirect(302, '/invite');
 	}
