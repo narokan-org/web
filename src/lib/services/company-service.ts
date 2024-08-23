@@ -49,7 +49,7 @@ export class CompanyService {
 
 		const newCompany: Partial<DBCompany> = {
 			Name: company.name,
-			CreatedByUser_FK: currentUser.id
+			CreatedByUser: currentUser.id
 		};
 
 		const response = await this.fetchFn('/data-api/rest/Company', {
