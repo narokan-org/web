@@ -1,8 +1,6 @@
-import type { DBUser } from '$lib/common/entities/db-user';
 import type { LocalUserPayload } from '$lib/common/models/local-user-payload';
 import type { User } from '$lib/common/models/user';
-import { mapDBUserToUser, mapUserToDBUser } from '$lib/utils/mappers';
-import { parseDBResponse } from '$lib/utils/utils';
+import { mapLocalUserToUser } from '$lib/utils/mappers';
 import type { LoggingService } from './logging-service';
 
 export class UserService {
@@ -11,7 +9,7 @@ export class UserService {
 		private log: LoggingService
 	) {}
 
-	async getLocalUser(): Promise<LocalUserPayload | null> {
+	async getUser(): Promise<User | null> {
 		const response = await this.fetchFn('/.auth/me');
 
 		if (!response.ok) {
@@ -24,109 +22,6 @@ export class UserService {
 			return null;
 		}
 
-		return localUser;
-	}
-
-	async getUser(id?: string): Promise<User | null> {
-		if (!id) {
-			const localUser = await this.getLocalUser();
-
-			if (!localUser) {
-				return null;
-			}
-
-			id = localUser.clientPrincipal.userId;
-		}
-
-		const role = await this.getUserRole();
-		if (!role) {
-			return null;
-		}
-
-		const response = await this.fetchFn(`/data-api/rest/User/Id/${id}`, {
-			headers: {
-				'X-MS-API-ROLE': role
-			}
-		});
-
-		if (!response.ok) {
-			return null;
-		}
-
-		const dbUser = (await parseDBResponse<DBUser>(response))?.[0];
-
-		if (!dbUser) {
-			return null;
-		}
-
-		return mapDBUserToUser(dbUser);
-	}
-
-	async createUser(user: User): Promise<User | null> {
-		const role = await this.getUserRole();
-		if (!role) {
-			return null;
-		}
-
-		const dbUser: DBUser = {
-			Id: user.id,
-			Email: user.email,
-			Onboarded: user.onboarded,
-			FullName: user.name
-		};
-
-		const response = await this.fetchFn(`/data-api/rest/User`, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-				'X-MS-API-ROLE': role
-			},
-			body: JSON.stringify(dbUser)
-		});
-
-		if (!response.ok) {
-			return null;
-		}
-
-		return user;
-	}
-
-	async updateUser(user: User): Promise<User | null> {
-		const response = await this.fetchFn(`/data-api/rest/User/Id/${user.id}`, {
-			method: 'PUT',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(mapUserToDBUser(user))
-		});
-
-		if (!response.ok) {
-			return null;
-		}
-
-		const dbUser = (await parseDBResponse<DBUser>(response))?.[0];
-
-		if (!dbUser) {
-			return null;
-		}
-
-		return mapDBUserToUser(dbUser);
-	}
-
-	async getUserRole(): Promise<string | null> {
-		const localUser = await this.getLocalUser();
-
-		if (!localUser) {
-			return null;
-		}
-
-		const role = localUser.clientPrincipal.userRoles.find((r) => r === 'authenticated');
-
-		if (!role) {
-			this.log.debug('Role for local user is not defined.');
-			return null;
-		}
-
-		return role;
+		return mapLocalUserToUser(localUser);
 	}
 }

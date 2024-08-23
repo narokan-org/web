@@ -1,33 +1,14 @@
-import { isProduction } from '$lib/utils/utils';
 import { redirect } from '@sveltejs/kit';
 
 export const load = async ({ locals, request }) => {
-	const localUser = await locals.userService.getLocalUser();
-	locals.loggingService.debug(`Local user: ${JSON.stringify(localUser)}`);
-
-	if (!localUser) {
-		return { isLoggedIn: false };
-	}
-
-	const email = isProduction()
-		? localUser.clientPrincipal.claims.find((c) => c.typ === 'emails')?.val
-		: localUser.clientPrincipal.userDetails;
-
-	if (!email) {
-		return { isLoggedIn: false };
-	}
-
-	let user = await locals.userService.getUser(localUser.clientPrincipal.userId);
+	const user = await locals.userService.getUser();
+	locals.loggingService.debug(`Local user: ${JSON.stringify(user)}`);
 
 	if (!user) {
-		user = await locals.userService.createUser({
-			id: localUser.clientPrincipal.userId,
-			email,
-			onboarded: false,
-			name: localUser.clientPrincipal.claims.find((c) => c.typ === 'name')?.val ?? ''
-		});
-		throw redirect(302, '/onboarding');
-	} else if (!user.onboarded && !request.url.includes('/onboarding')) {
+		return { isLoggedIn: false };
+	}
+
+	if (!user.onboarded && !request.url.includes('/onboarding')) {
 		locals.loggingService.debug('User is not onboarded. Redirecting to onboarding.');
 		throw redirect(302, '/onboarding');
 	}

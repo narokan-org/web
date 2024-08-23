@@ -10,8 +10,6 @@ Basel uses the [azure static web apps (swa) cli](https://azure.github.io/static-
 
 `npm install -g @azure/static-web-apps-cli`
 
-Place a file called `staticwebapp.config.json` at the root of the repo and add an empty `{}` inside of it. This is a temporary fix necessary to get the app running locally.
-
 ### Authentication
 
 Basel uses SWA auth. With local development you'll be met with a login screen and you'll enter the following details in the form.
@@ -20,16 +18,20 @@ Basel uses SWA auth. With local development you'll be met with a login screen an
 User ID: 9a400d60-9ddf-4781-9af7-b8c33973eff1
 Username: nitish.sachar@gmail.com // Use whatever email you want but make sure to replace below too in userDetails.
 User's Claims:
-[{
-  "identityProvider": "aad",
-  "userId": "9a400d60-9ddf-4781-9af7-b8c33973eff1",
-  "userDetails": "nitish.sachar@gmail.com",
-  "userRoles": ["anonymous", "authenticated"],
-  "claims": [{
-    "typ": "name",
-    "val": "Azure Static Web Apps"
-  }]
-}]
+[
+  {
+    "typ": "emails",
+    "val": "nitish.sachar@gmail.com"
+  },
+  {
+    "typ": "extension_FullName",
+    "val": "Nitish Sachar"
+  },
+  {
+    "typ": "extension_Onboarded",
+    "val": "true"
+  }
+]
 ```
 
 ### Debugging in Azure Static Web Apps

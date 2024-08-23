@@ -1,8 +1,9 @@
 import type { DBCompany } from '$lib/common/entities/db-company';
-import type { DBUser } from '$lib/common/entities/db-user';
 
 import type { Company } from '$lib/common/models/company';
+import type { LocalUserPayload } from '$lib/common/models/local-user-payload';
 import type { User } from '$lib/common/models/user';
+import { dev } from '$app/environment';
 
 export function mapDBCompanyToCompany(dbCompany: DBCompany): Company {
 	return {
@@ -11,10 +12,17 @@ export function mapDBCompanyToCompany(dbCompany: DBCompany): Company {
 	};
 }
 
-export function mapDBUserToUser(dbUser: DBUser): User {
-	return { id: dbUser.Id, email: dbUser.Email, onboarded: dbUser.Onboarded, name: dbUser.FullName };
-}
-
-export function mapUserToDBUser(user: User): Omit<DBUser, 'Id'> {
-	return { Email: user.email, Onboarded: user.onboarded, FullName: user.name };
+export function mapLocalUserToUser(localUser: LocalUserPayload): User {
+	return {
+		id: localUser.clientPrincipal.userId,
+		email: dev
+			? localUser.clientPrincipal.userDetails
+			: localUser.clientPrincipal.claims.find((c) => c.typ === 'emails')!.val,
+		onboarded:
+			localUser.clientPrincipal.claims
+				.find((c) => c.typ === 'extension_Onboarded')
+				?.val.toLowerCase() === 'true',
+		name: localUser.clientPrincipal.claims.find((c) => c.typ === 'extension_FullName')?.val ?? '',
+		roles: localUser.clientPrincipal.userRoles
+	};
 }

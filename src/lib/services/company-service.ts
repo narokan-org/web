@@ -14,7 +14,7 @@ export class CompanyService {
 	) {}
 
 	async getCompany(id: number): Promise<Company | null> {
-		const role = await this.userService.getUserRole();
+		const role = (await this.userService.getUser())?.roles.find((r) => r === 'authenticated');
 
 		if (!role) {
 			return null;
@@ -40,8 +40,8 @@ export class CompanyService {
 	}
 
 	async createCompany(company: Omit<Company, 'id'>): Promise<Company | null> {
-		const role = await this.userService.getUserRole();
 		const currentUser = await this.userService.getUser();
+		const role = currentUser?.roles.find((r) => r === 'authenticated');
 
 		if (!role || !currentUser) {
 			return null;
@@ -77,7 +77,7 @@ export class CompanyService {
 	}
 
 	private async associateCompanyWithUser(companyId: number, userId: string): Promise<void> {
-		const role = await this.userService.getUserRole();
+		const role = (await this.userService.getUser())?.roles.find((r) => r === 'authenticated');
 
 		if (!role) {
 			return;
