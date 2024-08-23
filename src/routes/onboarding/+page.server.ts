@@ -20,13 +20,8 @@ export const actions: Actions = {
 			return fail(500, { message: 'Failed to create company' });
 		}
 
-		const currentUser = await locals.userService.getUser();
-		if (!currentUser) {
-			return fail(500, { message: 'Failed to get current user' });
-		}
-
 		locals.loggingService.debug('Updating user attributes');
-		await locals.userService.updateUserAttributes(currentUser.id, {
+		await locals.userService.updateUserAttributes({
 			extension_Onboarded: true
 		});
 

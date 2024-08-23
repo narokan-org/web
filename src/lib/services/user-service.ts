@@ -28,13 +28,21 @@ export class UserService {
 		return mapLocalUserToUser(localUser);
 	}
 
-	async updateUserAttributes(userId: string, attributes: UserExtensionAttributes) {
+	async updateUserAttributes(attributes: UserExtensionAttributes) {
+		const currentUser = await this.getUser();
+
+		if (!currentUser) {
+			this.log.error('Failed to get current user for updating user attributes');
+			return;
+		}
+
 		const graphClient = await this.identityService.getGraphClient();
 
 		if (!graphClient) {
 			return;
 		}
 
-		await graphClient.api(`/users/${userId}`).update(attributes);
+		this.log.debug(`Updating user attributes for user ${currentUser.id}`);
+		await graphClient.api(`/users/${currentUser.id}`).update(attributes);
 	}
 }
