@@ -12,7 +12,8 @@ export const createMockUser = (user: Partial<User> = {}): User => {
 		id: simpleFaker.string.uuid(),
 		email: faker.internet.email(),
 		onboarded: true,
-		name: faker.person.fullName()
+		name: faker.person.fullName(),
+		roles: ['anonymous', 'authenticated']
 	};
 
 	return {

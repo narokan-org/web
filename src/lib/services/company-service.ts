@@ -47,6 +47,8 @@ export class CompanyService {
 			return null;
 		}
 
+		this.log.debug(`Creating company ${JSON.stringify(company)}`);
+
 		const newCompany: Partial<DBCompany> = {
 			Name: company.name,
 			CreatedByUser: currentUser.id

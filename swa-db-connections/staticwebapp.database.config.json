@@ -39,15 +39,6 @@
 				}
 			]
 		},
-		"User": {
-			"source": "dbo.User",
-			"permissions": [
-				{
-					"actions": ["read", "create", "update"],
-					"role": "authenticated"
-				}
-			]
-		},
 		"UserCompanyRelationship": {
 			"source": "dbo.UserCompanyRelationship",
 			"permissions": [
