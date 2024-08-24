@@ -22,7 +22,7 @@ export const actions: Actions = {
 
 		locals.loggingService.debug('Updating user attributes');
 		await locals.identityService.updateUserAttributes({
-			FullName: 'Test Name'
+			Onboarded: true
 		});
 
 		locals.loggingService.debug('Redirecting to invite page');
