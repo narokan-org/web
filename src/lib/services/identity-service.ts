@@ -70,10 +70,11 @@ export class IdentityService {
 	): { [key: string]: any } {
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		const result: { [key: string]: any } = {};
+		const clientId = process.env.AZURE_ADB2C_CLIENT_ID?.replace(/-/g, '');
 		for (const key in attributes) {
 			// eslint-disable-next-line no-prototype-builtins
 			if (attributes.hasOwnProperty(key)) {
-				result[`extension_${process.env.AZURE_ADB2C_CLIENT_ID}_${key}`] = attributes[key];
+				result[`extension_${clientId}_${key}`] = attributes[key];
 			}
 		}
 		return result;
