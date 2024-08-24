@@ -11,12 +11,12 @@
 	const isLoggedIn = writable(false);
 	const user = writable<User>();
 
-	const showLoggedInLayout = data.isLoggedIn && !isOnboardingPath($page.url.pathname);
-
 	isLoggedIn.set(data.isLoggedIn);
 	user.set(data.user);
 
 	setContext('auth', { isLoggedIn, user });
+
+	$: showLoggedInLayout = data.isLoggedIn && !isOnboardingPath($page.url.pathname);
 </script>
 
 <div class={showLoggedInLayout ? 'flex bg-gray-50 min-h-screen' : ''}>

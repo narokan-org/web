@@ -41,7 +41,7 @@
 		img: '/images/logo.png'
 	};
 
-	let activeUrl = $page.url.pathname;
+	$: activeUrl = $page.url.pathname;
 </script>
 
 <div class="flex" {...$$restProps}>
