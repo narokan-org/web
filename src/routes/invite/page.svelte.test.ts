@@ -68,6 +68,6 @@ describe('invite page', () => {
 		render(Page);
 
 		const skipButton = screen.getByTestId('invite-skip-button');
-		expect(skipButton).toHaveAttribute('href', '/dashboard');
+		expect(skipButton).toHaveAttribute('href', '/');
 	});
 });

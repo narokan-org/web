@@ -69,7 +69,7 @@
 		</ButtonGroup>
 
 		<div class="flex justify-center">
-			<Button class="text-sm mt-12 " data-testid="invite-skip-button" href="/dashboard"
+			<Button class="text-sm mt-12 " data-testid="invite-skip-button" href="/"
 				>{$t('common.pages.invite.skipButtonLabel')}</Button
 			>
 		</div>
