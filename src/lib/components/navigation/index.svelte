@@ -81,11 +81,13 @@
 			</NavUl>
 		</Navbar>
 	{:else if $isLoggedIn && isOnboardingPath(activeUrl)}
-		<div class="ml-auto mr-12 mt-12">
-			<P data-testid="navigation-login-status" class="text-sm text-gray-500 block"
+		<div class="mt-12 mr-12">
+			<P data-testid="navigation-login-status" class="text-sm text-gray-500 text-right"
 				>{$t('common.components.navigation.loginStatus')}</P
 			>
-			<P data-testid="navigation-login-status-user-email" class="text-sm block">{$user.email}</P>
+			<P data-testid="navigation-login-status-user-email" class="text-sm text-right"
+				>{$user.email}</P
+			>
 		</div>
 	{:else}
 		<Sidebar class="h-full" data-testid="navigation-side-bar" {activeUrl}>
