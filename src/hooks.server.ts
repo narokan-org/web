@@ -6,11 +6,10 @@ import { IdentityService } from '$lib/services/identity-service';
 
 export const handle: Handle = async ({ event, resolve }) => {
 	event.locals.loggingService = new LoggingService();
-	event.locals.identityService = new IdentityService(event.locals.loggingService);
-	event.locals.userService = new UserService(
-		event.fetch,
+	event.locals.userService = new UserService(event.fetch, event.locals.loggingService);
+	event.locals.identityService = new IdentityService(
 		event.locals.loggingService,
-		event.locals.identityService
+		event.locals.userService
 	);
 	event.locals.companyService = new CompanyService(
 		event.fetch,

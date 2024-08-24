@@ -1,6 +1,8 @@
 import { ConfidentialClientApplication } from '@azure/msal-node';
 import type { LoggingService } from './logging-service';
 import { Client } from '@microsoft/microsoft-graph-client';
+import type { UserService } from './user-service';
+import type { UserExtensionAttributes } from '$lib/common/models/user-extension-attributes';
 
 export class IdentityService {
 	private cca = new ConfidentialClientApplication({
@@ -11,9 +13,34 @@ export class IdentityService {
 		}
 	});
 
-	constructor(private log: LoggingService) {}
+	constructor(
+		private log: LoggingService,
+		private userService: UserService
+	) {}
 
-	async getGraphClient(): Promise<Client | undefined> {
+	async updateUserAttributes(attributes: UserExtensionAttributes) {
+		const currentUser = await this.userService.getUser();
+
+		if (!currentUser) {
+			this.log.error('Failed to get current user for updating user attributes');
+			return;
+		}
+
+		const graphClient = await this.getGraphClient();
+
+		if (!graphClient) {
+			return;
+		}
+
+		this.log.debug(`Updating user attributes for user ${currentUser.id}`);
+		this.log.debug(`Attributes: ${JSON.stringify(this.prependAppIdToAttributes(attributes))}`);
+
+		await graphClient
+			.api(`/users/${currentUser.id}`)
+			.update(this.prependAppIdToAttributes(attributes));
+	}
+
+	private async getGraphClient(): Promise<Client | undefined> {
 		const accessToken = await this.getAccessToken();
 
 		if (!accessToken) {
@@ -34,5 +61,21 @@ export class IdentityService {
 		});
 
 		return authResult?.accessToken;
+	}
+
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	private prependAppIdToAttributes<T extends Record<string, any>>(
+		attributes: T
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	): { [key: string]: any } {
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		const result: { [key: string]: any } = {};
+		for (const key in attributes) {
+			// eslint-disable-next-line no-prototype-builtins
+			if (attributes.hasOwnProperty(key)) {
+				result[`extension_${process.env.AZURE_ADB2C_CLIENT_ID}_${key}`] = attributes[key];
+			}
+		}
+		return result;
 	}
 }

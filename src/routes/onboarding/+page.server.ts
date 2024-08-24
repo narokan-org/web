@@ -21,8 +21,8 @@ export const actions: Actions = {
 		}
 
 		locals.loggingService.debug('Updating user attributes');
-		await locals.userService.updateUserAttributes({
-			extension_Onboarded: true
+		await locals.identityService.updateUserAttributes({
+			Onboarded: true
 		});
 
 		locals.loggingService.debug('Redirecting to invite page');
