@@ -29,6 +29,11 @@
 		},
 		"tableSearch": {
 			"placeholder": "Search"
+		},
+		"userPopover": {
+			"profileButton": "Profile",
+			"notificationsButton": "Notifications",
+			"signOutButton": "Sign Out"
 		}
 	},
 	"pages": {

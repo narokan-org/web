@@ -17,14 +17,17 @@
 		SidebarDropdownItem,
 		SidebarDropdownWrapper
 	} from 'flowbite-svelte';
-	import ChevronDownOutline from 'flowbite-svelte-icons/ChevronDownOutline.svelte';
-	import HomeOutline from 'flowbite-svelte-icons/HomeOutline.svelte';
-	import InboxOutline from 'flowbite-svelte-icons/InboxOutline.svelte';
-	import ShieldCheckOutline from 'flowbite-svelte-icons/ShieldCheckOutline.svelte';
-	import ShieldOutline from 'flowbite-svelte-icons/ShieldOutline.svelte';
-	import BuildingOutline from 'flowbite-svelte-icons/BuildingOutline.svelte';
-	import BookOutline from 'flowbite-svelte-icons/BookOutline.svelte';
-	import CogOutline from 'flowbite-svelte-icons/CogOutline.svelte';
+	import {
+		ChevronDownOutline,
+		HomeOutline,
+		InboxOutline,
+		ShieldCheckOutline,
+		ShieldOutline,
+		BuildingOutline,
+		BookOutline,
+		CogOutline
+	} from 'flowbite-svelte-icons';
+	import UserPopover from '$lib/components/user-popover/index.svelte';
 
 	import type { User } from '$lib/common/models/user';
 	import { page } from '$app/stores';
@@ -198,7 +201,8 @@
 
 				<SidebarGroup border />
 
-				<div class="flex flex-row">
+				<!-- TODO: This is not a11y compliant. -->
+				<div class="flex flex-row" id="navigation-user-info" data-testid="navigation-user-info">
 					<Avatar data-testid="navigation-avatar" rounded>
 						{#if $user.name}
 							{$user.name.charAt(0)}
@@ -209,6 +213,7 @@
 						<P class="text-xs text-gray-500">{$user.email}</P>
 					</div>
 				</div>
+				<UserPopover triggeredBy="#navigation-user-info" />
 			</SidebarWrapper>
 		</Sidebar>
 	{/if}
