@@ -32,9 +32,6 @@ export class IdentityService {
 			return;
 		}
 
-		this.log.debug(`Updating user attributes for user ${currentUser.id}`);
-		this.log.debug(`Attributes: ${JSON.stringify(this.prependAppIdToAttributes(attributes))}`);
-
 		await graphClient
 			.api(`/users/${currentUser.id}`)
 			.update(this.prependAppIdToAttributes(attributes));
