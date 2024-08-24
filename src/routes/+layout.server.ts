@@ -8,13 +8,9 @@ export const load = async ({ locals, request, cookies }) => {
 		return { isLoggedIn: false };
 	}
 
-	const onboardedCookie = cookies.get('basel/onboarded');
+	const onboardedCookie = cookies.get('basel-onboarded');
 
 	if (onboardedCookie) {
-		if (!user.onboarded) {
-			await locals.identityService.updateUserAttributes({ Onboarded: true });
-		}
-
 		return { isLoggedIn: true, user };
 	}
 

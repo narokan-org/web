@@ -26,7 +26,7 @@ export const actions: Actions = {
 			});
 		}
 
-		cookies.set('basel/onboarded', 'true', {
+		cookies.set('basel-onboarded', 'true', {
 			path: '/',
 			httpOnly: true,
 			maxAge: 60 * 60 * 24 * 30
