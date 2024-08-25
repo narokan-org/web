@@ -10,5 +10,8 @@
 	"explorer.sortOrder": "filesFirst",
 	"files.associations": {
 		"*.css": "tailwindcss"
-	}
+	},
+	"coverage-gutters.coverageBaseDir": "coverage/**",
+	"coverage-gutters.coverageFileNames": ["cobertura-coverage.xml"],
+	"coverage-gutters.showLineCoverage": true
 }

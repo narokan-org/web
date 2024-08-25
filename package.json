@@ -14,7 +14,7 @@
 		"format": "prettier --write .",
 		"test:integration": "playwright test",
 		"test:unit": "vitest --run --reporter=junit",
-		"test:unit:watch": "vitest --watch --disable-console-intercept",
+		"test:unit:watch": "vitest --watch --coverage --disable-console-intercept",
 		"test:coverage": "vitest run --coverage --reporter=junit --output-file=coverage/junit.xml"
 	},
 	"dependencies": {
