@@ -41,7 +41,25 @@
 				return null;
 			}
 
-			toastStore.addToast($t('common.pages.home.waitlistSuccessMessage'), 'success', true);
+			const waitlistInfo: { created_at: string } = await response.json();
+
+			const createdAt = new Date(waitlistInfo.created_at.split('_')[0]);
+
+			const createdAtDate = new Date(
+				createdAt.getFullYear(),
+				createdAt.getMonth(),
+				createdAt.getDate()
+			);
+			const now = new Date();
+			const currentDate = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+
+			toastStore.addToast(
+				$t(
+					`common.pages.home.${createdAtDate < currentDate ? 'waitlistAlreadyOnWaitlistMessage' : 'waitlistSuccessMessage'}`
+				),
+				'success',
+				true
+			);
 		} catch (error) {
 			toastStore.addToast($t('common.pages.home.waitlistErrorMessage'), 'error', true);
 		}
