@@ -24,7 +24,6 @@
 		const form = event.target as HTMLFormElement;
 
 		isSubmitting = true;
-
 		const response = await fetch('https://api.getwaitlist.com/api/v1/signup', {
 			method: 'POST',
 			headers: {
