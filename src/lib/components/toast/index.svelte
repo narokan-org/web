@@ -1,15 +1,22 @@
 <script lang="ts">
 	import { Toast } from 'flowbite-svelte';
-	import { CheckCircleSolid } from 'flowbite-svelte-icons';
+	import { CheckCircleSolid, CloseCircleSolid } from 'flowbite-svelte-icons';
 	export let dismissable = false;
-	export let icon: 'success' = 'success';
+	export let icon: 'success' | 'error' = 'success';
 </script>
 
 <div {...$$restProps}>
-	<Toast {dismissable}>
-		{#if icon === 'success'}
-			<CheckCircleSolid />
-		{/if}
+	<Toast
+		{dismissable}
+		contentClass="flex space-x-4 rtl:space-x-reverse divide-x rtl:divide-x-reverse divide-gray-200 dark:divide-gray-700 items-center"
+	>
+		<div class="w-5 h-5 text-primary-600 dark:text-primary-500">
+			{#if icon === 'success'}
+				<CheckCircleSolid />
+			{:else if icon === 'error'}
+				<CloseCircleSolid />
+			{/if}
+		</div>
 		<slot name="content"></slot>
 	</Toast>
 </div>

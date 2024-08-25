@@ -60,6 +60,8 @@
 			"subheading": "Manage your risk network on a single platform and rely less on spreadsheets - all in one risk focused interface your team will love.",
 			"waitlistInputPlaceholder": "Email address",
 			"waitlistButton": "Join waitlist",
+			"waitlistErrorMessage": "An error occurred. Please try again.",
+			"waitlistSuccessMessage": "You have been added to the waitlist! Stay tuned for updates.",
 			"loggedIn": {
 				"heading": "Welcome, {{placeholder}}",
 				"subheading": "There's nothing here yet.",

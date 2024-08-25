@@ -1,16 +1,16 @@
 <script lang="ts">
 	import { Heading, P, Img, Input, Button, Table, TableHead, TableHeadCell } from 'flowbite-svelte';
-	import ProgressCard from '$lib/components/progress-card/index.svelte';
+	import { PlusOutline, UploadOutline } from 'flowbite-svelte-icons';
 	// import BrainSolid from 'flowbite-svelte-icons/BrainSolid.svelte';
 	// import LockSolid from 'flowbite-svelte-icons/LockSolid.svelte';
 	// import FileChartBarSolid from 'flowbite-svelte-icons/FileChartBarSolid.svelte';
-	import PlusOutline from 'flowbite-svelte-icons/PlusOutline.svelte';
-	import UploadOutline from 'flowbite-svelte-icons/UploadOutline.svelte';
+	import ProgressCard from '$lib/components/progress-card/index.svelte';
 	import { getContext } from 'svelte';
 	import { t } from '$lib/translations';
 	import Feature from '$lib/components/feature/index.svelte';
 	import type { Readable } from 'svelte/store';
 	import type { User } from '$lib/common/models/user';
+	import { toastStore } from '$lib/stores/toast-store';
 
 	const { isLoggedIn, user } = getContext<{ isLoggedIn: Readable<boolean>; user: Readable<User> }>(
 		'auth'
@@ -24,23 +24,29 @@
 		const form = event.target as HTMLFormElement;
 
 		isSubmitting = true;
-		const response = await fetch('https://api.getwaitlist.com/api/v1/signup', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({
-				email,
-				waitlist_id: '19478'
-			})
-		});
 
-		isSubmitting = false;
+		try {
+			const response = await fetch('https://api.getwaitlist.com/api/v1/signup', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({
+					email,
+					waitlist_id: '19478'
+				})
+			});
 
-		if (!response.ok) {
-			return null;
+			if (!response.ok) {
+				return null;
+			}
+
+			toastStore.addToast($t('common.pages.home.waitlistSuccessMessage'), 'success', true);
+		} catch (error) {
+			toastStore.addToast($t('common.pages.home.waitlistErrorMessage'), 'error', true);
 		}
 
+		isSubmitting = false;
 		form.reset();
 	}
 </script>

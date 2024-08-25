@@ -3,7 +3,7 @@ import { writable } from 'svelte/store';
 export type ToastProps = {
 	id: number;
 	message: string;
-	icon: 'success';
+	icon: 'success' | 'error';
 	dismissable: boolean;
 };
 
@@ -14,7 +14,7 @@ const createToastStore = () => {
 
 	return {
 		subscribe,
-		addToast: (message: string, icon: 'success' = 'success', dismissable = false) => {
+		addToast: (message: string, icon: 'success' | 'error' = 'success', dismissable = false) => {
 			update((toasts) => [...toasts, { id: id++, message, icon, dismissable }]);
 		},
 		removeToast: (id: number) => {
