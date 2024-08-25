@@ -60,7 +60,7 @@
 				'success',
 				true
 			);
-		} catch (error) {
+		} catch {
 			toastStore.addToast($t('common.pages.home.waitlistErrorMessage'), 'error', true);
 		}
 

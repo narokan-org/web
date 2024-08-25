@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { ButtonGroup, Button, Popover, Hr } from 'flowbite-svelte';
+	import { ButtonGroup, Button, Popover } from 'flowbite-svelte';
 	import { t } from '$lib/translations';
 
 	export let triggeredBy: string;
