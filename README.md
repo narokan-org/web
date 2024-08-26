@@ -9,9 +9,9 @@ Code Coverage Graph
 
 ## Documentation Index
 
-| Topic                                                                                                                         | Description                                                  |
-| ----------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
-| [Development](docs/development.md)                                                                                            | Instructions about development, local setup, and other tips. |
-| [Product Management](https://linear.app/narokan/)                                                                            | Issue tracking and product management. Requires invite.      |
-| [Product Documentation](https://coda.io/d/PRD_dP1UBl3hQc4/Project-Basel_suVd-?loginId=bml0aXNoLnNhY2hhckBnbWFpbC5jb20#_lu2F3) | Detailed product documentation about what exactly Narokan is.  |
-| [Design](https://www.figma.com/proto/ziyVifnwIWgPVAL5QDy8HG/Design?node-id=162-34491&t=RvkkiA4sPFPTsOf6-1)                    | Design prototypes and assets.                                |
+| Topic                                                                                                                         | Description                                                   |
+| ----------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- |
+| [Development](docs/development.md)                                                                                            | Instructions about development, local setup, and other tips.  |
+| [Product Management](https://linear.app/narokan/)                                                                             | Issue tracking and product management. Requires invite.       |
+| [Product Documentation](https://coda.io/d/PRD_dP1UBl3hQc4/Project-Basel_suVd-?loginId=bml0aXNoLnNhY2hhckBnbWFpbC5jb20#_lu2F3) | Detailed product documentation about what exactly Narokan is. |
+| [Design](https://www.figma.com/proto/ziyVifnwIWgPVAL5QDy8HG/Design?node-id=162-34491&t=RvkkiA4sPFPTsOf6-1)                    | Design prototypes and assets.                                 |
