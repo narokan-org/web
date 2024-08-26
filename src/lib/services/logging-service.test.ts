@@ -39,7 +39,7 @@ describe('LoggingService', () => {
 
 		loggingService.info(message);
 
-		expect(console.log).toHaveBeenCalledWith(expect.stringContaining('[Basel]'));
+		expect(console.log).toHaveBeenCalledWith(expect.stringContaining('[Narokan]'));
 	});
 
 	it('should log info messages correctly', () => {

@@ -39,7 +39,7 @@
 	);
 
 	let site = {
-		name: 'Basel',
+		name: 'Narokan',
 		href: '/',
 		img: '/images/logo.png'
 	};

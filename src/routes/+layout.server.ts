@@ -8,7 +8,7 @@ export const load = async ({ locals, request, cookies }) => {
 		return { isLoggedIn: false };
 	}
 
-	const onboardedCookie = cookies.get('basel-onboarded');
+	const onboardedCookie = cookies.get('narokan-onboarded');
 
 	if (onboardedCookie) {
 		return { isLoggedIn: true, user };

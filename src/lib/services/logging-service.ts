@@ -3,7 +3,7 @@ import { isProduction } from '$lib/utils/utils';
 type LogMessage = string | object;
 
 export class LoggingService {
-	#tag = '[Basel]';
+	#tag = '[Narokan]';
 
 	private getTimestamp(): string {
 		return isProduction()

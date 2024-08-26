@@ -27,7 +27,7 @@ export default defineConfig({
 		svelteTesting(),
 		codecovSvelteKitPlugin({
 			enableBundleAnalysis: true,
-			bundleName: 'basel',
+			bundleName: 'narokan',
 			uploadToken: process.env.CODECOV_TOKEN
 		})
 	],

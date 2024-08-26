@@ -59,7 +59,7 @@ const config = {
 				routes: [
 					{
 						route: '/login',
-						redirect: `/.auth/login/${process.env.BASEL_ENVIRONMENT === 'production' ? 'aadb2c_sign_in' : 'aad'}`
+						redirect: `/.auth/login/${process.env.NAROKAN_ENVIRONMENT === 'production' ? 'aadb2c_sign_in' : 'aad'}`
 					},
 					{
 						route: '/signup',

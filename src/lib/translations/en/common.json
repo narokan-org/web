@@ -1,5 +1,5 @@
 {
-	"appName": "Basel",
+	"appName": "Narokan",
 	"components": {
 		"navigation": {
 			"assessments": "Assessments",
@@ -98,7 +98,7 @@
 			"skipButtonLabel": "Skip"
 		},
 		"onboarding": {
-			"heading": "Welcome to Basel",
+			"heading": "Welcome to Narokan",
 			"roleInputLabel": "What is your role?",
 			"roleInputPlaceholder": "Select your role in the company",
 			"roleOption1": "Manager",
