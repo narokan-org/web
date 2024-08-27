@@ -4,9 +4,6 @@
 [![DeepSource](https://app.deepsource.com/gh/narokan-org/web.svg/?label=code+coverage&show_trend=true&token=o_NlhHplClKn6pV5KFydPD1d)](https://app.deepsource.com/gh/narokan-org/web/)
 [![DeepSource](https://app.deepsource.com/gh/narokan-org/web.svg/?label=active+issues&show_trend=true&token=o_NlhHplClKn6pV5KFydPD1d)](https://app.deepsource.com/gh/narokan-org/web/)
 
-![Code Coverage Tree Graph](https://codecov.io/gh/narokan-org/web/graphs/tree.svg?token=NMX0XR26DI)  
-Code Coverage Graph
-
 ## Documentation Index
 
 | Topic                                                                                                                         | Description                                                   |
