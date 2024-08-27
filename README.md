@@ -2,7 +2,7 @@
 
 [![Build Status](https://github.com/narokan-org/web/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/narokan-org/web/actions/workflows/ci-cd.yml)
 [![codecov](https://codecov.io/gh/narokan-org/web/graph/badge.svg?token=NMX0XR26DI)](https://codecov.io/gh/narokan-org/web)
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/57015ad5df2e418c99622a3226b8fea7)](https://app.codacy.com/gh/narokan-org/web/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
+[![DeepSource](https://app.deepsource.com/gh/narokan-org/web.svg/?label=active+issues&show_trend=true&token=o_NlhHplClKn6pV5KFydPD1d)](https://app.deepsource.com/gh/narokan-org/web/)
 
 ![Code Coverage Tree Graph](https://codecov.io/gh/narokan-org/web/graphs/tree.svg?token=NMX0XR26DI)  
 Code Coverage Graph
