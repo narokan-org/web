@@ -7,9 +7,9 @@ import type { UserExtensionAttributes } from '$lib/common/models/user-extension-
 export class IdentityService {
 	private cca = new ConfidentialClientApplication({
 		auth: {
-			authority: `https://login.microsoftonline.com/${process.env.AZURE_ADB2C_TENANT_ID}`,
-			clientId: process.env.AZURE_ADB2C_CLIENT_ID!,
-			clientSecret: process.env.AZURE_ADB2C_CLIENT_SECRET!
+			authority: `https://login.microsoftonline.com/${process.env.AADB2C_TENANT_ID}`,
+			clientId: process.env.AADB2C_PROVIDER_CLIENT_ID!,
+			clientSecret: process.env.AADB2C_PROVIDER_CLIENT_SECRET!
 		}
 	});
 
@@ -67,7 +67,7 @@ export class IdentityService {
 	): { [key: string]: any } {
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		const result: { [key: string]: any } = {};
-		const clientId = process.env.AZURE_ADB2C_EXTENSIONS_APP_CLIENT_ID?.replace(/-/g, '');
+		const clientId = process.env.AADB2C_EXTENSIONS_APP_CLIENT_ID?.replace(/-/g, '');
 		for (const key in attributes) {
 			// eslint-disable-next-line no-prototype-builtins
 			if (attributes.hasOwnProperty(key)) {
