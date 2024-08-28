@@ -15,7 +15,7 @@
 		"test:integration": "playwright test",
 		"test:unit": "vitest --run --reporter=junit",
 		"test:unit:watch": "vitest --watch --coverage --disable-console-intercept",
-		"test:coverage": "vitest run --coverage --reporter=junit --output-file=coverage/junit.xml"
+		"test:coverage": "vitest run --coverage"
 	},
 	"dependencies": {
 		"@azure/msal-node": "^2.13.0",
