@@ -21,7 +21,7 @@ const config = {
 									},
 									openIdConnectConfiguration: {
 										wellKnownOpenIdConfiguration:
-											'https://login.dev.narokan.com/narokandev.onmicrosoft.com/B2C_1_Sign_In/v2.0/.well-known/openid-configuration'
+											'https://narokandev.b2clogin.com/narokandev.onmicrosoft.com/B2C_1_Sign_In/v2.0/.well-known/openid-configuration'
 									}
 								},
 								login: {
@@ -38,7 +38,7 @@ const config = {
 									},
 									openIdConnectConfiguration: {
 										wellKnownOpenIdConfiguration:
-											'https://login.dev.narokan.com/narokandev.onmicrosoft.com/B2C_1_Sign_Up/v2.0/.well-known/openid-configuration'
+											'https://narokandev.b2clogin.com/narokandev.onmicrosoft.com/B2C_1_Sign_Up/v2.0/.well-known/openid-configuration'
 									}
 								},
 								login: {
