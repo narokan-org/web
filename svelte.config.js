@@ -1,8 +1,5 @@
-import { currentEnvironment } from './src/lib/utils/utils.ts';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 import azure from 'svelte-adapter-azure-swa';
-
-const env = currentEnvironment();
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -55,14 +52,14 @@ const config = {
 				},
 				responseOverrides: {
 					401: {
-						redirect: `/.auth/login/${env === 'local' ? 'aad' : 'aadb2c_sign_in'}?post_login_redirect_uri=.referrer`,
+						redirect: `/.auth/login/${process.env.NODE_ENV !== 'local' ? 'aadb2c_sign_in' : 'aad'}?post_login_redirect_uri=.referrer`,
 						statusCode: 302
 					}
 				},
 				routes: [
 					{
 						route: '/login',
-						redirect: `/.auth/login/${env === 'local' ? 'aad' : 'aadb2c_sign_in'}`
+						redirect: `/.auth/login/${process.env.NODE_ENV !== 'local' ? 'aadb2c_sign_in' : 'aad'}`
 					},
 					{
 						route: '/signup',
