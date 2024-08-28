@@ -1,5 +1,5 @@
 import { fail, redirect, type Actions } from '@sveltejs/kit';
-import { isProduction } from '$lib/utils/utils';
+import { currentEnvironment } from '$lib/utils/utils';
 export const actions: Actions = {
 	default: async ({ locals, request, cookies }) => {
 		// TODO: Creation of a company should be done as a transaction with a stored procedure using an API function. Since this is a sensitive operation, it should be done server side with rollback capabilities.
@@ -20,7 +20,7 @@ export const actions: Actions = {
 			return fail(500, { message: 'Failed to create company' });
 		}
 
-		if (isProduction()) {
+		if (currentEnvironment() !== 'local') {
 			await locals.identityService.updateUserAttributes({
 				Onboarded: true
 			});

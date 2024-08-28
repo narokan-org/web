@@ -1,4 +1,4 @@
-import { isProduction } from '$lib/utils/utils';
+import { currentEnvironment } from '$lib/utils/utils';
 
 type LogMessage = string | object;
 
@@ -6,7 +6,7 @@ export class LoggingService {
 	#tag = '[Narokan]';
 
 	private getTimestamp(): string {
-		return isProduction()
+		return currentEnvironment() !== 'local'
 			? ''
 			: new Date().toLocaleString('en-US', { timeZone: 'America/Los_Angeles' });
 	}

@@ -1,5 +1,8 @@
+import { currentEnvironment } from './src/lib/utils/utils.ts';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 import azure from 'svelte-adapter-azure-swa';
+
+const env = currentEnvironment();
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -21,7 +24,7 @@ const config = {
 									},
 									openIdConnectConfiguration: {
 										wellKnownOpenIdConfiguration:
-											'https://baselapp.b2clogin.com/baselapp.onmicrosoft.com/B2C_1_Basel_Sign_In/v2.0/.well-known/openid-configuration'
+											'https://login.dev.narokan.com/narokandev.onmicrosoft.com/B2C_1_Sign_In/v2.0/.well-known/openid-configuration'
 									}
 								},
 								login: {
@@ -38,7 +41,7 @@ const config = {
 									},
 									openIdConnectConfiguration: {
 										wellKnownOpenIdConfiguration:
-											'https://baselapp.b2clogin.com/baselapp.onmicrosoft.com/B2C_1_Basel_Sign_Up/v2.0/.well-known/openid-configuration'
+											'https://login.dev.narokan.com/narokandev.onmicrosoft.com/B2C_1_Sign_Up/v2.0/.well-known/openid-configuration'
 									}
 								},
 								login: {
@@ -52,14 +55,14 @@ const config = {
 				},
 				responseOverrides: {
 					401: {
-						redirect: `/.auth/login/${process.env.NODE_ENV === 'production' ? 'aadb2c_sign_in' : 'aad'}?post_login_redirect_uri=.referrer`,
+						redirect: `/.auth/login/${env === 'local' ? 'aad' : 'aadb2c_sign_in'}?post_login_redirect_uri=.referrer`,
 						statusCode: 302
 					}
 				},
 				routes: [
 					{
 						route: '/login',
-						redirect: `/.auth/login/${process.env.NAROKAN_ENVIRONMENT === 'production' ? 'aadb2c_sign_in' : 'aad'}`
+						redirect: `/.auth/login/${env === 'local' ? 'aad' : 'aadb2c_sign_in'}`
 					},
 					{
 						route: '/signup',

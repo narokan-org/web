@@ -1,4 +1,14 @@
-export const isProduction = () => process.env.NODE_ENV === 'production';
+import type { Environment } from '$lib/common/models/environment';
+
+export function currentEnvironment(): Environment {
+	const env = process.env.NODE_ENV;
+
+	if (env === 'production' || env === 'local' || env === 'development') {
+		return env;
+	}
+
+	throw new Error(`Invalid environment: ${env}`);
+}
 
 export async function parseDBResponse<T>(response: Response): Promise<T[] | null> {
 	const jsonResponse = await response.json();
