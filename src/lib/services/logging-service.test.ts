@@ -18,7 +18,7 @@ describe('LoggingService', () => {
 
 	it('should log with timestamp', () => {
 		const message = 'Info message';
-		process.env.NODE_ENV = 'development';
+		process.env.NODE_ENV = 'local';
 		loggingService.info(message);
 
 		const timestampRegex = /\d{1,2}\/\d{1,2}\/\d{4}, \d{1,2}:\d{2}:\d{2} (AM|PM)/;
