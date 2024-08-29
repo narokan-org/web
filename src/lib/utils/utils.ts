@@ -1,7 +1,7 @@
 import type { Environment } from '$lib/common/models/environment';
 
 export function currentEnvironment(): Environment {
-	const env = process.env.NODE_ENV;
+	const env = process.env.NODE_ENV ?? 'local';
 
 	if (env === 'production' || env === 'local' || env === 'development') {
 		return env;
