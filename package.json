@@ -24,7 +24,6 @@
 	},
 	"devDependencies": {
 		"@azure/static-web-apps-cli": "^2.0.1",
-		"@codecov/sveltekit-plugin": "^0.0.1-beta.12",
 		"@faker-js/faker": "^8.4.1",
 		"@playwright/test": "^1.28.1",
 		"@sveltejs/adapter-auto": "^3.0.0",
@@ -57,6 +56,7 @@
 		"typescript": "^5.0.0",
 		"typescript-eslint": "^8.0.0-alpha.20",
 		"vite": "^5.0.3",
+		"vite-plugin-tailwind-purgecss": "^0.3.3",
 		"vitest": "^2.0.0"
 	},
 	"type": "module",

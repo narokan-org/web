@@ -1,6 +1,6 @@
 import { sveltekit } from '@sveltejs/kit/vite';
-import { codecovSvelteKitPlugin } from '@codecov/sveltekit-plugin';
 import { svelteTesting } from '@testing-library/svelte/vite';
+import { purgeCss } from 'vite-plugin-tailwind-purgecss';
 import type { ViteDevServer } from 'vite';
 import { defineConfig } from 'vitest/config';
 
@@ -21,16 +21,7 @@ const swaPlugin = () => ({
 });
 
 export default defineConfig({
-	plugins: [
-		swaPlugin(),
-		sveltekit(),
-		svelteTesting(),
-		codecovSvelteKitPlugin({
-			enableBundleAnalysis: true,
-			bundleName: 'narokan',
-			uploadToken: process.env.CODECOV_TOKEN
-		})
-	],
+	plugins: [swaPlugin(), sveltekit(), svelteTesting(), purgeCss()],
 	test: {
 		globals: true,
 		environment: 'jsdom',
