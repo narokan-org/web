@@ -122,21 +122,23 @@
 			"workspaceLocationInputOption1": "United States",
 			"workspaceLocationInputOption2": "Europe"
 		},
-		"risks": {
+		"riskRegister": {
 			"heading": "Risks",
-			"importRisksButton": "Import Risks",
+			"createRiskFactorButton": "Create Risk Factor",
+			"exportCSVButton": "Export to CSV",
+			"mitigationPlansCard": {
+				"heading": "Migration plans in progress"
+			},
+			"residualRiskTrendCard": {
+				"footer": "Residual Risk Trend"
+			},
 			"table": {
-				"heading1": "Category/Type",
-				"heading2": "Risk Name",
-				"heading3": "Process",
-				"heading4": "Entity",
-				"heading5": "Description",
-				"heading6": "Inherent Risk",
-				"heading7": "Controls",
-				"heading8": "Residual Risk",
-				"heading9": "Treatment",
-				"heading10": "Last Assessed",
-				"searchPlaceholder": "Search"
+				"heading1": "Risk Factor",
+				"heading2": "Owner",
+				"heading3": "Residual Risk",
+				"heading4": "Treatment",
+				"heading5": "Status",
+				"heading6": "Last Assessed"
 			}
 		},
 		"settings": {
