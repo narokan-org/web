@@ -28,7 +28,9 @@ CREATE TABLE [dbo].[Risk] (
     FOREIGN KEY (ClonedFromRiskId) REFERENCES [dbo].[Risk](Id),
     CreatedDate DATETIME DEFAULT GETDATE() NOT NULL,
     CompanyId INT NOT NULL,
-    FOREIGN KEY (CompanyId) REFERENCES [dbo].[Company](Id)
+    FOREIGN KEY (CompanyId) REFERENCES [dbo].[Company](Id),
+    RiskCategoryId INT NOT NULL,
+    FOREIGN KEY (RiskCategoryId) REFERENCES [dbo].[CompanyRiskCategory](Id)
 )
 
 DROP TABLE IF EXISTS [dbo].[CompanyRiskCategory];

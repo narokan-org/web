@@ -1,6 +1,50 @@
 {
 	"appName": "Narokan",
 	"components": {
+		"createRiskFactorModal": {
+			"heading": "Create Risk Factor",
+			"secondaryButton": "Cancel",
+			"primaryButton": "Add Risk Factor",
+			"tab1": {
+				"heading": "General Information",
+				"formFields": {
+					"title": "Title",
+					"titlePlaceholder": "Name this risk factor",
+					"description": "Description",
+					"descriptionPlaceholder": "Describe how this risk factor affects your business",
+					"category": "Category",
+					"categoryPlaceholder": "Select risk category",
+					"owners": "Owners",
+					"ownersPlaceholder": "Select owners",
+					"entity": "Entity",
+					"entityPlaceholder": "Select entities"
+				}
+			},
+			"tab2": {
+				"heading": "Assessment",
+				"formFields": {
+					"likelihood": "Likelihood",
+					"likelihoodPlaceholder": "Select likelihood",
+					"impact": "Impact",
+					"impactPlaceholder": "Select impact",
+					"inherentRisk": "Inherent Risk",
+					"residualRisk": "Residual Risk",
+					"riskTolerance": "Risk Tolerance",
+					"scorePlaceholder": "--",
+					"response": "Response",
+					"responsePlaceholder": "Select how you want to treat this risk",
+					"Notes": "Notes",
+					"notesPlaceholder": "Enter any notes about this risk factor"
+				}
+			},
+			"tab3": {
+				"heading": "Monitoring",
+				"formFields": {
+					"kri": "Select KRI",
+					"kriPlaceholder": "Select KRI"
+				}
+			}
+		},
 		"navigation": {
 			"assessments": "Assessments",
 			"controls": "Controls",

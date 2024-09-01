@@ -2,8 +2,15 @@
 	import { TableBody, TableHead, TableHeadCell, TableSearch, Button } from 'flowbite-svelte';
 	import ProgressCard from '$lib/components/progress-card/index.svelte';
 	import TrendCard from '$lib/components/trend-card/index.svelte';
+	import CreateRiskFactorModal from '$lib/components/create-risk-factor-modal/index.svelte';
 	import { Heading } from 'flowbite-svelte';
 	import { t } from '$lib/translations';
+
+	$: createRiskFactorModalOpen = false;
+
+	function onCreateRiskFactorClick() {
+		createRiskFactorModalOpen = true;
+	}
 </script>
 
 <div class="flex flex-col">
@@ -26,7 +33,7 @@
 
 	<div class="flex flex-col mt-8">
 		<div class="flex gap-2 mb-2">
-			<Button size="xs" color="primary"
+			<Button size="xs" color="primary" on:click={onCreateRiskFactorClick}
 				>{$t('common.pages.riskRegister.table.primaryButton')}</Button
 			>
 
@@ -57,4 +64,14 @@
 			<TableBody></TableBody>
 		</TableSearch>
 	</div>
+
+	<CreateRiskFactorModal
+		bind:isOpen={createRiskFactorModalOpen}
+		riskCategories={[]}
+		owners={[]}
+		entities={[]}
+		onSubmit={() => {
+			console.log('submitted');
+		}}
+	/>
 </div>
