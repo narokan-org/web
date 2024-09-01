@@ -100,7 +100,7 @@
 					<SidebarItem
 						data-testid="navigation-side-bar-dashboard"
 						label={$t('common.components.navigation.dashboard')}
-						href=""
+						href="/"
 					>
 						<svelte:fragment slot="icon">
 							<HomeOutline />
