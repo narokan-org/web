@@ -24,7 +24,7 @@
 <div class={showLoggedInLayout ? 'flex bg-gray-50 min-h-screen' : ''}>
 	<Header class={showLoggedInLayout ? 'w-auto' : ''} />
 
-	<main class="mx-4 {showLoggedInLayout ? 'mt-4' : ''}">
+	<main class="mx-4 {showLoggedInLayout ? 'mt-4' : ''} w-full">
 		<slot></slot>
 	</main>
 
