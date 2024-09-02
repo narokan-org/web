@@ -64,3 +64,12 @@ CREATE TABLE [dbo].[RiskOwners] (
     UserId UNIQUEIDENTIFIER NOT NULL,
     FOREIGN KEY (RISKID) REFERENCES [dbo].[Risk](Id)
 );
+
+DROP TABLE IF EXISTS [dbo].[UserSurveyAnswer];
+
+CREATE TABLE [dbo].[UserSurveyAnswer] (
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    UserId UNIQUEIDENTIFIER NOT NULL,
+    TeamSize NVARCHAR(5) NULL,
+    CompanyRole NVARCHAR(50) NULL CHECK (CompanyRole IN ('Analyst', 'C-Level', 'Director', 'Manager', 'Specialist', 'Stakeholder', 'Other'))
+);

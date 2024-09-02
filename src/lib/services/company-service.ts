@@ -1,5 +1,6 @@
 import type { DBCompany } from '$lib/common/entities/db-company';
 import type { DBUserCompanyRelationship } from '$lib/common/entities/db-user-company-relationship';
+import type { DBUserSurveyAnswer } from '$lib/common/entities/db-user-survey-answer';
 import type { Company } from '$lib/common/models/company';
 import { mapDBCompanyToCompany } from '$lib/utils/mappers';
 import { parseDBResponse } from '$lib/utils/utils';
@@ -76,6 +77,50 @@ export class CompanyService {
 		await this.associateCompanyWithUser(dbCompany.Id, currentUser.id);
 
 		return mapDBCompanyToCompany(dbCompany);
+	}
+
+	async submitOnboardingSurvey({
+		teamSize,
+		companyRole
+	}: {
+		teamSize?: string;
+		companyRole?:
+			| 'Analyst'
+			| 'C-Level'
+			| 'Director'
+			| 'Manager'
+			| 'Specialist'
+			| 'Stakeholder'
+			| 'Other';
+	}) {
+		const currentUser = await this.userService.getUser();
+		const role = currentUser?.roles.find((r) => r === 'authenticated');
+
+		if (!role || !currentUser) {
+			return;
+		}
+
+		this.log.debug(`Submitting onboarding survey ${JSON.stringify({ teamSize, role })}`);
+
+		const dbUserSurvey: DBUserSurveyAnswer = {
+			UserId: currentUser.id,
+			TeamSize: teamSize,
+			CompanyRole: companyRole
+		};
+
+		const response = await this.fetchFn('/data-api/rest/UserSurveyAnswer', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				'X-MS-API-ROLE': role
+			},
+			body: JSON.stringify(dbUserSurvey)
+		});
+
+		if (!response.ok) {
+			this.log.error(`Could not create user survey answer: ${dbUserSurvey}`);
+			return;
+		}
 	}
 
 	private async associateCompanyWithUser(companyId: number, userId: string): Promise<void> {

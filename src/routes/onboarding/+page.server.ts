@@ -7,6 +7,16 @@ export const actions: Actions = {
 
 		const formData = await request.formData();
 		const companyName = formData.get('workspace-name') as string;
+		const teamSize = formData.get('team-size') as string;
+		const companyRole = formData.get('role') as
+			| 'Analyst'
+			| 'C-Level'
+			| 'Director'
+			| 'Manager'
+			| 'Specialist'
+			| 'Stakeholder'
+			| 'Other'
+			| undefined;
 
 		if (!companyName.trim()) {
 			return fail(400, {
@@ -18,6 +28,10 @@ export const actions: Actions = {
 
 		if (!newCompany) {
 			return fail(500, { message: 'Failed to create company' });
+		}
+
+		if (teamSize || companyRole) {
+			await locals.companyService.submitOnboardingSurvey({ teamSize, companyRole });
 		}
 
 		if (currentEnvironment() !== 'local') {

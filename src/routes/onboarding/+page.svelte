@@ -20,12 +20,12 @@
 
 	let role = '';
 	let roles = [
-		{ value: 'manager', name: $t('common.pages.onboarding.roleOption1') },
-		{ value: 'analyst', name: $t('common.pages.onboarding.roleOption2') },
-		{ value: 'c-level', name: $t('common.pages.onboarding.roleOption3') },
-		{ value: 'specialist', name: $t('common.pages.onboarding.roleOption4') },
-		{ value: 'director', name: $t('common.pages.onboarding.roleOption5') },
-		{ value: 'stakeholder', name: $t('common.pages.onboarding.roleOption6') }
+		{ value: 'Manager', name: $t('common.pages.onboarding.roleOption1') },
+		{ value: 'Analyst', name: $t('common.pages.onboarding.roleOption2') },
+		{ value: 'C-Level', name: $t('common.pages.onboarding.roleOption3') },
+		{ value: 'Specialist', name: $t('common.pages.onboarding.roleOption4') },
+		{ value: 'Director', name: $t('common.pages.onboarding.roleOption5') },
+		{ value: 'Stakeholder', name: $t('common.pages.onboarding.roleOption6') }
 	];
 	roles.sort((a, b) => a.value.localeCompare(b.value));
 	roles.push({ value: 'other', name: $t('common.pages.onboarding.roleOption7') });

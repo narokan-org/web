@@ -47,6 +47,15 @@
 					"role": "authenticated"
 				}
 			]
+		},
+		"UserSurveyAnswer": {
+			"source": "dbo.UserSurveyAnswer",
+			"permissions": [
+				{
+					"actions": ["create"],
+					"role": "authenticated"
+				}
+			]
 		}
 	}
 }
