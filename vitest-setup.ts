@@ -6,6 +6,8 @@ import { vi } from 'vitest';
 import * as stores from '$app/stores';
 import type { User } from '$lib/common/models/user';
 import { faker, simpleFaker } from '@faker-js/faker';
+import type { IUserService } from '$lib/services/user-service';
+import type { ILoggingService } from '$lib/services/logging-service';
 
 export const createMockUser = (user: Partial<User> = {}): User => {
 	const defaultUser: User = {
@@ -41,6 +43,29 @@ export const createMockPage = (page: Partial<Page> = {}): Page => {
 		...page
 	};
 };
+
+vi.mock('./src/lib/services/logging-service.ts', () => {
+	return {
+		LoggingService: vi.fn().mockImplementation((): ILoggingService => {
+			return {
+				info: vi.fn(),
+				error: vi.fn(),
+				warn: vi.fn(),
+				debug: vi.fn()
+			};
+		})
+	};
+});
+
+vi.mock('./src/lib/services/user-service.ts', () => {
+	return {
+		UserService: vi.fn().mockImplementation((): IUserService => {
+			return {
+				getUser: vi.fn()
+			};
+		})
+	};
+});
 
 vi.mock('$app/stores', (): typeof stores => {
 	const getStores: typeof stores.getStores = () => {

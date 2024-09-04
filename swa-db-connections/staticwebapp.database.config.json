@@ -56,6 +56,15 @@
 					"role": "authenticated"
 				}
 			]
+		},
+		"CompanyRiskCategory": {
+			"source": "dbo.CompanyRiskCategory",
+			"permissions": [
+				{
+					"actions": ["read"],
+					"role": "authenticated"
+				}
+			]
 		}
 	}
 }

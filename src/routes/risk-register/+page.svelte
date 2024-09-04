@@ -5,7 +5,9 @@
 	import CreateRiskFactorModal from '$lib/components/create-risk-factor-modal/index.svelte';
 	import { Heading } from 'flowbite-svelte';
 	import { t } from '$lib/translations';
+	import type { PageData } from './$types';
 
+	export let data: PageData;
 	$: createRiskFactorModalOpen = false;
 
 	function onCreateRiskFactorClick() {
@@ -67,7 +69,7 @@
 
 	<CreateRiskFactorModal
 		bind:isOpen={createRiskFactorModalOpen}
-		riskCategories={[]}
+		riskCategories={data.categories ?? []}
 		owners={[]}
 		entities={[]}
 		onSubmit={() => {

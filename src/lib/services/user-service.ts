@@ -3,7 +3,11 @@ import type { User } from '$lib/common/models/user';
 import { mapLocalUserToUser } from '$lib/utils/mappers';
 import type { LoggingService } from './logging-service';
 
-export class UserService {
+export interface IUserService {
+	getUser(): Promise<User | null>;
+}
+
+export class UserService implements IUserService {
 	constructor(
 		private fetchFn: typeof fetch,
 		private log: LoggingService

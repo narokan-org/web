@@ -46,6 +46,12 @@ export const actions: Actions = {
 			maxAge: 60 * 60 * 24 * 30
 		});
 
+		cookies.set('narokan-current-company', newCompany.id.toString(), {
+			path: '/',
+			httpOnly: true,
+			maxAge: 60 * 60 * 24 * 30
+		});
+
 		redirect(302, '/invite');
 	}
 };

@@ -1,13 +1,35 @@
 import type { DBCompany } from '$lib/common/entities/db-company';
+import type { DBCompanyRiskCategory } from '$lib/common/entities/db-company-risk-category';
 import type { DBUserCompanyRelationship } from '$lib/common/entities/db-user-company-relationship';
 import type { DBUserSurveyAnswer } from '$lib/common/entities/db-user-survey-answer';
 import type { Company } from '$lib/common/models/company';
-import { mapDBCompanyToCompany } from '$lib/utils/mappers';
+import type { RiskCategory } from '$lib/common/models/risk-category';
+import { mapDBCompanyRiskCategoryToRiskCategory, mapDBCompanyToCompany } from '$lib/utils/mappers';
 import { parseDBResponse } from '$lib/utils/utils';
 import type { LoggingService } from './logging-service';
 import type { UserService } from './user-service';
 
-export class CompanyService {
+export interface ICompanyService {
+	getCompany(id: number): Promise<Company | null>;
+	createCompany(company: Omit<Company, 'id'>): Promise<Company | null>;
+	submitOnboardingSurvey({
+		teamSize,
+		companyRole
+	}: {
+		teamSize?: string;
+		companyRole?:
+			| 'Analyst'
+			| 'C-Level'
+			| 'Director'
+			| 'Manager'
+			| 'Specialist'
+			| 'Stakeholder'
+			| 'Other';
+	}): Promise<void>;
+	getRiskCategories(id: number): Promise<RiskCategory[]>;
+}
+
+export class CompanyService implements ICompanyService {
 	constructor(
 		private fetchFn: typeof fetch,
 		private log: LoggingService,
@@ -121,6 +143,35 @@ export class CompanyService {
 			this.log.error(`Could not create user survey answer: ${dbUserSurvey}`);
 			return;
 		}
+	}
+
+	async getRiskCategories(id: number): Promise<RiskCategory[]> {
+		const role = (await this.userService.getUser())?.roles.find((r) => r === 'authenticated');
+
+		if (!role) {
+			return [];
+		}
+
+		const response = await this.fetchFn(
+			`/data-api/rest/CompanyRiskCategory?$filter=CompanyId eq ${id}`,
+			{
+				headers: {
+					'X-MS-API-ROLE': role
+				}
+			}
+		);
+
+		if (!response.ok) {
+			return [];
+		}
+
+		const dbCompanyRiskCategories = await parseDBResponse<DBCompanyRiskCategory>(response);
+
+		if (!dbCompanyRiskCategories) {
+			return [];
+		}
+
+		return dbCompanyRiskCategories?.map((c) => mapDBCompanyRiskCategoryToRiskCategory(c)) ?? [];
 	}
 
 	private async associateCompanyWithUser(companyId: number, userId: string): Promise<void> {
