@@ -11,5 +11,20 @@ export const load: PageServerLoad = async ({ locals, cookies }) => {
 
 	const categories = await locals.companyService.getRiskCategories(Number(currentCompany));
 
-	return { categories };
+	const companyUsers = await locals.companyService.getUserCompanyRelationships(
+		Number(currentCompany)
+	);
+
+	const owners =
+		(await locals.identityService.getUsers(companyUsers.map((u) => u.userId)))
+			.filter((u) => u.email && u.name)
+			.map((u) => {
+				return {
+					name: `${u.name} (${u.email})`,
+					userId: u.id
+				};
+			}) ?? [];
+
+	console.log('owners', owners);
+	return { categories, owners };
 };

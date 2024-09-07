@@ -18,7 +18,7 @@
 	let selectedEntities: string[] = [];
 	export let isOpen: boolean = false;
 	export let riskCategories: RiskCategory[];
-	export let owners: { userId: string; name: string }[];
+	export let owners: { name: string; userId: string }[];
 	export let entities: { companyId: string; name: string }[];
 	export let onSubmit: () => void;
 </script>

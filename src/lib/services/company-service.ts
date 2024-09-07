@@ -4,7 +4,12 @@ import type { DBUserCompanyRelationship } from '$lib/common/entities/db-user-com
 import type { DBUserSurveyAnswer } from '$lib/common/entities/db-user-survey-answer';
 import type { Company } from '$lib/common/models/company';
 import type { RiskCategory } from '$lib/common/models/risk-category';
-import { mapDBCompanyRiskCategoryToRiskCategory, mapDBCompanyToCompany } from '$lib/utils/mappers';
+import type { UserCompanyRelationship } from '$lib/common/models/user-company-relationship';
+import {
+	mapDBCompanyRiskCategoryToRiskCategory,
+	mapDBCompanyToCompany,
+	mapDBUserCompanyRelationshipToUserCompanyRelationship
+} from '$lib/utils/mappers';
 import { parseDBResponse } from '$lib/utils/utils';
 import type { LoggingService } from './logging-service';
 import type { UserService } from './user-service';
@@ -27,6 +32,7 @@ export interface ICompanyService {
 			| 'Other';
 	}): Promise<void>;
 	getRiskCategories(id: number): Promise<RiskCategory[]>;
+	getUserCompanyRelationships(companyId: number): Promise<UserCompanyRelationship[]>;
 }
 
 export class CompanyService implements ICompanyService {
@@ -174,6 +180,37 @@ export class CompanyService implements ICompanyService {
 		return dbCompanyRiskCategories?.map((c) => mapDBCompanyRiskCategoryToRiskCategory(c)) ?? [];
 	}
 
+	async getUserCompanyRelationships(companyId: number) {
+		const role = (await this.userService.getUser())?.roles.find((r) => r === 'authenticated');
+
+		if (!role) {
+			return [];
+		}
+
+		const response = await this.fetchFn(
+			`/data-api/rest/UserCompanyRelationship?$filter=CompanyId eq ${companyId}`,
+			{
+				headers: {
+					'X-MS-API-ROLE': role
+				}
+			}
+		);
+
+		if (!response.ok) {
+			return [];
+		}
+
+		const dbUserRelationships = await parseDBResponse<DBUserCompanyRelationship>(response);
+
+		if (!dbUserRelationships) {
+			return [];
+		}
+
+		return (
+			dbUserRelationships.map((r) => mapDBUserCompanyRelationshipToUserCompanyRelationship(r)) ?? []
+		);
+	}
+
 	private async associateCompanyWithUser(companyId: number, userId: string): Promise<void> {
 		const role = (await this.userService.getUser())?.roles.find((r) => r === 'authenticated');
 
@@ -186,7 +223,6 @@ export class CompanyService implements ICompanyService {
 			CompanyId: companyId,
 			Role: 'Administrator'
 		};
-		this.log.debug(`Creating user company relationship ${JSON.stringify(relationship)}`);
 
 		await this.fetchFn(`/data-api/rest/UserCompanyRelationship`, {
 			method: 'POST',

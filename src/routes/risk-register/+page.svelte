@@ -70,7 +70,7 @@
 	<CreateRiskFactorModal
 		bind:isOpen={createRiskFactorModalOpen}
 		riskCategories={data.categories ?? []}
-		owners={[]}
+		owners={data.owners ?? []}
 		entities={[]}
 		onSubmit={() => {
 			console.log('submitted');

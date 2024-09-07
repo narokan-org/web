@@ -6,6 +6,8 @@ import type { User } from '$lib/common/models/user';
 import { dev } from '$app/environment';
 import type { DBCompanyRiskCategory } from '$lib/common/entities/db-company-risk-category';
 import type { RiskCategory } from '$lib/common/models/risk-category';
+import type { DBUserCompanyRelationship } from '$lib/common/entities/db-user-company-relationship';
+import type { UserCompanyRelationship } from '$lib/common/models/user-company-relationship';
 
 export function mapDBCompanyToCompany(dbCompany: DBCompany): Company {
 	return {
@@ -35,5 +37,15 @@ export function mapDBCompanyRiskCategoryToRiskCategory(
 	return {
 		id: dbCompanyRiskCategory.Id,
 		name: dbCompanyRiskCategory.CategoryName
+	};
+}
+
+export function mapDBUserCompanyRelationshipToUserCompanyRelationship(
+	DBUserCompanyRelationship: DBUserCompanyRelationship
+): UserCompanyRelationship {
+	return {
+		companyId: DBUserCompanyRelationship.CompanyId,
+		userId: DBUserCompanyRelationship.UserId,
+		role: DBUserCompanyRelationship.Role
 	};
 }
