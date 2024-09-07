@@ -44,7 +44,7 @@ describe('components/create-risk-factor-modal', () => {
 				entities
 			}
 		});
-		screen.debug();
+
 		expect(screen.getByText(common.components.createRiskFactorModal.heading)).toBeInTheDocument();
 		expect(
 			screen.getByText(common.components.createRiskFactorModal.tab1.heading)

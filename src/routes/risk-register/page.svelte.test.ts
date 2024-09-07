@@ -3,10 +3,21 @@ import { render, screen } from '@testing-library/svelte';
 import common from '$lib/translations/en/common.json';
 import Page from './+page.svelte';
 import userEvent from '@testing-library/user-event';
+import type { PageData } from './$types';
 
 describe('risk register page', () => {
+	function renderPage(data?: PageData) {
+		return render(Page, {
+			...data,
+			data: {
+				categories: [],
+				owners: []
+			}
+		});
+	}
+
 	it('should render', () => {
-		render(Page);
+		renderPage();
 
 		expect(screen.getByText(common.pages.riskRegister.heading)).toBeInTheDocument();
 		expect(
@@ -27,12 +38,11 @@ describe('risk register page', () => {
 	});
 
 	it('should show risk factor modal on click of create risk factor button', async () => {
-		render(Page);
+		renderPage();
 
 		const createRiskFactorButton = screen.getByText(common.pages.riskRegister.table.primaryButton);
 
 		await userEvent.click(createRiskFactorButton);
-		screen.debug();
 
 		expect(
 			screen.getByText(common.components.createRiskFactorModal.primaryButton)

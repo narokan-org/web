@@ -105,7 +105,7 @@ describe('components/navigation', () => {
 		expect(screen.getByTestId('navigation-side-bar-dashboard')).toHaveTextContent(
 			common.components.navigation.dashboard
 		);
-		expect(screen.getByTestId('navigation-side-bar-dashboard')).toHaveAttribute('href', '');
+		expect(screen.getByTestId('navigation-side-bar-dashboard')).toHaveAttribute('href', '/');
 		expect(screen.getByTestId('navigation-side-bar-inbox')).toHaveTextContent(
 			common.components.navigation.inbox
 		);

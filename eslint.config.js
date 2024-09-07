@@ -23,7 +23,14 @@ export default [
 		rules: {
 			'@typescript-eslint/no-unsafe-return': 'off',
 			'@typescript-eslint/no-unsafe-member-access': 'off',
-			'@typescript-eslint_no-unsafe-call': 'off'
+			'@typescript-eslint_no-unsafe-call': 'off',
+			'no-restricted-syntax': [
+				'warn',
+				{
+					selector: "CallExpression[callee.object.name='screen'][callee.property.name='debug']",
+					message: 'Calls to screen.debug() are not allowed.'
+				}
+			]
 		}
 	},
 	{

@@ -39,13 +39,13 @@ describe('onboarding page', () => {
 
 		expect(options).toEqual([
 			'',
-			'analyst',
-			'c-level',
-			'director',
-			'manager',
-			'specialist',
-			'stakeholder',
-			'other'
+			'Analyst',
+			'C-Level',
+			'Director',
+			'Manager',
+			'Specialist',
+			'Stakeholder',
+			'Other'
 		]);
 	});
 });

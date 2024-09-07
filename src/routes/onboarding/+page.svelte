@@ -28,7 +28,7 @@
 		{ value: 'Stakeholder', name: $t('common.pages.onboarding.roleOption6') }
 	];
 	roles.sort((a, b) => a.value.localeCompare(b.value));
-	roles.push({ value: 'other', name: $t('common.pages.onboarding.roleOption7') });
+	roles.push({ value: 'Other', name: $t('common.pages.onboarding.roleOption7') });
 </script>
 
 <div class="flex flex-col items-center justify-center min-h-screen w-full">
