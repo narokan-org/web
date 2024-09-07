@@ -33,8 +33,20 @@
 					"scorePlaceholder": "--",
 					"response": "Response",
 					"responsePlaceholder": "Select how you want to treat this risk",
-					"Notes": "Notes",
-					"notesPlaceholder": "Enter any notes about this risk factor"
+					"notes": "Notes",
+					"notesPlaceholder": "Enter any notes about this risk factor",
+					"likelihoodOption1": "Rare",
+					"likelihoodOption2": "Low",
+					"likelihoodOption3": "Medium",
+					"likelihoodOption4": "High",
+					"impactOption1": "Low",
+					"impactOption2": "Moderate",
+					"impactOption3": "Major",
+					"impactOption4": "Extreme",
+					"responseOption1": "Accept",
+					"responseOption2": "Moderate",
+					"responseOption3": "Major",
+					"responseOption4": "Extreme"
 				}
 			},
 			"tab3": {

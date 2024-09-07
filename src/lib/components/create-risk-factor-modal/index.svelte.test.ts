@@ -3,6 +3,7 @@ import { render, screen } from '@testing-library/svelte';
 import common from '$lib/translations/en/common.json';
 import CreateRiskFactorModal from './index.svelte';
 import type { RiskCategory } from '$lib/common/models/risk-category';
+import userEvent from '@testing-library/user-event';
 
 describe('components/create-risk-factor-modal', () => {
 	const riskCategories: RiskCategory[] = [
@@ -89,7 +90,7 @@ describe('components/create-risk-factor-modal', () => {
 		).toBeInTheDocument();
 	});
 
-	it('should render assessment tab', () => {
+	it('should render assessment tab', async () => {
 		render(CreateRiskFactorModal, {
 			props: {
 				isOpen: true,
@@ -99,9 +100,46 @@ describe('components/create-risk-factor-modal', () => {
 				entities
 			}
 		});
+		const tab2 = screen.getByText(common.components.createRiskFactorModal.tab2.heading);
+
+		await userEvent.click(tab2);
 
 		expect(
-			screen.getByText(common.components.createRiskFactorModal.tab2.heading)
+			screen.getByLabelText(common.components.createRiskFactorModal.tab2.formFields.likelihood)
+		).toBeInTheDocument();
+		expect(
+			screen.getByText(
+				common.components.createRiskFactorModal.tab2.formFields.likelihoodPlaceholder
+			)
+		).toBeInTheDocument();
+		expect(
+			screen.getByLabelText(common.components.createRiskFactorModal.tab2.formFields.impact)
+		).toBeInTheDocument();
+		expect(
+			screen.getByText(common.components.createRiskFactorModal.tab2.formFields.impactPlaceholder)
+		).toBeInTheDocument();
+		expect(
+			screen.getByText(common.components.createRiskFactorModal.tab2.formFields.inherentRisk)
+		).toBeInTheDocument();
+		expect(
+			screen.getByText(common.components.createRiskFactorModal.tab2.formFields.residualRisk)
+		).toBeInTheDocument();
+		expect(
+			screen.getByText(common.components.createRiskFactorModal.tab2.formFields.riskTolerance)
+		).toBeInTheDocument();
+		expect(
+			screen.getByLabelText(common.components.createRiskFactorModal.tab2.formFields.response)
+		).toBeInTheDocument();
+		expect(
+			screen.getByText(common.components.createRiskFactorModal.tab2.formFields.responsePlaceholder)
+		).toBeInTheDocument();
+		expect(
+			screen.getByLabelText(common.components.createRiskFactorModal.tab2.formFields.notes)
+		).toBeInTheDocument();
+		expect(
+			screen.getByPlaceholderText(
+				common.components.createRiskFactorModal.tab2.formFields.notesPlaceholder
+			)
 		).toBeInTheDocument();
 	});
 
