@@ -54,7 +54,7 @@ export class IdentityService {
 		const selectProperties = `id,extension_${this.getExtensionAppClientId()}_FullName,extension_${this.getExtensionAppClientId()}_Onboarded,identities`;
 
 		for (const userId of userIds ?? []) {
-			let userRequest: BatchRequestStep = {
+			const userRequest: BatchRequestStep = {
 				id: userId,
 				request: new Request(
 					`https://graph.microsoft.com/users/${userId}?$select=${selectProperties}`,
@@ -103,8 +103,10 @@ export class IdentityService {
 		return userInfo;
 	}
 
+	// estlint-disable-next-line @typescript-eslint/no-explicit-any
 	private mapIdentityUserToUser(identityUser: any): User {
 		return {
+			// estlint-disable-next-line @typescript-eslint/no-explicit-any
 			id: identityUser.id,
 			email: identityUser['identities'].find((e: any) => e.signInType === 'emailAddress')
 				?.issuerAssignedId,
@@ -141,12 +143,9 @@ export class IdentityService {
 		return authResult?.accessToken;
 	}
 
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	private prependAppIdToAttributes<T extends Record<string, any>>(
 		attributes: T
-		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	): { [key: string]: any } {
-		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		const result: { [key: string]: any } = {};
 		const clientId = this.getExtensionAppClientId();
 

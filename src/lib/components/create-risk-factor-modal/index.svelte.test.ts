@@ -28,10 +28,12 @@ describe('components/create-risk-factor-modal', () => {
 				entities
 			}
 		});
-		expect(screen.getByText(common.components.createRiskFactorModal.secondaryButton))
-			.toBeInTheDocument;
-		expect(screen.getByText(common.components.createRiskFactorModal.primaryButton))
-			.toBeInTheDocument;
+		expect(
+			screen.getByText(common.components.createRiskFactorModal.secondaryButton)
+		).toBeInTheDocument();
+		expect(
+			screen.getByText(common.components.createRiskFactorModal.primaryButton)
+		).toBeInTheDocument();
 	});
 
 	it('should render general information tab', () => {

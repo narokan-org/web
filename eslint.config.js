@@ -24,6 +24,7 @@ export default [
 			'@typescript-eslint/no-unsafe-return': 'off',
 			'@typescript-eslint/no-unsafe-member-access': 'off',
 			'@typescript-eslint_no-unsafe-call': 'off',
+			'@typescript-eslint/no-explicit-any': 'off',
 			'no-restricted-syntax': [
 				'warn',
 				{
