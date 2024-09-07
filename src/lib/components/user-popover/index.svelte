@@ -9,13 +9,13 @@
 	<Popover trigger="click" placement="right" arrow={false} {triggeredBy} offset={25}>
 		<div class="flex flex-col max-w-56">
 			<ButtonGroup divClass="flex flex-col">
-				<Button href="/profile" class="border-none hover:rounded-none"
+				<Button href="/profile" class="border-none hover:rounded-none justify-start"
 					>{$t('common.components.userPopover.profileButton')}</Button
 				>
-				<Button href="/notifications" class="border-none hover:rounded-none"
+				<Button href="/notifications" class="border-none hover:rounded-none justify-start"
 					>{$t('common.components.userPopover.notificationsButton')}</Button
 				>
-				<Button href="/logout" class="border-none hover:rounded-none"
+				<Button href="/logout" class="border-none hover:rounded-none justify-start"
 					>{$t('common.components.userPopover.signOutButton')}</Button
 				>
 			</ButtonGroup>
