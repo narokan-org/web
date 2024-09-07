@@ -25,6 +25,5 @@ export const load: PageServerLoad = async ({ locals, cookies }) => {
 				};
 			}) ?? [];
 
-	console.log('owners', owners);
 	return { categories, owners };
 };
