@@ -97,6 +97,15 @@ const config = {
 					// 	route: '/invite',
 					// 	allowedRoles: ['authenticated']
 					// },
+					// {
+					// 	route: '/settings/edit-profile',
+					// 	allowedRoles: ['authenticated']
+					// },
+					{
+						route: '/settings',
+						allowedRoles: ['authenticated'],
+						redirect: '/settings/edit-profile'
+					},
 					{
 						route: '/entities',
 						allowedRoles: ['authenticated']

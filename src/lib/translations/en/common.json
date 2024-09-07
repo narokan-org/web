@@ -83,6 +83,19 @@
 		"progressCard": {
 			"totalProgress": "{{value}}%"
 		},
+		"settingsSidebar": {
+			"heading": "Settings",
+			"section1Heading": "Personal",
+			"section2Heading": "Workspace",
+			"profile": "Profile",
+			"notifications": "Notifications",
+			"general": "General",
+			"users": "Users",
+			"teams": "Teams",
+			"securityAndPermissions": "Security & Permissions",
+			"auditLog": "Audit Log",
+			"billing": "Billing"
+		},
 		"tableSearch": {
 			"placeholder": "Search"
 		},

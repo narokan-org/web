@@ -134,4 +134,21 @@ describe('components/navigation', () => {
 		expect(screen.getByText(testUser.name!)).toBeInTheDocument();
 		expect(screen.getByText(testUser.email!)).toBeInTheDocument();
 	});
+
+	it('should render settings sidebar', () => {
+		const mockPage = createMockPage({
+			url: new URL('http://localhost/settings')
+		});
+
+		vi.mocked(stores.page).subscribe = vi.fn((fn) => {
+			fn(mockPage);
+			return readable(mockPage).subscribe(fn);
+		});
+
+		render(Navigation, {
+			context: new Map([['auth', { isLoggedIn: readable(true), user: readable({}) }]])
+		});
+
+		expect(screen.getByTestId('navigation-settings-sidebar')).toBeInTheDocument();
+	});
 });

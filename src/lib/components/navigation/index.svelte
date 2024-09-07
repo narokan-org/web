@@ -28,6 +28,7 @@
 		CogOutline
 	} from 'flowbite-svelte-icons';
 	import UserPopover from '$lib/components/user-popover/index.svelte';
+	import SettingsSidebar from '$lib/components/settings-sidebar/index.svelte';
 
 	import type { User } from '$lib/common/models/user';
 	import { page } from '$app/stores';
@@ -45,6 +46,7 @@
 	};
 
 	$: activeUrl = $page.url.pathname;
+	$: isSettingsPage = activeUrl.startsWith('/settings');
 </script>
 
 <div class="flex" {...$$restProps}>
@@ -92,6 +94,8 @@
 				>{$user.email}</P
 			>
 		</div>
+	{:else if $isLoggedIn && isSettingsPage}
+		<SettingsSidebar {activeUrl} data-testid="navigation-settings-sidebar" />
 	{:else}
 		<Sidebar class="h-full" data-testid="navigation-side-bar" {activeUrl}>
 			<SidebarWrapper class="bg-white h-full flex flex-col">
@@ -189,7 +193,7 @@
 					<SidebarItem
 						data-testid="navigation-side-bar-settings"
 						label={$t('common.components.navigation.settings')}
-						href="/settings"
+						href="/settings/edit-profile"
 					>
 						<svelte:fragment slot="icon">
 							<CogOutline />
