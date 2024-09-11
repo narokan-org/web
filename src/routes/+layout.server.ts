@@ -1,11 +1,21 @@
 import { redirect } from '@sveltejs/kit';
+import type { LayoutServerLoad } from './$types';
 
-export const load = async ({ locals, request, cookies }) => {
-	const user = await locals.userService.getUser();
-	locals.loggingService.debug(`Local user: ${JSON.stringify(user)}`);
-
+export const load: LayoutServerLoad = async ({ locals, request, cookies }) => {
+	const localUser = cookies.get('narokan-user');
+	console.log('localUser', localUser);
+	let user = localUser ? JSON.parse(localUser) : await locals.userService.getUser();
+	console.log('user', user);
 	if (!user) {
 		return { isLoggedIn: false };
+	}
+
+	if (!localUser) {
+		cookies.set('narokan-user', JSON.stringify(user), {
+			httpOnly: true,
+			secure: true,
+			path: '/'
+		});
 	}
 
 	const onboardedCookie = cookies.get('narokan-onboarded');
@@ -14,7 +24,7 @@ export const load = async ({ locals, request, cookies }) => {
 		return { isLoggedIn: true, user };
 	}
 
-	if (!user.onboarded && !request.url.includes('/onboarding')) {
+	if (user && !user.onboarded && !request.url.includes('/onboarding')) {
 		locals.loggingService.debug('User is not onboarded. Redirecting to onboarding.');
 		throw redirect(302, '/onboarding');
 	}

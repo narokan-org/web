@@ -6,6 +6,7 @@
 	// import FileChartBarSolid from 'flowbite-svelte-icons/FileChartBarSolid.svelte';
 	import ProgressCard from '$lib/components/progress-card/index.svelte';
 	import { getContext } from 'svelte';
+	import { readable } from 'svelte/store';
 	import { t } from '$lib/translations';
 	import Feature from '$lib/components/feature/index.svelte';
 	import type { Readable } from 'svelte/store';
@@ -14,7 +15,7 @@
 
 	const { isLoggedIn, user } = getContext<{ isLoggedIn: Readable<boolean>; user: Readable<User> }>(
 		'auth'
-	);
+	) ?? { isLoggedIn: readable(false), user: readable(null) };
 
 	let email = '';
 	let isSubmitting = false;

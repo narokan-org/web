@@ -57,6 +57,12 @@
 				}
 			}
 		},
+		"editProfile": {
+			"formFields": {
+				"fullName": "Full Name"
+			},
+			"saveButton": "Save"
+		},
 		"navigation": {
 			"assessments": "Assessments",
 			"controls": "Controls",
@@ -212,8 +218,8 @@
 				"secondaryButton": "Export to CSV"
 			}
 		},
-		"settings": {
-			"heading": "Settings"
+		"editProfile": {
+			"heading": "Profile"
 		}
 	}
 }

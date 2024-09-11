@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
-	import type { Readable } from 'svelte/store';
+	import { readable, type Readable } from 'svelte/store';
 	import {
 		Avatar,
 		Navbar,
@@ -37,7 +37,7 @@
 
 	const { isLoggedIn, user } = getContext<{ isLoggedIn: Readable<boolean>; user: Readable<User> }>(
 		'auth'
-	);
+	) ?? { isLoggedIn: readable(false), user: readable(null) };
 
 	let site = {
 		name: 'Narokan',

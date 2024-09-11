@@ -11,14 +11,14 @@
 
 	export let data: { isLoggedIn: boolean; user: User };
 	const isLoggedIn = writable(false);
-	const user = writable<User>();
-
 	isLoggedIn.set(data.isLoggedIn);
+
+	const user = writable<User>();
 	user.set(data.user);
 
 	setContext('auth', { isLoggedIn, user });
 
-	$: showLoggedInLayout = data.isLoggedIn && !isOnboardingPath($page.url.pathname);
+	$: showLoggedInLayout = data && data.isLoggedIn && !isOnboardingPath($page.url.pathname);
 </script>
 
 <div class={showLoggedInLayout ? 'flex bg-gray-50 min-h-screen' : ''}>

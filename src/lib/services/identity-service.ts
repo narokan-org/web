@@ -9,6 +9,7 @@ import {
 import type { UserService } from './user-service';
 import type { UserExtensionAttributes } from '$lib/common/models/user-extension-attributes';
 import type { User } from '$lib/common/models/user';
+import { currentEnvironment } from '$lib/utils/utils';
 
 export class IdentityService {
 	private cca = new ConfidentialClientApplication({
@@ -25,6 +26,10 @@ export class IdentityService {
 	) {}
 
 	async updateUserAttributes(attributes: UserExtensionAttributes) {
+		if (currentEnvironment() === 'local') {
+			return;
+		}
+
 		const currentUser = await this.userService.getUser();
 
 		if (!currentUser) {
