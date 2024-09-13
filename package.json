@@ -3,8 +3,8 @@
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
-		"dev:hr": "NODE_ENV=local npm run build && swa start --config-name narokan-hr",
-		"dev:no-hr": "NODE_ENV=local npm run build && swa start --config-name narokan-no-hr",
+		"dev:hr": "NODE_ENV=local npm run build && NODE_ENV=local swa start --config-name narokan-hr",
+		"dev:no-hr": "NODE_ENV=local npm run build && NODE_ENV=local swa start --config-name narokan-no-hr",
 		"build": "vite build",
 		"preview": "vite preview",
 		"test": "npm run test:integration && npm run test:unit",

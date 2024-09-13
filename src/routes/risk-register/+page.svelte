@@ -5,9 +5,18 @@
 	import CreateRiskFactorModal from '$lib/components/create-risk-factor-modal/index.svelte';
 	import { Heading } from 'flowbite-svelte';
 	import { t } from '$lib/translations';
-	import type { PageData } from './$types';
+	import type { RiskCategory } from '$lib/common/models/risk-category';
+	import type { LikelihoodOption } from '$lib/common/models/likelihood-option';
+	import type { ImpactOption } from '$lib/common/models/impact-option';
+	import type { ResponseOption } from '$lib/common/models/response-option';
 
-	export let data: PageData;
+	export let data: {
+		likelihoodOptions: LikelihoodOption[];
+		impactOptions: ImpactOption[];
+		responseOptions: ResponseOption[];
+		categories: RiskCategory[];
+		owners: { name: string; userId: number }[];
+	};
 	$: createRiskFactorModalOpen = false;
 
 	function onCreateRiskFactorClick() {
@@ -69,8 +78,17 @@
 
 	<CreateRiskFactorModal
 		bind:isOpen={createRiskFactorModalOpen}
+		likelihoodOptions={data.likelihoodOptions}
+		impactOptions={data.impactOptions}
+		responseOptions={data.responseOptions.map((r) => ({
+			name: r.name,
+			value: r.id.toString()
+		}))}
 		riskCategories={data.categories ?? []}
-		owners={data.owners ?? []}
+		owners={data.owners.map((o) => ({
+			name: o.name,
+			userId: o.userId.toString()
+		}))}
 		entities={[]}
 		onSubmit={() => {
 			console.log('submitted');

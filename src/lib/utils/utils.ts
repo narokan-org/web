@@ -23,3 +23,12 @@ export function isOnboardingPath(path: string) {
 	const onboardingPaths = ['/onboarding', '/invite'];
 	return onboardingPaths.includes(path);
 }
+
+export function isGuid(value: any): boolean {
+	if (typeof value !== 'string') {
+		return false;
+	}
+	const guidPattern =
+		/^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/;
+	return guidPattern.test(value);
+}

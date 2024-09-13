@@ -65,6 +65,33 @@
 					"role": "authenticated"
 				}
 			]
+		},
+		"LikelihoodOption": {
+			"source": "dbo.LikelihoodOption",
+			"permissions": [
+				{
+					"actions": ["read"],
+					"role": "authenticated"
+				}
+			]
+		},
+		"ImpactOption": {
+			"source": "dbo.ImpactOption",
+			"permissions": [
+				{
+					"actions": ["read"],
+					"role": "authenticated"
+				}
+			]
+		},
+		"ResponseOption": {
+			"source": "dbo.ResponseOption",
+			"permissions": [
+				{
+					"actions": ["read"],
+					"role": "authenticated"
+				}
+			]
 		}
 	}
 }

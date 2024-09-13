@@ -66,10 +66,6 @@ const config = {
 						redirect: `/.auth/login/aadb2c_sign_up`
 					},
 					{
-						route: '/logout',
-						redirect: `/.auth/logout`
-					},
-					{
 						route: '/.auth/login/github',
 						statusCode: 404
 					},

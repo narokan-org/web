@@ -51,7 +51,7 @@ export class IdentityService {
 	async getUsers(userIds?: string[]) {
 		const graphClient = await this.getGraphClient();
 
-		if (!graphClient) {
+		if (!graphClient || currentEnvironment() === 'local') {
 			return [];
 		}
 

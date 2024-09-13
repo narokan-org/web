@@ -10,10 +10,12 @@ export const load: PageServerLoad = async ({ locals, cookies }) => {
 	}
 
 	const categories = await locals.companyService.getRiskCategories(Number(currentCompany));
-
-	const companyUsers = await locals.companyService.getUserCompanyRelationships(
-		Number(currentCompany)
-	);
+	const likelihoodOptions = await locals.assessmentService.getLikelihoodOptions();
+	const impactOptions = await locals.assessmentService.getImpactOptions();
+	const responseOptions = await locals.assessmentService.getResponseOptions();
+	const companyUsers = await locals.companyService.getUserCompanyRelationships({
+		CompanyId: parseInt(currentCompany)
+	});
 
 	const owners =
 		(await locals.identityService.getUsers(companyUsers.map((u) => u.userId)))
@@ -25,5 +27,5 @@ export const load: PageServerLoad = async ({ locals, cookies }) => {
 				};
 			}) ?? [];
 
-	return { categories, owners };
+	return { categories, owners, likelihoodOptions, impactOptions, responseOptions };
 };

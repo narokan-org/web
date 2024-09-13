@@ -16,67 +16,13 @@
 	let selectedRiskCategory: number;
 	let selectedOwners: string[] = [];
 	let selectedEntities: string[] = [];
-
 	let selectedLikelihood: number;
-	const likelihoodOptions = [
-		{
-			name: $t('common.components.createRiskFactorModal.tab2.formFields.likelihoodOption1'),
-			value: 1
-		},
-		{
-			name: $t('common.components.createRiskFactorModal.tab2.formFields.likelihoodOption2'),
-			value: 2
-		},
-		{
-			name: $t('common.components.createRiskFactorModal.tab2.formFields.likelihoodOption3'),
-			value: 3
-		},
-		{
-			name: $t('common.components.createRiskFactorModal.tab2.formFields.likelihoodOption4'),
-			value: 4
-		}
-	];
-
 	let selectedImpact: number;
-	const impactOptions = [
-		{
-			name: $t('common.components.createRiskFactorModal.tab2.formFields.impactOption1'),
-			value: 1
-		},
-		{
-			name: $t('common.components.createRiskFactorModal.tab2.formFields.impactOption2'),
-			value: 2
-		},
-		{
-			name: $t('common.components.createRiskFactorModal.tab2.formFields.impactOption3'),
-			value: 3
-		},
-		{
-			name: $t('common.components.createRiskFactorModal.tab2.formFields.impactOption4'),
-			value: 4
-		}
-	];
-
 	let selectedResponse: string;
-	const responseOptions = [
-		{
-			name: $t('common.components.createRiskFactorModal.tab2.formFields.responseOption1'),
-			value: 1
-		},
-		{
-			name: $t('common.components.createRiskFactorModal.tab2.formFields.responseOption2'),
-			value: 2
-		},
-		{
-			name: $t('common.components.createRiskFactorModal.tab2.formFields.responseOption3'),
-			value: 3
-		},
-		{
-			name: $t('common.components.createRiskFactorModal.tab2.formFields.responseOption4'),
-			value: 4
-		}
-	];
 
+	export let likelihoodOptions: { name: string; value: number }[];
+	export let impactOptions: { name: string; value: number }[];
+	export let responseOptions: { name: string; value: string }[];
 	export let isOpen: boolean = false;
 	export let riskCategories: RiskCategory[];
 	export let owners: { name: string; userId: string }[];

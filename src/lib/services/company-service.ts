@@ -5,6 +5,7 @@ import type { DBUserSurveyAnswer } from '$lib/common/entities/db-user-survey-ans
 import type { Company } from '$lib/common/models/company';
 import type { RiskCategory } from '$lib/common/models/risk-category';
 import type { UserCompanyRelationship } from '$lib/common/models/user-company-relationship';
+import { isGuid } from '$lib/utils/utils';
 import {
 	mapDBCompanyRiskCategoryToRiskCategory,
 	mapDBCompanyToCompany,
@@ -32,7 +33,9 @@ export interface ICompanyService {
 			| 'Other';
 	}): Promise<void>;
 	getRiskCategories(id: number): Promise<RiskCategory[]>;
-	getUserCompanyRelationships(companyId: number): Promise<UserCompanyRelationship[]>;
+	getUserCompanyRelationships(
+		filterCriteria: Record<string, string>
+	): Promise<UserCompanyRelationship[]>;
 }
 
 export class CompanyService implements ICompanyService {
@@ -180,15 +183,22 @@ export class CompanyService implements ICompanyService {
 		return dbCompanyRiskCategories?.map((c) => mapDBCompanyRiskCategoryToRiskCategory(c)) ?? [];
 	}
 
-	async getUserCompanyRelationships(companyId: number) {
+	async getUserCompanyRelationships(filterCriteria: Record<string, any>) {
 		const role = (await this.userService.getUser())?.roles.find((r) => r === 'authenticated');
 
 		if (!role) {
 			return [];
 		}
 
+		const filter = Object.entries(filterCriteria)
+			.map(
+				([key, value]) =>
+					`${key} eq ${typeof value === 'number' || isGuid(value) ? value : `'${value}'`}`
+			)
+			.join(' and ');
+
 		const response = await this.fetchFn(
-			`/data-api/rest/UserCompanyRelationship?$filter=CompanyId eq ${companyId}`,
+			`/data-api/rest/UserCompanyRelationship?$filter=${filter}`,
 			{
 				headers: {
 					'X-MS-API-ROLE': role

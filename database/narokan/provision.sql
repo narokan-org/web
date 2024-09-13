@@ -6,8 +6,28 @@ DROP TABLE IF EXISTS [dbo].[RiskOwners];
 DROP TABLE IF EXISTS [dbo].[UserSurveyAnswer];
 DROP TABLE IF EXISTS [dbo].[Assessment];
 DROP TABLE IF EXISTS [dbo].[RiskAssessment];
+DROP TABLE IF EXISTS [dbo].[LikelihoodOption];
+DROP TABLE IF EXISTS [dbo].[ImpactOption];
+DROP TABLE IF EXISTS [dbo].[ResponseOption];
 
 --- Tables ---
+CREATE TABLE [dbo].[LikelihoodOption] (
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    Name NVARCHAR(50) NOT NULL,
+    Value INT NOT NULL
+);
+
+CREATE TABLE [dbo].[ImpactOption] (
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    Name NVARCHAR(50) NOT NULL,
+    Value INT NOT NULL
+);
+
+CREATE TABLE [dbo].[ResponseOption] (
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    Name NVARCHAR(50) NOT NULL
+);
+
 CREATE TABLE [dbo].[Company] (
     Id INT IDENTITY(1,1) PRIMARY KEY,
     Name NVARCHAR(16) NOT NULL,
@@ -64,9 +84,12 @@ CREATE TABLE [dbo].[UserSurveyAnswer] (
 
 CREATE TABLE [dbo].[Assessment] (
     Id INT IDENTITY(1,1) PRIMARY KEY,
-    Likelihood INT NOT NULL CHECK (Likelihood IN (1, 2, 3, 4)),
-    Impact INT NOT NULL CHECK (Impact IN (1, 2, 3, 4)),
-    Response NVARCHAR(50) NULL CHECK (Response IN ('Accept', 'Avoid', 'Mitigate', 'Transfer')),
+    LikelihoodOptionId INT NOT NULL,
+    FOREIGN KEY (LikelihoodOptionId) REFERENCES [dbo].[LikelihoodOption](Id),
+    ImpactOptionId INT NOT NULL,
+    FOREIGN KEY (ImpactOptionId) REFERENCES [dbo].[ImpactOption](Id),
+    ResponseOptionId INT NOT NULL,
+    FOREIGN KEY (ResponseOptionId) REFERENCES [dbo].[ResponseOption](Id),
     Notes NVARCHAR(4000) NULL,
     CreatedDate DATETIME DEFAULT GETDATE() NOT NULL
 );
@@ -79,7 +102,6 @@ CREATE TABLE [dbo].[RiskAssessment] (
     FOREIGN KEY (RiskId) REFERENCES [dbo].[Risk](Id),
     FOREIGN KEY (AssessmentId) REFERENCES [dbo].[Assessment](Id)
 );
-
 
 --- Stored Procedures ---
 GO
@@ -96,3 +118,50 @@ BEGIN
         (@CompanyId, 'System'),
         (@CompanyId, 'External');
 END;
+
+GO
+CREATE PROCEDURE [dbo].[InsertDefaultLikelihoodOptions]
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    INSERT INTO [dbo].[LikelihoodOption] (Name, Value)
+    VALUES
+        ('Rare', 1),
+        ('Low', 2),
+        ('Medium', 3),
+        ('High', 4);
+END;
+
+GO
+CREATE PROCEDURE [dbo].[InsertDefaultImpactOptions]
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    INSERT INTO [dbo].[ImpactOption] (Name, Value)
+    VALUES
+        ('Low', 1),
+        ('Moderate', 2),
+        ('Major', 3),
+        ('Extreme', 4);
+END;
+
+GO
+CREATE PROCEDURE [dbo].[InsertDefaultResponseOptions]
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    INSERT INTO [dbo].[ResponseOption] (Name)
+    VALUES
+        ('Accept'),
+        ('Moderate'),
+        ('Major'),
+        ('Extreme');
+END;
+
+EXEC [dbo].[InsertDefaultCompanyRiskCategories] @CompanyId = 1;
+EXEC [dbo].[InsertDefaultLikelihoodOptions];
+EXEC [dbo].[InsertDefaultImpactOptions];
+EXEC [dbo].[InsertDefaultResponseOptions];
