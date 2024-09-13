@@ -21,6 +21,9 @@ describe('components/create-risk-factor-modal', () => {
 	it('should render footer', () => {
 		render(CreateRiskFactorModal, {
 			props: {
+				likelihoodOptions: [],
+				impactOptions: [],
+				responseOptions: [],
 				isOpen: true,
 				onSubmit: () => {},
 				riskCategories,
@@ -39,6 +42,9 @@ describe('components/create-risk-factor-modal', () => {
 	it('should render general information tab', () => {
 		render(CreateRiskFactorModal, {
 			props: {
+				likelihoodOptions: [],
+				impactOptions: [],
+				responseOptions: [],
 				isOpen: true,
 				onSubmit: () => {},
 				riskCategories,
@@ -95,6 +101,9 @@ describe('components/create-risk-factor-modal', () => {
 	it('should render assessment tab', async () => {
 		render(CreateRiskFactorModal, {
 			props: {
+				likelihoodOptions: [],
+				impactOptions: [],
+				responseOptions: [],
 				isOpen: true,
 				onSubmit: () => {},
 				riskCategories,
@@ -148,6 +157,9 @@ describe('components/create-risk-factor-modal', () => {
 	it('should render monitoring tab', () => {
 		render(CreateRiskFactorModal, {
 			props: {
+				likelihoodOptions: [],
+				impactOptions: [],
+				responseOptions: [],
 				isOpen: true,
 				onSubmit: () => {},
 				riskCategories,
