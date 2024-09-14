@@ -181,9 +181,7 @@
 			"teamSizeOption4": "16+",
 			"workspaceNameInputLabel": "Workspace name",
 			"workspaceNameInputPlaceholder": "Team workspace",
-			"workspaceLocationInputLabel": "Workspace will be hosted in",
-			"workspaceLocationInputOption1": "United States",
-			"workspaceLocationInputOption2": "Europe"
+			"workspaceLocationInputLabel": "Workspace will be hosted in"
 		},
 		"riskRegister": {
 			"heading": "Risks",

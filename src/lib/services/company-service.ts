@@ -14,7 +14,8 @@ import {
 import { parseDBResponse } from '$lib/utils/utils';
 import type { LoggingService } from './logging-service';
 import type { UserService } from './user-service';
-
+import type { Region } from '$lib/common/models/region';
+import type { DBRegion } from '$lib/common/entities/db-region';
 export interface ICompanyService {
 	getCompany(id: number): Promise<Company | null>;
 	createCompany(company: Omit<Company, 'id'>): Promise<Company | null>;
@@ -36,6 +37,7 @@ export interface ICompanyService {
 	getUserCompanyRelationships(
 		filterCriteria: Record<string, string>
 	): Promise<UserCompanyRelationship[]>;
+	getRegions(): Promise<Region[]>;
 }
 
 export class CompanyService implements ICompanyService {
@@ -83,7 +85,8 @@ export class CompanyService implements ICompanyService {
 
 		const newCompany: Partial<DBCompany> = {
 			Name: company.name,
-			CreatedByUser: currentUser.id
+			CreatedByUser: currentUser.id,
+			RegionId: company.regionId
 		};
 
 		const response = await this.fetchFn('/data-api/rest/Company', {
@@ -242,5 +245,31 @@ export class CompanyService implements ICompanyService {
 			},
 			body: JSON.stringify(relationship)
 		});
+	}
+
+	async getRegions(): Promise<Region[]> {
+		const role = (await this.userService.getUser())?.roles.find((r) => r === 'authenticated');
+
+		if (!role) {
+			return [];
+		}
+
+		const response = await this.fetchFn('/data-api/rest/Region', {
+			headers: {
+				'X-MS-API-ROLE': role
+			}
+		});
+
+		if (!response.ok) {
+			return [];
+		}
+
+		const dbRegions = await parseDBResponse<DBRegion>(response);
+
+		if (!dbRegions) {
+			return [];
+		}
+
+		return dbRegions.map((r) => ({ id: r.Id, name: r.Name })) ?? [];
 	}
 }

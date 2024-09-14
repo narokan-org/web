@@ -3,4 +3,5 @@ export interface DBCompany {
 	Name: string;
 	CreatedDate: Date;
 	CreatedByUser: string;
+	RegionId: number;
 }

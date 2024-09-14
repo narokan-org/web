@@ -178,10 +178,9 @@ BEGIN
     INSERT INTO [dbo].[Region] (Name)
     VALUES
         ('United States'),
-        ('Europe'),
+        ('Europe');
 END;
 
-EXEC [dbo].[InsertDefaultCompanyRiskCategories] @CompanyId = 1;
 EXEC [dbo].[InsertDefaultLikelihoodOptions];
 EXEC [dbo].[InsertDefaultImpactOptions];
 EXEC [dbo].[InsertDefaultResponseOptions];

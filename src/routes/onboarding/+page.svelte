@@ -1,14 +1,12 @@
 <script lang="ts">
 	import { Button, Heading, Label, P, Input, Select, Hr } from 'flowbite-svelte';
+	import type { Region } from '$lib/common/models/region';
 	import { t } from '$lib/translations';
 
-	let workspaceName = '';
+	export let data: { regions: Region[] };
 
-	let workspaceLocation = 'us';
-	let workspaceLocations = [
-		{ value: 'us', name: $t('common.pages.onboarding.workspaceLocationInputOption1') },
-		{ value: 'eu', name: $t('common.pages.onboarding.workspaceLocationInputOption2') }
-	];
+	let workspaceName = '';
+	let workspaceLocation = 1;
 
 	let workspaceTeamSize = '';
 	let workspaceTeamSizes = [
@@ -72,7 +70,7 @@
 					class="text-sm ml-2 max-w-48"
 					id="workspace-location-input"
 					name="workspace-location"
-					items={workspaceLocations}
+					items={data.regions.map((r) => ({ value: r.id, name: r.name }))}
 					bind:value={workspaceLocation}
 				/>
 			</div>

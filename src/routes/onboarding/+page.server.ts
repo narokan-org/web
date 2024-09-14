@@ -7,6 +7,7 @@ export const actions: Actions = {
 
 		const formData = await request.formData();
 		const companyName = formData.get('workspace-name') as string;
+		const workspaceLocation = formData.get('workspace-location') as string;
 		const teamSize = formData.get('team-size') as string;
 		const companyRole = formData.get('role') as
 			| 'Analyst'
@@ -24,7 +25,10 @@ export const actions: Actions = {
 			});
 		}
 
-		const newCompany = await locals.companyService.createCompany({ name: companyName });
+		const newCompany = await locals.companyService.createCompany({
+			name: companyName,
+			regionId: parseInt(workspaceLocation)
+		});
 
 		if (!newCompany) {
 			return fail(500, { message: 'Failed to create company' });
@@ -54,4 +58,12 @@ export const actions: Actions = {
 
 		redirect(302, '/invite');
 	}
+};
+
+export const load = async ({ locals }) => {
+	const regions = await locals.companyService.getRegions();
+
+	return {
+		regions
+	};
 };

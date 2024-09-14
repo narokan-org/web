@@ -92,6 +92,15 @@
 					"role": "authenticated"
 				}
 			]
+		},
+		"Region": {
+			"source": "dbo.Region",
+			"permissions": [
+				{
+					"actions": ["read"],
+					"role": "authenticated"
+				}
+			]
 		}
 	}
 }

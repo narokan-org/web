@@ -33,6 +33,9 @@ IF OBJECT_ID('dbo.ResponseOption', 'U') IS NOT NULL
 IF OBJECT_ID('dbo.RiskOwners', 'U') IS NOT NULL
     DROP TABLE dbo.RiskOwners;
 
+IF OBJECT_ID('dbo.Region', 'U') IS NOT NULL
+    DROP TABLE dbo.Region;
+
 IF OBJECT_ID('dbo.CompanyRiskCategory', 'U') IS NOT NULL
     DROP TABLE dbo.CompanyRiskCategory;
 
@@ -47,3 +50,6 @@ IF OBJECT_ID('dbo.InsertDefaultImpactOptions', 'P') IS NOT NULL
 
 IF OBJECT_ID('dbo.InsertDefaultResponseOptions', 'P') IS NOT NULL
     DROP PROCEDURE dbo.InsertDefaultResponseOptions;
+
+IF OBJECT_ID('dbo.InsertDefaultRegions', 'P') IS NOT NULL
+    DROP PROCEDURE dbo.InsertDefaultRegions;
