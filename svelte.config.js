@@ -105,15 +105,11 @@ const config = {
 					{
 						route: '/entities',
 						allowedRoles: ['authenticated']
-					},
+					}
 					// {
 					// 	route: '/risk-register',
 					// 	allowedRoles: ['authenticated']
-					// },
-					{
-						route: '/settings',
-						allowedRoles: ['authenticated']
-					}
+					// }
 				]
 			}
 		})
