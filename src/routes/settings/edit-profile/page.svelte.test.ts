@@ -7,10 +7,6 @@ import type { User } from '$lib/common/models/user';
 
 describe('settings page', () => {
 	describe('edit profile', () => {
-		const mockUser = {
-			name: 'John Doe'
-		};
-
 		function renderPage(user?: Partial<User>) {
 			return render(EditProfilePage, {
 				context: new Map([['auth', { isLoggedIn: readable(false), user: readable(user ?? {}) }]])

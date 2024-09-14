@@ -3,9 +3,8 @@ import type { LayoutServerLoad } from './$types';
 
 export const load: LayoutServerLoad = async ({ locals, request, cookies }) => {
 	const localUser = cookies.get('narokan-user');
-	console.log('localUser', localUser);
-	let user = localUser ? JSON.parse(localUser) : await locals.userService.getUser();
-	console.log('user', user);
+	const user = localUser ? JSON.parse(localUser) : await locals.userService.getUser();
+
 	if (!user) {
 		return { isLoggedIn: false };
 	}
