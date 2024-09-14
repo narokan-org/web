@@ -16,7 +16,8 @@ describe('risk register page', () => {
 				categories: [],
 				owners: [],
 				entities: [],
-				currentEntity: null
+				currentEntity: null,
+				currentUser: null
 			}
 		});
 	}

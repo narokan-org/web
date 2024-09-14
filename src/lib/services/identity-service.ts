@@ -48,11 +48,12 @@ export class IdentityService {
 			.update(this.prependAppIdToAttributes(attributes));
 	}
 
-	async getUsers(userIds?: string[]) {
+	async getUsers(userIds?: string[]): Promise<User[]> {
 		const graphClient = await this.getGraphClient();
 
 		if (!graphClient || currentEnvironment() === 'local') {
-			return [];
+			const currentUser = await this.userService.getUser();
+			return currentUser ? [currentUser] : [];
 		}
 
 		const userRequests: BatchRequestStep[] = [];

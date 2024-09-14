@@ -11,10 +11,8 @@
 		Button
 	} from 'flowbite-svelte';
 	import { t } from '$lib/translations';
-	import type { RiskCategory } from '$lib/common/models/risk-category';
 
 	let selectedRiskCategory: number;
-	let selectedOwners: string[] = [];
 	let selectedLikelihood: number;
 	let selectedImpact: number;
 	let selectedResponse: string;
@@ -25,11 +23,13 @@
 
 	export let selectedEntities: string[] = [];
 	export let entities: { name: string; value: string }[];
-	console.log(selectedEntities);
+
+	export let selectedOwners: string[] = [];
 	export let owners: { name: string; value: string }[];
 
+	export let riskCategories: { name: string; value: number }[];
+
 	export let isOpen: boolean = false;
-	export let riskCategories: RiskCategory[];
 	export let onSubmit: () => void;
 	export const inherentRisk: string = $t(
 		'common.components.createRiskFactorModal.tab2.formFields.scorePlaceholder'
@@ -84,7 +84,7 @@
 
 									<Select
 										class="mt-2"
-										items={riskCategories.map((c) => ({ name: c.name, value: c.id }))}
+										items={riskCategories.map((c) => ({ name: c.name, value: c.value }))}
 										name="category"
 										bind:value={selectedRiskCategory}
 										placeholder={$t(

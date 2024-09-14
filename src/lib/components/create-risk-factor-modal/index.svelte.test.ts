@@ -6,11 +6,11 @@ import type { RiskCategory } from '$lib/common/models/risk-category';
 import userEvent from '@testing-library/user-event';
 
 describe('components/create-risk-factor-modal', () => {
-	const riskCategories: RiskCategory[] = [
-		{ id: 1, name: 'Process' },
-		{ id: 2, name: 'People' },
-		{ id: 3, name: 'System' },
-		{ id: 4, name: 'External' }
+	const riskCategories: { value: number; name: string }[] = [
+		{ value: 1, name: 'Process' },
+		{ value: 2, name: 'People' },
+		{ value: 3, name: 'System' },
+		{ value: 4, name: 'External' }
 	];
 	const owners: { value: string; name: string }[] = [
 		{ value: '1', name: 'John Doe' },
