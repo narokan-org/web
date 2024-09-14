@@ -192,7 +192,7 @@
 				"footer": "Residual Risk Trend"
 			},
 			"table": {
-				"heading1": "Risk Factor",
+				"heading1": "Risk",
 				"heading2": "Owner",
 				"heading3": "Residual Risk",
 				"heading4": "Treatment",
@@ -200,7 +200,7 @@
 				"heading6": "Last Assessed",
 				"searchPlaceholder": "Search",
 				"filter": "Filters",
-				"primaryButton": "Create Risk Factor",
+				"primaryButton": "Create Risk",
 				"secondaryButton": "Export to CSV"
 			}
 		},
