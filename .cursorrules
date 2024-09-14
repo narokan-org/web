@@ -119,6 +119,7 @@ Testing
 Write unit tests for utility functions and complex logic
 Create component tests using a testing library compatible with Svelte (e.g., Svelte Testing Library)
 Implement end-to-end tests for critical user flows
+For every code recommendation, always include the associated test
 
 Accessibility
 

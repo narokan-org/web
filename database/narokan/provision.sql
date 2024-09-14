@@ -9,8 +9,14 @@ DROP TABLE IF EXISTS [dbo].[RiskAssessment];
 DROP TABLE IF EXISTS [dbo].[LikelihoodOption];
 DROP TABLE IF EXISTS [dbo].[ImpactOption];
 DROP TABLE IF EXISTS [dbo].[ResponseOption];
+DROP TABLE IF EXISTS [dbo].[Region];
 
 --- Tables ---
+CREATE TABLE [dbo].[Region] (
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    Name NVARCHAR(50) NOT NULL
+);
+
 CREATE TABLE [dbo].[LikelihoodOption] (
     Id INT IDENTITY(1,1) PRIMARY KEY,
     Name NVARCHAR(50) NOT NULL,
@@ -34,7 +40,9 @@ CREATE TABLE [dbo].[Company] (
     CreatedDate DATETIME DEFAULT GETDATE() NOT NULL,
     CreatedByUser UNIQUEIDENTIFIER NOT NULL,
     ParentCompanyId INT NULL,
-    FOREIGN KEY (ParentCompanyId) REFERENCES [dbo].[Company](Id)
+    FOREIGN KEY (ParentCompanyId) REFERENCES [dbo].[Company](Id),
+    RegionId INT NOT NULL,
+    FOREIGN KEY (RegionId) REFERENCES [dbo].[Region](Id)
 );
 
 CREATE TABLE [dbo].[UserCompanyRelationship] (
@@ -161,7 +169,20 @@ BEGIN
         ('Extreme');
 END;
 
+GO
+CREATE PROCEDURE [dbo].[InsertDefaultRegions]
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    INSERT INTO [dbo].[Region] (Name)
+    VALUES
+        ('United States'),
+        ('Europe'),
+END;
+
 EXEC [dbo].[InsertDefaultCompanyRiskCategories] @CompanyId = 1;
 EXEC [dbo].[InsertDefaultLikelihoodOptions];
 EXEC [dbo].[InsertDefaultImpactOptions];
 EXEC [dbo].[InsertDefaultResponseOptions];
+EXEC [dbo].[InsertDefaultRegions];
