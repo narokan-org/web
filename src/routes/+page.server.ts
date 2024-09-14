@@ -10,7 +10,9 @@ export const load: PageServerLoad = async ({ locals, cookies }) => {
 	const currentCompanyCookie = cookies.get('narokan-current-company');
 
 	if (!currentCompanyCookie) {
-		const userCompanies = await locals.companyService.getUserCompanyRelationships({'UserId' : user.id});
+		const userCompanies = await locals.companyService.getUserCompanyRelationships({
+			UserId: user.id
+		});
 
 		if (userCompanies && userCompanies.length > 0) {
 			const firstCompany = userCompanies[0];
