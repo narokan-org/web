@@ -14,7 +14,9 @@ describe('risk register page', () => {
 				impactOptions: [],
 				responseOptions: [],
 				categories: [],
-				owners: []
+				owners: [],
+				entities: [],
+				currentEntity: null
 			}
 		});
 	}

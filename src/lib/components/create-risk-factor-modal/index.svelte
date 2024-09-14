@@ -15,7 +15,6 @@
 
 	let selectedRiskCategory: number;
 	let selectedOwners: string[] = [];
-	let selectedEntities: string[] = [];
 	let selectedLikelihood: number;
 	let selectedImpact: number;
 	let selectedResponse: string;
@@ -23,10 +22,14 @@
 	export let likelihoodOptions: { name: string; value: number }[];
 	export let impactOptions: { name: string; value: number }[];
 	export let responseOptions: { name: string; value: string }[];
+
+	export let selectedEntities: string[] = [];
+	export let entities: { name: string; value: string }[];
+	console.log(selectedEntities);
+	export let owners: { name: string; value: string }[];
+
 	export let isOpen: boolean = false;
 	export let riskCategories: RiskCategory[];
-	export let owners: { name: string; userId: string }[];
-	export let entities: { companyId: string; name: string }[];
 	export let onSubmit: () => void;
 	export const inherentRisk: string = $t(
 		'common.components.createRiskFactorModal.tab2.formFields.scorePlaceholder'
@@ -96,7 +99,7 @@
 
 									<MultiSelect
 										class="mt-2"
-										items={owners.map((o) => ({ name: o.name, value: o.userId }))}
+										items={owners.map((o) => ({ name: o.name, value: o.value }))}
 										name="owners"
 										required
 										bind:value={selectedOwners}
@@ -111,8 +114,8 @@
 						<Label class="mt-4">
 							{$t('common.components.createRiskFactorModal.tab1.formFields.entity')}
 
-							<Select
-								items={entities.map((e) => ({ name: e.name, value: e.companyId }))}
+							<MultiSelect
+								items={entities.map((e) => ({ name: e.name, value: e.value }))}
 								bind:value={selectedEntities}
 								name="entities"
 								required

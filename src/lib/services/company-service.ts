@@ -17,6 +17,7 @@ import type { UserService } from './user-service';
 import type { Region } from '$lib/common/models/region';
 import type { DBRegion } from '$lib/common/entities/db-region';
 export interface ICompanyService {
+	getCompanies(): Promise<Company[]>;
 	getCompany(id: number): Promise<Company | null>;
 	createCompany(company: Omit<Company, 'id'>): Promise<Company | null>;
 	submitOnboardingSurvey({
@@ -46,6 +47,34 @@ export class CompanyService implements ICompanyService {
 		private log: LoggingService,
 		private userService: UserService
 	) {}
+
+	async getCompanies(): Promise<Company[]> {
+		const role = (await this.userService.getUser())?.roles.find((r) => r === 'authenticated');
+
+		if (!role) {
+			return [];
+		}
+
+		const response = await this.fetchFn('/data-api/rest/Company', {
+			headers: {
+				'X-MS-API-ROLE': role
+			}
+		});
+
+		if (!response.ok) {
+			return [];
+		}
+
+		const dbCompanies = await parseDBResponse<DBCompany>(response);
+
+		return (
+			dbCompanies?.map((c) => ({
+				id: c.Id,
+				name: c.Name,
+				regionId: c.RegionId
+			})) ?? []
+		);
+	}
 
 	async getCompany(id: number): Promise<Company | null> {
 		const role = (await this.userService.getUser())?.roles.find((r) => r === 'authenticated');

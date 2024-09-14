@@ -9,6 +9,7 @@
 	import type { LikelihoodOption } from '$lib/common/models/likelihood-option';
 	import type { ImpactOption } from '$lib/common/models/impact-option';
 	import type { ResponseOption } from '$lib/common/models/response-option';
+	import type { Company } from '$lib/common/models/company';
 
 	export let data: {
 		likelihoodOptions: LikelihoodOption[];
@@ -16,6 +17,8 @@
 		responseOptions: ResponseOption[];
 		categories: RiskCategory[];
 		owners: { name: string; userId: number }[];
+		entities: Company[];
+		currentEntity: Company | null;
 	};
 	$: createRiskFactorModalOpen = false;
 
@@ -87,9 +90,10 @@
 		riskCategories={data.categories ?? []}
 		owners={data.owners.map((o) => ({
 			name: o.name,
-			userId: o.userId.toString()
+			value: o.userId.toString()
 		}))}
-		entities={[]}
+		entities={data.entities.map((e) => ({ name: e.name, value: e.id.toString() }))}
+		selectedEntities={[data.currentEntity?.id.toString() ?? '']}
 		onSubmit={() => {
 			console.log('submitted');
 		}}

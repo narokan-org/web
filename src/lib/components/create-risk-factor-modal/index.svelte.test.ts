@@ -12,11 +12,11 @@ describe('components/create-risk-factor-modal', () => {
 		{ id: 3, name: 'System' },
 		{ id: 4, name: 'External' }
 	];
-	const owners: { userId: string; name: string }[] = [
-		{ userId: '1', name: 'John Doe' },
-		{ userId: '2', name: 'Jane Doe' }
+	const owners: { value: string; name: string }[] = [
+		{ value: '1', name: 'John Doe' },
+		{ value: '2', name: 'Jane Doe' }
 	];
-	const entities: { companyId: string; name: string }[] = [{ companyId: '1', name: 'Company A' }];
+	const entities: { value: string; name: string }[] = [{ value: '1', name: 'Company A' }];
 
 	it('should render footer', () => {
 		render(CreateRiskFactorModal, {

@@ -16,6 +16,10 @@ export const load: PageServerLoad = async ({ locals, cookies }) => {
 	const companyUsers = await locals.companyService.getUserCompanyRelationships({
 		CompanyId: parseInt(currentCompany)
 	});
+	const entities = await locals.companyService.getCompanies();
+	const currentEntity = entities.find((e) => e.id === Number(currentCompany));
+	console.log(entities);
+	console.log(currentEntity);
 
 	const owners =
 		(await locals.identityService.getUsers(companyUsers.map((u) => u.userId)))
@@ -27,5 +31,13 @@ export const load: PageServerLoad = async ({ locals, cookies }) => {
 				};
 			}) ?? [];
 
-	return { categories, owners, likelihoodOptions, impactOptions, responseOptions };
+	return {
+		categories,
+		owners,
+		likelihoodOptions,
+		impactOptions,
+		responseOptions,
+		entities,
+		currentEntity
+	};
 };
