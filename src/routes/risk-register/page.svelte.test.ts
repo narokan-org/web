@@ -10,6 +10,9 @@ describe('risk register page', () => {
 		return render(Page, {
 			...data,
 			data: {
+				likelihoodOptions: [],
+				impactOptions: [],
+				responseOptions: [],
 				categories: [],
 				owners: []
 			}
