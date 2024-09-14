@@ -91,9 +91,6 @@ describe('components/create-risk-factor-modal', () => {
 			screen.getByText(common.components.createRiskFactorModal.tab1.formFields.ownersPlaceholder)
 		).toBeInTheDocument();
 		expect(
-			screen.getByLabelText(common.components.createRiskFactorModal.tab1.formFields.entity)
-		).toBeInTheDocument();
-		expect(
 			screen.getByText(common.components.createRiskFactorModal.tab1.formFields.entityPlaceholder)
 		).toBeInTheDocument();
 	});

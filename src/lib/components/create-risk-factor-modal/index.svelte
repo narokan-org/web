@@ -31,9 +31,10 @@
 
 	export let isOpen: boolean = false;
 	export let onSubmit: () => void;
-	export const inherentRisk: string = $t(
-		'common.components.createRiskFactorModal.tab2.formFields.scorePlaceholder'
-	);
+	$: inherentRisk =
+		selectedLikelihood === undefined && selectedImpact === undefined
+			? 0
+			: selectedLikelihood * selectedImpact;
 	export const residualRisk: string = $t(
 		'common.components.createRiskFactorModal.tab2.formFields.scorePlaceholder'
 	);
@@ -162,19 +163,23 @@
 							<div class="flex flex-col flex-1">
 								<span class="text-sm"
 									>{$t(
-										'common.components.createRiskFactorModal.tab2.formFields.residualRisk'
+										'common.components.createRiskFactorModal.tab2.formFields.inherentRisk'
 									)}</span
 								>
-								<span class="text-sm">{residualRisk}</span>
+								<span class="text-sm"
+									>{inherentRisk === 0
+										? $t('common.components.createRiskFactorModal.tab2.formFields.scorePlaceholder')
+										: inherentRisk}</span
+								>
 							</div>
 
 							<div class="flex flex-col flex-1">
 								<span class="text-sm"
 									>{$t(
-										'common.components.createRiskFactorModal.tab2.formFields.inherentRisk'
+										'common.components.createRiskFactorModal.tab2.formFields.residualRisk'
 									)}</span
 								>
-								<span class="text-sm">{inherentRisk}</span>
+								<span class="text-sm">{residualRisk}</span>
 							</div>
 
 							<div class="flex flex-col flex-1">
