@@ -27,7 +27,7 @@ Table ResponseOption {
     Name nvarchar(50) [not null]
 }
 
-Table core.Company {
+Table Company {
     Id int [pk, increment]
     Name nvarchar(16) [not null]
     CreatedDate datetime [not null, default: `GETDATE()`]
@@ -36,7 +36,7 @@ Table core.Company {
     RegionId int [ref: > Region.Id, note: 'Region for where the company data is stored. If a parent company exists, then the region is the same as the root company.']
 }
 
-Table core.UserCompanyRelationship {
+Table UserCompanyRelationship {
     UserId uniqueidentifier [not null]
     CompanyId int [not null]
     Role nvarchar(50) [not null]
@@ -48,14 +48,14 @@ Table core.UserCompanyRelationship {
     Note: 'Stores the relationship between users and companies.'
 }
 
-Table core.CompanyRiskCategory {
+Table CompanyRiskCategory {
     Id int [pk, increment]
     CompanyId int [not null, ref: > Company.Id]
     CategoryName nvarchar(100) [not null]
     DateCreated datetime [not null, default: `GETDATE()`]
 }
 
-Table core.Risk {
+Table Risk {
     Id int [pk, increment]
     Title nvarchar(1000) [not null]
     Description nvarchar(4000) [null]
@@ -65,14 +65,14 @@ Table core.Risk {
     RiskCategoryId int [not null, ref: > CompanyRiskCategory.Id]
 }
 
-Table core.RiskOwners {
+Table RiskOwners {
     Id int [pk, increment]
     RiskId int [not null, ref: > Risk.Id]
     UserId uniqueidentifier [not null]
     CreatedDate datetime [not null, default: `GETDATE()`]
 }
 
-Table core.UserSurveyAnswer {
+Table UserSurveyAnswer {
     Id int [pk, increment]
     UserId uniqueidentifier
     TeamSize nvarchar(5)
@@ -82,7 +82,7 @@ Table core.UserSurveyAnswer {
     Note: 'Stores the user survey answers during the onboarding process.'
 }
 
-Table core.Assessment {
+Table Assessment {
     Id int [pk, increment]
     LikelihoodOptionId int [not null, ref: > LikelihoodOption.Id]
     ImpactOptionId int [not null, ref: > ImpactOption.Id]
@@ -91,7 +91,7 @@ Table core.Assessment {
     CreatedDate datetime [default: `GETDATE()`]
 }
 
-Table core.RiskAssessment {
+Table RiskAssessment {
     RiskId int [not null, ref: > Risk.Id]
     AssessmentId int [not null, ref: > Assessment.Id]
     CreatedDate datetime [not null, default: `GETDATE()`]
