@@ -1,0 +1,103 @@
+Project {
+    database_type: 'mssql'
+    Note: 'Core database for Narokan'
+}
+
+Table Region {
+    Id int [pk, increment]
+    Name nvarchar(50) [not null]
+
+    Note: 'Region for where the company data is stored.'
+}
+
+Table LikelihoodOption {
+    Id int [pk, increment]
+    Name nvarchar(50) [not null]
+    Value int [not null]
+}
+
+Table ImpactOption {
+    Id int [pk, increment]
+    Name nvarchar(50) [not null]
+    Value int [not null]
+}
+
+Table ResponseOption {
+    Id int [pk, increment]
+    Name nvarchar(50) [not null]
+}
+
+Table core.Company {
+    Id int [pk, increment]
+    Name nvarchar(16) [not null]
+    CreatedDate datetime [not null, default: `GETDATE()`]
+    CreatedByUser uniqueidentifier [not null]
+    ParentCompanyId int [null, ref: > Company.Id, note: 'Companies can have subsidiaries. Those subsidiary relationships are managed by this column. The root company will have this be null.']
+    RegionId int [ref: > Region.Id, note: 'Region for where the company data is stored. If a parent company exists, then the region is the same as the root company.']
+}
+
+Table core.UserCompanyRelationship {
+    UserId uniqueidentifier [not null]
+    CompanyId int [not null]
+    Role nvarchar(50) [not null]
+    CreatedDate datetime [not null, default: `GETDATE()`]
+    indexes {
+        (UserId, CompanyId) [pk]
+    }
+
+    Note: 'Stores the relationship between users and companies.'
+}
+
+Table core.CompanyRiskCategory {
+    Id int [pk, increment]
+    CompanyId int [not null, ref: > Company.Id]
+    CategoryName nvarchar(100) [not null]
+    DateCreated datetime [not null, default: `GETDATE()`]
+}
+
+Table core.Risk {
+    Id int [pk, increment]
+    Title nvarchar(1000) [not null]
+    Description nvarchar(4000) [null]
+    ClonedFromRiskId int [ref: > Risk.Id, note: 'Risks can be duplicated and reference their original risk by using this column.']
+    CreatedDate datetime [default: `GETDATE()`]
+    CompanyId int [not null, ref: > Company.Id]
+    RiskCategoryId int [not null, ref: > CompanyRiskCategory.Id]
+}
+
+Table core.RiskOwners {
+    Id int [pk, increment]
+    RiskId int [not null, ref: > Risk.Id]
+    UserId uniqueidentifier [not null]
+    CreatedDate datetime [not null, default: `GETDATE()`]
+}
+
+Table core.UserSurveyAnswer {
+    Id int [pk, increment]
+    UserId uniqueidentifier
+    TeamSize nvarchar(5)
+    CreatedDate datetime [default: `GETDATE()`]
+    CompanyRole nvarchar(50) [note: 'CHECK (CompanyRole IN (\'Analyst\', \'C-Level\', \'Director\', \'Manager\', \'Specialist\', \'Stakeholder\', \'Other\'))']
+
+    Note: 'Stores the user survey answers during the onboarding process.'
+}
+
+Table core.Assessment {
+    Id int [pk, increment]
+    LikelihoodOptionId int [not null, ref: > LikelihoodOption.Id]
+    ImpactOptionId int [not null, ref: > ImpactOption.Id]
+    ResponseOptionId int [not null, ref: > ResponseOption.Id]
+    Notes nvarchar(4000) [null]
+    CreatedDate datetime [default: `GETDATE()`]
+}
+
+Table core.RiskAssessment {
+    RiskId int [not null, ref: > Risk.Id]
+    AssessmentId int [not null, ref: > Assessment.Id]
+    CreatedDate datetime [not null, default: `GETDATE()`]
+    indexes {
+        (RiskId, AssessmentId) [pk]
+    }
+
+    Note: 'Risks and assessments have a many-to-many relationship. This table stores the relationship between risks and assessments.'
+}
