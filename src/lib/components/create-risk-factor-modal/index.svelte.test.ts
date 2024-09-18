@@ -2,7 +2,6 @@ import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/svelte';
 import common from '$lib/translations/en/common.json';
 import CreateRiskFactorModal from './index.svelte';
-import type { RiskCategory } from '$lib/common/models/risk-category';
 import userEvent from '@testing-library/user-event';
 
 describe('components/create-risk-factor-modal', () => {
