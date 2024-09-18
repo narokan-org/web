@@ -5,7 +5,13 @@ import Page from './+page.svelte';
 
 describe('onboarding page', () => {
 	it('should render', () => {
-		render(Page);
+		render(Page, {
+			props: {
+				data: {
+					regions: []
+				}
+			}
+		});
 
 		expect(screen.getByTestId('onboarding-heading')).toBeInTheDocument();
 		expect(screen.getByTestId('onboarding-subheading')).toBeInTheDocument();
@@ -21,7 +27,13 @@ describe('onboarding page', () => {
 	});
 
 	it('should not allow more than 16 characters for workspace name', async () => {
-		render(Page);
+		render(Page, {
+			props: {
+				data: {
+					regions: []
+				}
+			}
+		});
 
 		const workspaceNameInput = screen.getByTestId<HTMLInputElement>(
 			'onboarding-workspace-name-input'
@@ -32,7 +44,13 @@ describe('onboarding page', () => {
 	});
 
 	it('should have roles in sorted order', async () => {
-		render(Page);
+		render(Page, {
+			props: {
+				data: {
+					regions: []
+				}
+			}
+		});
 
 		const roleInput = screen.getByTestId<HTMLSelectElement>('onboarding-role-input');
 		const options = Array.from(roleInput.options).map((option) => option.value);
