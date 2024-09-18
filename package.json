@@ -23,6 +23,7 @@
 		"sveltekit-i18n": "^2.4.2"
 	},
 	"devDependencies": {
+		"dbdocs": "^0.12.3",
 		"@azure/static-web-apps-cli": "^2.0.1",
 		"@faker-js/faker": "^8.4.1",
 		"@playwright/test": "^1.28.1",
