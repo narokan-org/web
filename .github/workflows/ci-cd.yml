@@ -27,7 +27,7 @@ jobs:
       - name: Update dbdocs project
         env:
           DBDOCS_TOKEN: ${{ secrets.DBDOCS_TOKEN }}
-        run: npx dbdocs build ./database/narokan.dbml
+        run: npx dbdocs build ./database/narokan.dbml --project Narokan
 
       - name: Run lint
         run: npm run lint
