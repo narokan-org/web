@@ -4,6 +4,7 @@ import { LoggingService } from '$lib/services/logging-service';
 import { CompanyService } from '$lib/services/company-service';
 import { IdentityService } from '$lib/services/identity-service';
 import { AssessmentService } from '$lib/services/assessment-service';
+import { RiskService } from '$lib/services/risk-service';
 
 export const handle: Handle = async ({ event, resolve }) => {
 	event.locals.loggingService = new LoggingService();
@@ -18,6 +19,11 @@ export const handle: Handle = async ({ event, resolve }) => {
 		event.locals.userService
 	);
 	event.locals.assessmentService = new AssessmentService(
+		event.fetch,
+		event.locals.loggingService,
+		event.locals.userService
+	);
+	event.locals.riskService = new RiskService(
 		event.fetch,
 		event.locals.loggingService,
 		event.locals.userService

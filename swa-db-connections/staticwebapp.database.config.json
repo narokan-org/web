@@ -101,6 +101,33 @@
 					"role": "authenticated"
 				}
 			]
+		},
+		"Risk": {
+			"source": "dbo.Risk",
+			"permissions": [
+				{
+					"actions": ["read", "create"],
+					"role": "authenticated"
+				}
+			]
+		},
+		"Assessment": {
+			"source": "dbo.Assessment",
+			"permissions": [
+				{
+					"actions": ["read", "create"],
+					"role": "authenticated"
+				}
+			]
+		},
+		"RiskAssessment": {
+			"source": "dbo.RiskAssessment",
+			"permissions": [
+				{
+					"actions": ["read", "create"],
+					"role": "authenticated"
+				}
+			]
 		}
 	}
 }

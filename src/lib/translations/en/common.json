@@ -2,16 +2,16 @@
 	"appName": "Narokan",
 	"components": {
 		"createRiskFactorModal": {
-			"heading": "Create Risk Factor",
+			"heading": "Create Risk",
 			"secondaryButton": "Cancel",
-			"primaryButton": "Add Risk Factor",
+			"primaryButton": "Add Risk",
 			"tab1": {
 				"heading": "General Information",
 				"formFields": {
 					"title": "Title",
-					"titlePlaceholder": "Name this risk factor",
+					"titlePlaceholder": "Name this risk",
 					"description": "Description",
-					"descriptionPlaceholder": "Describe how this risk factor affects your business",
+					"descriptionPlaceholder": "Describe how this risk affects your business",
 					"category": "Category",
 					"categoryPlaceholder": "Select risk category",
 					"owners": "Owners",
@@ -34,7 +34,7 @@
 					"response": "Response",
 					"responsePlaceholder": "Select how you want to treat this risk",
 					"notes": "Notes",
-					"notesPlaceholder": "Enter any notes about this risk factor"
+					"notesPlaceholder": "Enter any notes about this risk"
 				}
 			},
 			"tab3": {
@@ -137,7 +137,7 @@
 				"bulkUploadButton": "Bulk Upload",
 				"risksTable": {
 					"heading": "Risks",
-					"column1": "Risk Factor",
+					"column1": "Risk",
 					"column2": "Owner",
 					"column3": "Status",
 					"column4": "Last Assessed"

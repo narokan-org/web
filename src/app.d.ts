@@ -12,6 +12,7 @@ declare global {
 			telemetryService: import('$lib/services/telemetry-service').TelemetryService;
 			identityService: import('$lib/services/identity-service').IdentityService;
 			assessmentService: import('$lib/services/assessment-service').AssessmentService;
+			riskService: import('$lib/services/risk-service').RiskService;
 		}
 		// interface PageData {}
 		// interface PageState {}
