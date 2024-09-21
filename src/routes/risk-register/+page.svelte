@@ -2,31 +2,14 @@
 	import { TableBody, TableHead, TableHeadCell, TableSearch, Button } from 'flowbite-svelte';
 	import ProgressCard from '$lib/components/progress-card/index.svelte';
 	import TrendCard from '$lib/components/trend-card/index.svelte';
-	import CreateRiskFactorModal from '$lib/components/create-risk-factor-modal/index.svelte';
+	import CreateRiskFactorModal from '$lib/components/create-risk-modal/index.svelte';
 	import { Heading } from 'flowbite-svelte';
 	import { t } from '$lib/translations';
-	import type { RiskCategory } from '$lib/common/models/risk-category';
-	import type { LikelihoodOption } from '$lib/common/models/likelihood-option';
-	import type { ImpactOption } from '$lib/common/models/impact-option';
-	import type { ResponseOption } from '$lib/common/models/response-option';
-	import type { Company } from '$lib/common/models/company';
-	import type { User } from '$lib/common/models/user';
-
+	import type { CreateRiskModalData } from '$lib/data-loaders/create-risk-modal';
 	export let data: {
-		likelihoodOptions: LikelihoodOption[];
-		impactOptions: ImpactOption[];
-		responseOptions: ResponseOption[];
-		categories: RiskCategory[];
-		owners: { name: string; userId: number }[];
-		entities: Company[];
-		currentEntity: Company | null;
-		currentUser: User | null;
+		createRiskModalData: CreateRiskModalData;
 	};
 	$: createRiskFactorModalOpen = false;
-
-	function onCreateRiskFactorClick() {
-		createRiskFactorModalOpen = true;
-	}
 </script>
 
 <div class="flex flex-col">
@@ -49,8 +32,12 @@
 
 	<div class="flex flex-col mt-8">
 		<div class="flex gap-2 mb-2">
-			<Button size="xs" color="primary" on:click={onCreateRiskFactorClick}
-				>{$t('common.pages.riskRegister.table.primaryButton')}</Button
+			<Button
+				size="xs"
+				color="primary"
+				on:click={() => {
+					createRiskFactorModalOpen = true;
+				}}>{$t('common.pages.riskRegister.table.primaryButton')}</Button
 			>
 
 			<Button color="alternative">{$t('common.pages.riskRegister.table.secondaryButton')}</Button>
@@ -83,25 +70,25 @@
 
 	<CreateRiskFactorModal
 		bind:isOpen={createRiskFactorModalOpen}
-		likelihoodOptions={data.likelihoodOptions}
-		impactOptions={data.impactOptions}
-		responseOptions={data.responseOptions.map((r) => ({
+		likelihoodOptions={data.createRiskModalData.likelihoodOptions}
+		impactOptions={data.createRiskModalData.impactOptions}
+		responseOptions={data.createRiskModalData.responseOptions.map((r) => ({
 			name: r.name,
 			value: r.id.toString()
 		}))}
-		riskCategories={data.categories.map((c) => ({
+		riskCategories={data.createRiskModalData.categories.map((c) => ({
 			name: c.name,
 			value: c.id
 		})) ?? []}
-		owners={data.owners.map((o) => ({
+		owners={data.createRiskModalData.owners.map((o) => ({
 			name: o.name,
-			value: o.userId.toString()
+			value: o.id.toString()
 		}))}
-		entities={data.entities.map((e) => ({ name: e.name, value: e.id.toString() }))}
-		selectedEntities={[data.currentEntity?.id.toString() ?? '']}
-		selectedOwners={[data.currentUser?.id.toString() ?? '']}
-		onSubmit={() => {
-			console.log('submitted');
-		}}
+		entities={data.createRiskModalData.entities.map((e) => ({
+			name: e.name,
+			value: e.id.toString()
+		}))}
+		selectedEntities={[data.createRiskModalData.currentEntity?.id.toString() ?? '']}
+		selectedOwners={[data.createRiskModalData.currentUser?.id.toString() ?? '']}
 	/>
 </div>

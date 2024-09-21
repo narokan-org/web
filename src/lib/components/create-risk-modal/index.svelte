@@ -11,7 +11,6 @@
 		Button
 	} from 'flowbite-svelte';
 	import { t } from '$lib/translations';
-	import { enhance } from '$app/forms';
 
 	let title: string;
 	let description: string;

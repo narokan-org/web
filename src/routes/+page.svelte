@@ -12,13 +12,17 @@
 	import type { Readable } from 'svelte/store';
 	import type { User } from '$lib/common/models/user';
 	import { toastStore } from '$lib/stores/toast-store';
-
+	import CreateRiskFactorModal from '$lib/components/create-risk-modal/index.svelte';
+	import type { CreateRiskModalData } from '$lib/data-loaders/create-risk-modal';
 	const { isLoggedIn, user } = getContext<{ isLoggedIn: Readable<boolean>; user: Readable<User> }>(
 		'auth'
 	) ?? { isLoggedIn: readable(false), user: readable(null) };
 
 	let email = '';
 	let isSubmitting = false;
+	export let data: { createRiskModal: CreateRiskModalData };
+
+	$: createRiskFactorModalOpen = false;
 
 	async function handleSignUp(event: Event) {
 		event.preventDefault();
@@ -179,7 +183,11 @@
 					</Table>
 					<!-- TODO: If there is no data, only then we will show this. Need to figure out that criteria. Same for the other table. -->
 					<div class="flex flex-grow h-full justify-center items-center gap-2">
-						<Button color="alternative"
+						<Button
+							color="alternative"
+							on:click={() => {
+								createRiskFactorModalOpen = true;
+							}}
 							><PlusOutline class="mr-1" />{$t(
 								'common.pages.home.loggedIn.createRiskButton'
 							)}</Button
@@ -228,5 +236,28 @@
 				</div>
 			</div>
 		</div>
+		<CreateRiskFactorModal
+			bind:isOpen={createRiskFactorModalOpen}
+			likelihoodOptions={data.createRiskModal.likelihoodOptions}
+			impactOptions={data.createRiskModal.impactOptions}
+			responseOptions={data.createRiskModal.responseOptions.map((r) => ({
+				name: r.name,
+				value: r.id.toString()
+			}))}
+			riskCategories={data.createRiskModal.categories.map((c) => ({
+				name: c.name,
+				value: c.id
+			}))}
+			owners={data.createRiskModal.owners.map((o) => ({
+				name: o.name,
+				value: o.id.toString()
+			}))}
+			entities={data.createRiskModal.entities.map((e) => ({
+				name: e.name,
+				value: e.id.toString()
+			}))}
+			selectedEntities={[data.createRiskModal.currentEntity?.id.toString() ?? '']}
+			selectedOwners={[data.createRiskModal.currentUser?.id.toString() ?? '']}
+		/>
 	</div>
 {/if}

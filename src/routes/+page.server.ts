@@ -1,4 +1,10 @@
+import { createRisk } from '$lib/actions/create-risk';
+import { loadCreateRiskModal } from '$lib/data-loaders/create-risk-modal';
 import type { PageServerLoad } from './$types';
+
+export const actions = {
+	'create-risk': createRisk
+};
 
 export const load: PageServerLoad = async ({ locals, cookies }) => {
 	const user = await locals.userService.getUser();
@@ -22,8 +28,11 @@ export const load: PageServerLoad = async ({ locals, cookies }) => {
 				httpOnly: true,
 				maxAge: 60 * 60 * 24 * 30
 			});
-
-			return;
 		}
 	}
+
+	const data = {
+		createRiskModal: await loadCreateRiskModal({ locals, cookies })
+	};
+	return data;
 };
