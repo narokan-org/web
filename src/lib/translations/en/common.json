@@ -99,6 +99,9 @@
 			"signOutButton": "Sign Out"
 		}
 	},
+	"global": {
+		"loading": "Loading..."
+	},
 	"pages": {
 		"assessments": {
 			"heading": "Assessments"
