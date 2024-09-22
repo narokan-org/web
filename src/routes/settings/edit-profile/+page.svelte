@@ -11,5 +11,5 @@
 
 <div class="flex flex-col mt-2">
 	<Heading class="text-2xl font-bold" tag="h4">{$t('common.pages.editProfile.heading')}</Heading>
-	<EditProfile fullName={$user.name} />
+	<EditProfile fullName={$user.name} email={$user.email} />
 </div>

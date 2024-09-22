@@ -47,7 +47,10 @@
 		},
 		"editProfile": {
 			"formFields": {
-				"fullName": "Full Name"
+				"fullName": "Full Name",
+				"email": "Email",
+				"password": "Password",
+				"confirmPassword": "Confirm Password"
 			},
 			"saveButton": "Save"
 		},
