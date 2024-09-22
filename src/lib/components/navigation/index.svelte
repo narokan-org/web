@@ -20,11 +20,11 @@
 	import {
 		ChevronDownOutline,
 		HomeOutline,
-		InboxOutline,
+		// InboxOutline,
 		ShieldCheckOutline,
 		ShieldOutline,
 		BuildingOutline,
-		BookOutline,
+		// BookOutline,
 		CogOutline
 	} from 'flowbite-svelte-icons';
 	import UserPopover from '$lib/components/user-popover/index.svelte';
@@ -112,7 +112,7 @@
 						</svelte:fragment>
 					</SidebarItem>
 
-					<SidebarItem
+					<!-- <SidebarItem
 						data-testid="navigation-side-bar-inbox"
 						label={$t('common.components.navigation.inbox')}
 						href="/inbox"
@@ -120,9 +120,9 @@
 						<svelte:fragment slot="icon">
 							<InboxOutline />
 						</svelte:fragment>
-					</SidebarItem>
+					</SidebarItem> -->
 
-					<SidebarItem
+					<!-- <SidebarItem
 						data-testid="navigation-side-bar-trust-center"
 						label={$t('common.components.navigation.trustCenter')}
 						href="/trust-center"
@@ -130,7 +130,7 @@
 						<svelte:fragment slot="icon">
 							<ShieldCheckOutline />
 						</svelte:fragment>
-					</SidebarItem>
+					</SidebarItem> -->
 
 					<SidebarDropdownWrapper
 						data-testid="navigation-side-bar-risks"
@@ -180,7 +180,7 @@
 				</SidebarGroup>
 
 				<SidebarGroup border>
-					<SidebarDropdownWrapper
+					<!-- <SidebarDropdownWrapper
 						data-testid="navigation-side-bar-docs"
 						label={$t('common.components.navigation.docs')}
 					>
@@ -192,7 +192,7 @@
 							label={$t('common.components.navigation.policies')}
 							href="/policies"
 						/>
-					</SidebarDropdownWrapper>
+					</SidebarDropdownWrapper> -->
 
 					<SidebarItem
 						data-testid="navigation-side-bar-settings"
@@ -210,7 +210,11 @@
 				<SidebarGroup border />
 
 				<!-- TODO: This is not a11y compliant. -->
-				<div class="flex flex-row" id="navigation-user-info" data-testid="navigation-user-info">
+				<div
+					class="flex flex-row cursor-pointer"
+					id="navigation-user-info"
+					data-testid="navigation-user-info"
+				>
 					<Avatar data-testid="navigation-avatar" rounded>
 						{#if $user.name}
 							{$user.name.charAt(0)}
