@@ -210,7 +210,11 @@
 				<SidebarGroup border />
 
 				<!-- TODO: This is not a11y compliant. -->
-				<div class="flex flex-row" id="navigation-user-info" data-testid="navigation-user-info">
+				<div
+					class="flex flex-row cursor-pointer"
+					id="navigation-user-info"
+					data-testid="navigation-user-info"
+				>
 					<Avatar data-testid="navigation-avatar" rounded>
 						{#if $user.name}
 							{$user.name.charAt(0)}
