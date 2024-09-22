@@ -13,8 +13,8 @@ export interface CreateRiskModalData {
 	impactOptions: ImpactOption[];
 	responseOptions: ResponseOption[];
 	entities: Company[];
-	currentEntity: Company;
-	currentUser: User;
+	currentEntity: Company | null;
+	currentUser: User | null;
 }
 
 export async function loadCreateRiskModal({

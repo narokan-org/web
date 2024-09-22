@@ -10,14 +10,16 @@ describe('risk register page', () => {
 		return render(Page, {
 			...data,
 			data: {
-				likelihoodOptions: [],
-				impactOptions: [],
-				responseOptions: [],
-				categories: [],
-				owners: [],
-				entities: [],
-				currentEntity: null,
-				currentUser: null
+				createRiskModalData: {
+					likelihoodOptions: [],
+					impactOptions: [],
+					responseOptions: [],
+					categories: [],
+					owners: [],
+					entities: [],
+					currentEntity: null,
+					currentUser: null
+				}
 			}
 		});
 	}

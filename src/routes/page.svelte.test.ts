@@ -5,6 +5,8 @@ import HomePage from './+page.svelte';
 import common from '../lib/translations/en/common.json';
 import { readable, writable } from 'svelte/store';
 import { createMockUser } from '../../vitest-setup';
+import type { User } from '$lib/common/models/user';
+import data from './+page.svelte';
 
 global.fetch = vi.fn(() =>
 	Promise.resolve(
@@ -76,12 +78,30 @@ describe('home page', () => {
 	});
 
 	describe('loggedIn', () => {
+		function renderPage(user: User) {
+			render(HomePage, {
+				props: {
+					data: {
+						createRiskModal: {
+							likelihoodOptions: [],
+							impactOptions: [],
+							categories: [],
+							owners: [],
+							responseOptions: [],
+							entities: [],
+							currentEntity: null,
+							currentUser: user
+						}
+					}
+				},
+				context: new Map([['auth', { isLoggedIn: readable(true), user: readable(user) }]])
+			});
+		}
+
 		it('should render', () => {
 			const testUser = createMockUser();
 
-			render(HomePage, {
-				context: new Map([['auth', { isLoggedIn: readable(true), user: readable(testUser) }]])
-			});
+			renderPage(testUser);
 
 			expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(
 				`Welcome, ${testUser.name}`
@@ -92,9 +112,7 @@ describe('home page', () => {
 		it('should render with progress cards', () => {
 			const testUser = createMockUser();
 
-			render(HomePage, {
-				context: new Map([['auth', { isLoggedIn: readable(true), user: readable(testUser) }]])
-			});
+			renderPage(testUser);
 
 			expect(screen.getByText(common.pages.home.loggedIn.progressCard1Heading)).toBeInTheDocument();
 			expect(screen.getByText(common.pages.home.loggedIn.progressCard2Heading)).toBeInTheDocument();
@@ -104,9 +122,7 @@ describe('home page', () => {
 		it('should render tables', () => {
 			const testUser = createMockUser();
 
-			render(HomePage, {
-				context: new Map([['auth', { isLoggedIn: readable(true), user: readable(testUser) }]])
-			});
+			renderPage(testUser);
 
 			expect(screen.getByText(common.pages.home.loggedIn.risksTable.heading)).toBeInTheDocument();
 			expect(screen.getByText(common.pages.home.loggedIn.risksTable.column1)).toBeInTheDocument();
