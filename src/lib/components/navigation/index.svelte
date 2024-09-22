@@ -105,6 +105,7 @@
 						data-testid="navigation-side-bar-dashboard"
 						label={$t('common.components.navigation.dashboard')}
 						href="/"
+						active={activeUrl === '/' || activeUrl === ''}
 					>
 						<svelte:fragment slot="icon">
 							<HomeOutline />
@@ -134,6 +135,7 @@
 					<SidebarDropdownWrapper
 						data-testid="navigation-side-bar-risks"
 						label={$t('common.components.navigation.risks')}
+						isOpen={activeUrl === '/risk-register' || activeUrl === '/assessments'}
 					>
 						<svelte:fragment slot="icon">
 							<ShieldOutline />
@@ -142,11 +144,13 @@
 							data-testid="navigation-side-bar-risk-register"
 							label={$t('common.components.navigation.riskRegister')}
 							href="/risk-register"
+							active={activeUrl === '/risk-register'}
 						/>
 						<SidebarDropdownItem
 							data-testid="navigation-side-bar-assessments"
 							label={$t('common.components.navigation.assessments')}
 							href="/assessments"
+							active={activeUrl === '/assessments'}
 						/>
 					</SidebarDropdownWrapper>
 
