@@ -15,7 +15,14 @@ const createToastStore = () => {
 	return {
 		subscribe,
 		addToast: (message: string, icon: 'success' | 'error' = 'success', dismissable = false) => {
-			update((toasts) => [...toasts, { id: id++, message, icon, dismissable }]);
+			const toastId = id++;
+			update((toasts) => [...toasts, { id: toastId, message, icon, dismissable }]);
+
+			if (!dismissable) {
+				setTimeout(() => {
+					update((toasts) => toasts.filter((toast) => toast.id !== toastId));
+				}, 3000);
+			}
 		},
 		removeToast: (id: number) => {
 			update((toasts) => toasts.filter((toast) => toast.id !== id));
