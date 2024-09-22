@@ -6,7 +6,6 @@ import common from '../lib/translations/en/common.json';
 import { readable, writable } from 'svelte/store';
 import { createMockUser } from '../../vitest-setup';
 import type { User } from '$lib/common/models/user';
-import data from './+page.svelte';
 
 global.fetch = vi.fn(() =>
 	Promise.resolve(
