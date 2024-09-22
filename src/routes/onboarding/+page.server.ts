@@ -56,7 +56,8 @@ export const actions: Actions = {
 			maxAge: 60 * 60 * 24 * 30
 		});
 
-		redirect(302, '/invite');
+		// redirect(302, '/invite');
+		redirect(302, '/');
 	}
 };
 

@@ -14,19 +14,19 @@
 
 	const settingsItems = [
 		{ label: $t('common.components.settingsSidebar.profile'), href: '/settings/edit-profile' },
-		{
-			label: $t('common.components.settingsSidebar.notifications'),
-			href: '/settings/notifications'
-		},
-		{ label: $t('common.components.settingsSidebar.general'), href: '/settings/general' },
-		{ label: $t('common.components.settingsSidebar.users'), href: '/settings/users' },
-		{ label: $t('common.components.settingsSidebar.teams'), href: '/settings/teams' },
-		{
-			label: $t('common.components.settingsSidebar.securityAndPermissions'),
-			href: '/settings/security'
-		},
-		{ label: $t('common.components.settingsSidebar.auditLog'), href: '/settings/audit-log' },
-		{ label: $t('common.components.settingsSidebar.billing'), href: '/settings/billing' }
+		// {
+		// 	label: $t('common.components.settingsSidebar.notifications'),
+		// 	href: '/settings/notifications'
+		// },
+		{ label: $t('common.components.settingsSidebar.general'), href: '/settings/general' }
+		// { label: $t('common.components.settingsSidebar.users'), href: '/settings/users' },
+		// { label: $t('common.components.settingsSidebar.teams'), href: '/settings/teams' },
+		// {
+		// 	label: $t('common.components.settingsSidebar.securityAndPermissions'),
+		// 	href: '/settings/security'
+		// },
+		// { label: $t('common.components.settingsSidebar.auditLog'), href: '/settings/audit-log' },
+		// { label: $t('common.components.settingsSidebar.billing'), href: '/settings/billing' }
 	];
 </script>
 
@@ -47,7 +47,7 @@
 				label={$t('common.components.settingsSidebar.section1Heading')}
 				class="text-xl font-bold"
 			/>
-			{#each settingsItems.slice(0, 2) as item}
+			{#each settingsItems.slice(0, 1) as item}
 				<SidebarItem href={item.href} label={item.label} />
 			{/each}
 		</SidebarGroup>
@@ -56,7 +56,7 @@
 				label={$t('common.components.settingsSidebar.section2Heading')}
 				class="text-xl font-bold"
 			/>
-			{#each settingsItems.slice(2) as item}
+			{#each settingsItems.slice(1) as item}
 				<SidebarItem href={item.href} label={item.label} />
 			{/each}
 		</SidebarGroup>

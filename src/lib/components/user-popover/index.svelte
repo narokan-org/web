@@ -12,9 +12,9 @@
 				<Button href="/settings/edit-profile" class="border-none hover:rounded-none justify-start"
 					>{$t('common.components.userPopover.profileButton')}</Button
 				>
-				<Button href="/notifications" class="border-none hover:rounded-none justify-start"
+				<!-- <Button href="/notifications" class="border-none hover:rounded-none justify-start"
 					>{$t('common.components.userPopover.notificationsButton')}</Button
-				>
+				> -->
 				<Button href="/logout" class="border-none hover:rounded-none justify-start"
 					>{$t('common.components.userPopover.signOutButton')}</Button
 				>
