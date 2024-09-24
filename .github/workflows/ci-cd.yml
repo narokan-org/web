@@ -16,7 +16,14 @@ jobs:
     name: Build and Deploy Job
 
     steps:
-      - uses: actions/checkout@v3
+      - name: B2C Azure Login
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.B2C_DEV_AZURE_CREDENTIALS }}
+          allow-no-subscriptions: true
+
+      - name: Checkout
+        uses: actions/checkout@v3
         with:
           submodules: true
           lfs: false
@@ -52,6 +59,10 @@ jobs:
           app_location: '/'
           api_location: 'build/server'
           output_location: 'build/static'
+
+      - name: Update AD B2C Redirect URIs
+        run: |
+          az ad app update --id ${{ secrets.B2C_DEV_NAROKAN_CLIENT_ID }} --web-redirect-uris "${{ steps.builddeploy.outputs.static_web_app_url }}/.auth/login/aadb2c_sign_in/callback" "${{ steps.builddeploy.outputs.static_web_app_url }}/.auth/login/aadb2c_sign_up/callback" "https://dev.narokan.com/.auth/login/aadb2c_sign_in/callback" "https://dev.narokan.com/.auth/login/aadb2c_sign_up/callback"
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
