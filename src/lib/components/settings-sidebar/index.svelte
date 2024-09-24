@@ -45,7 +45,7 @@
 		<SidebarGroup class="mt-8">
 			<SidebarItem
 				label={$t('common.components.settingsSidebar.section1Heading')}
-				class="text-xl font-bold"
+				class="text-xl font-bold cursor-default hover:bg-transparent"
 			/>
 			{#each settingsItems.slice(0, 1) as item}
 				<SidebarItem href={item.href} label={item.label} />
@@ -54,7 +54,7 @@
 		<SidebarGroup class="mt-10">
 			<SidebarItem
 				label={$t('common.components.settingsSidebar.section2Heading')}
-				class="text-xl font-bold"
+				class="text-xl font-bold cursor-default hover:bg-transparent"
 			/>
 			{#each settingsItems.slice(1) as item}
 				<SidebarItem href={item.href} label={item.label} />
