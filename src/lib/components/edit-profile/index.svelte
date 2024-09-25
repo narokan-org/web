@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Input, Button, Label, P } from 'flowbite-svelte';
+	import { Input, Button, Label, Heading, P } from 'flowbite-svelte';
 	import { EyeOutline, EyeSlashOutline } from 'flowbite-svelte-icons';
 	import { enhance } from '$app/forms';
 
@@ -24,22 +24,31 @@
 	}}
 >
 	<div class="flex flex-col gap-y-6 mt-6">
-		<Label
+		<Heading tag="h6" class="text-gray-600"
+			>{$t('common.components.editProfile.personalInformation')}</Heading
+		>
+		<Label class="mt-3"
 			>{$t('common.components.editProfile.formFields.fullName')}
-			<Input name="fullName" class="mt-3" bind:value={fullName} required />
+			<Input name="fullName" class="mt-1" bind:value={fullName} required />
 		</Label>
 
 		<div>
-			<Label>{$t('common.components.editProfile.formFields.email')}</Label>
-			<P class="mt-3">{email}</P>
+			<Label class="text-black"
+				>{$t('common.components.editProfile.formFields.email')}
+				<Input class="mt-1" name="email" value={email} disabled />
+			</Label>
 		</div>
 
+		<Heading tag="h6" class="text-gray-600 mt-10"
+			>{$t('common.components.editProfile.changePassword')}</Heading
+		>
 		<div>
 			<Label
-				>{$t('common.components.editProfile.formFields.password')}
-				<Input class="mt-3" name="password" type={showPassword ? 'text' : 'password'} size="lg">
+				>{$t('common.components.editProfile.formFields.password')}<span class="text-red-500">*</span
+				>
+				<Input class="mt-1" name="password" type={showPassword ? 'text' : 'password'} size="lg">
 					<button
-						slot="left"
+						slot="right"
 						on:click={() => (showPassword = !showPassword)}
 						class="pointer-events-auto"
 					>
@@ -50,19 +59,25 @@
 						{/if}
 					</button>
 				</Input>
+				<P class="text-sm text-gray-500 mt-1">
+					{$t('common.components.editProfile.passwordInstructions')}
+				</P>
 			</Label>
 		</div>
 		<div>
 			<Label
-				>{$t('common.components.editProfile.formFields.confirmPassword')}
+				>{$t('common.components.editProfile.formFields.confirmPassword')}<span class="text-red-500"
+					>*</span
+				>
 				<Input
-					class="mt-3"
+					class="mt-1"
 					name="confirmPassword"
 					type={showConfirmPassword ? 'text' : 'password'}
 					size="lg"
+					autocomplete="off"
 				>
 					<button
-						slot="left"
+						slot="right"
 						on:click={() => (showConfirmPassword = !showConfirmPassword)}
 						class="pointer-events-auto"
 					>
@@ -75,6 +90,6 @@
 				</Input>
 			</Label>
 		</div>
-		<Button type="submit">{$t('common.components.editProfile.saveButton')}</Button>
 	</div>
+	<Button class="mt-6" type="submit">{$t('common.components.editProfile.saveButton')}</Button>
 </form>
