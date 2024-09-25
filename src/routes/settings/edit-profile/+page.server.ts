@@ -9,6 +9,7 @@ export const actions: Actions = {
 		const confirmPassword = formData.get('confirmPassword') as string;
 
 		if (!fullName || !fullName.trim()) {
+			locals.loggingService.error('Full name is required');
 			return fail(400, {
 				message: 'Full name is required'
 			});
@@ -16,22 +17,28 @@ export const actions: Actions = {
 
 		if (password || confirmPassword) {
 			if (!password || !confirmPassword) {
+				locals.loggingService.error(
+					`Password and confirm password do not match. ${password} ${confirmPassword}`
+				);
 				return fail(400, {
 					message: 'Both password and confirm password must be provided'
 				});
 			}
 
 			if (password !== confirmPassword) {
+				locals.loggingService.error(`Passwords do not match. ${password} ${confirmPassword}`);
 				return fail(400, {
 					message: 'Passwords do not match'
 				});
 			}
 		}
 
+		locals.loggingService.info(`Updating user attributes. ${fullName}`);
 		await locals.identityService.updateUserAttributes({
 			FullName: fullName
 		});
 
+		locals.loggingService.info(`Updating user password. ${password}`);
 		await locals.identityService.updatePassword({
 			password
 		});

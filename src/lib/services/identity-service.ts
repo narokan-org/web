@@ -34,6 +34,7 @@ export class IdentityService implements IIdentityService {
 
 	async updatePassword({ password }: { password: string }) {
 		if (currentEnvironment() === 'local') {
+			this.log.info(`Skipping password update in local environment. ${password}`);
 			return;
 		}
 
@@ -57,12 +58,14 @@ export class IdentityService implements IIdentityService {
 			return;
 		}
 
+		this.log.info(`Updating user password. ${password}`);
 		await graphClient.api(`/users/${currentUser.id}`).update({
 			passwordProfile: {
 				password: password,
 				forceChangePasswordNextSignIn: true
 			}
 		});
+		this.log.info(`User password updated. ${password}`);
 	}
 
 	async updateUserAttributes(attributes: UserExtensionAttributes) {
