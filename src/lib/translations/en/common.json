@@ -46,10 +46,18 @@
 			}
 		},
 		"editProfile": {
+			"personalInformation": "Personal Information",
+			"changePassword": "Change Password",
+			"passwordInstructions": "Your password must contain at least 8 characters, one lowercase letter, one uppercase letter, one number, and one symbol.",
+			"passwordMismatch": "Your passwords do not match.",
 			"formFields": {
-				"fullName": "Full Name"
+				"fullName": "Full Name",
+				"email": "Email",
+				"password": "Password",
+				"confirmPassword": "Confirm Password"
 			},
-			"saveButton": "Save"
+			"saveButton": "Save Changes",
+			"savingChanges": "Saving changes..."
 		},
 		"navigation": {
 			"assessments": "Assessments",
@@ -100,7 +108,8 @@
 		}
 	},
 	"global": {
-		"loading": "Loading..."
+		"loading": "Loading...",
+		"changesSaved": "Changes saved successfully."
 	},
 	"pages": {
 		"assessments": {

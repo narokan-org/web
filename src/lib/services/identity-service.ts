@@ -10,8 +10,15 @@ import type { UserService } from './user-service';
 import type { UserExtensionAttributes } from '$lib/common/models/user-extension-attributes';
 import type { User } from '$lib/common/models/user';
 import { currentEnvironment } from '$lib/utils/utils';
+import { validatePassword } from '$lib/utils/password-validator';
 
-export class IdentityService {
+export interface IIdentityService {
+	updateUserAttributes(attributes: UserExtensionAttributes): Promise<void>;
+	getUsers(userIds?: string[]): Promise<User[]>;
+	updatePassword({ password }: { password: string }): Promise<void>;
+}
+
+export class IdentityService implements IIdentityService {
 	private cca = new ConfidentialClientApplication({
 		auth: {
 			authority: `https://login.microsoftonline.com/${process.env.AADB2C_TENANT_ID}`,
@@ -24,6 +31,48 @@ export class IdentityService {
 		private log: LoggingService,
 		private userService: UserService
 	) {}
+
+	async updatePassword({ password }: { password: string }) {
+		if (currentEnvironment() === 'local') {
+			this.log.info(`Skipping password update in local environment.`);
+			return;
+		}
+
+		const validationResult = validatePassword(password);
+
+		if (!validationResult.isValid) {
+			this.log.error('Password does not meet the minimum requirements.');
+			throw new Error(validationResult.error);
+		}
+
+		const currentUser = await this.userService.getUser();
+
+		if (!currentUser) {
+			this.log.error('Failed to get current user for updating user password.');
+			return;
+		}
+
+		const graphClient = await this.getGraphClient();
+
+		if (!graphClient) {
+			return;
+		}
+
+		await graphClient.api(`/users/${currentUser.id}`).update(
+			{
+				passwordProfile: {
+					password: password,
+					forceChangePasswordNextSignIn: false
+				}
+			},
+			(error) => {
+				if (error) {
+					this.log.error(`Failed to update user password. ${error}`);
+				}
+			}
+		);
+		this.log.info(`User password updated. ${password}`);
+	}
 
 	async updateUserAttributes(attributes: UserExtensionAttributes) {
 		if (currentEnvironment() === 'local') {

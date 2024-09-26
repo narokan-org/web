@@ -95,7 +95,8 @@ const config = {
 					// },
 					// {
 					// 	route: '/settings/edit-profile',
-					// 	allowedRoles: ['authenticated']
+					// 	allowedRoles: ['authenticated'],
+					// 	methods: ['POST']
 					// },
 					{
 						route: '/settings',
