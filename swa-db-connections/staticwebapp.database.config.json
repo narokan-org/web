@@ -34,7 +34,7 @@
 			"source": "dbo.Company",
 			"permissions": [
 				{
-					"actions": ["read", "create"],
+					"actions": ["read", "create", "update"],
 					"role": "authenticated"
 				}
 			]
