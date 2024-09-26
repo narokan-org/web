@@ -19,6 +19,7 @@ import type { DBRegion } from '$lib/common/entities/db-region';
 export interface ICompanyService {
 	getCompanies(): Promise<Company[]>;
 	getCompany(id: number): Promise<Company | null>;
+	updateCompany(company: Omit<Company, 'regionId'>): Promise<Company>;
 	createCompany(company: Omit<Company, 'id'>): Promise<Company | null>;
 	submitOnboardingSurvey({
 		teamSize,
@@ -140,6 +141,44 @@ export class CompanyService implements ICompanyService {
 		await this.associateCompanyWithUser(dbCompany.Id, currentUser.id);
 
 		return mapDBCompanyToCompany(dbCompany);
+	}
+
+	async updateCompany(company: Omit<Company, 'regionId'>): Promise<Company> {
+		const currentUser = await this.userService.getUser();
+		const role = currentUser?.roles.find((r) => r === 'authenticated');
+
+		if (!role || !currentUser) {
+			throw new Error('User not authenticated');
+		}
+
+		const updatedCompany: Partial<DBCompany> = {
+			Name: company.name
+		};
+
+		const response = await this.fetchFn(`/data-api/rest/Company/Id/${company.id}`, {
+			method: 'PATCH',
+			headers: {
+				'Content-Type': 'application/json',
+				'X-MS-API-ROLE': role
+			},
+			body: JSON.stringify(updatedCompany)
+		});
+
+		if (!response.ok) {
+			throw new Error(`Could not update company ${company.id}: ${response.statusText}`);
+		}
+
+		const dbCompany = (await parseDBResponse<DBCompany>(response))?.[0];
+
+		if (!dbCompany) {
+			throw new Error(`Could not update company ${company.id}: ${response.statusText}`);
+		}
+
+		return {
+			id: dbCompany.Id,
+			name: dbCompany.Name,
+			regionId: dbCompany.RegionId
+		};
 	}
 
 	async submitOnboardingSurvey({

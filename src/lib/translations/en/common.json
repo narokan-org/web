@@ -59,6 +59,14 @@
 			"saveButton": "Save Changes",
 			"savingChanges": "Saving changes..."
 		},
+		"generalSettings": {
+			"manageWorkspace": "Manage Workspace",
+			"formFields": {
+				"workspaceName": "Workspace Name"
+			},
+			"saveButton": "Save Changes",
+			"savingChanges": "Saving changes..."
+		},
 		"navigation": {
 			"assessments": "Assessments",
 			"controls": "Controls",
@@ -218,6 +226,9 @@
 		},
 		"editProfile": {
 			"heading": "Profile"
+		},
+		"generalSettings": {
+			"heading": "General"
 		}
 	}
 }

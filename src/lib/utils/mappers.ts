@@ -12,7 +12,8 @@ import type { UserCompanyRelationship } from '$lib/common/models/user-company-re
 export function mapDBCompanyToCompany(dbCompany: DBCompany): Company {
 	return {
 		id: dbCompany.Id,
-		name: dbCompany.Name
+		name: dbCompany.Name,
+		regionId: dbCompany.RegionId
 	};
 }
 
