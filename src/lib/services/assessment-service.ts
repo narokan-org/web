@@ -10,7 +10,7 @@ import type { DBResponseOption } from '$lib/common/entities/db-response-option';
 import type { Assessment } from '$lib/common/models/assessment';
 import type { DBAssessment } from '$lib/common/entities/db-assessment';
 import type { DBRiskAssessment } from '$lib/common/entities/db-risk-assessment';
-
+import type { DataAPIClient } from './data-api-client';
 export interface IAssessmentService {
 	getLikelihoodOptions(): Promise<LikelihoodOption[]>;
 	getImpactOptions(): Promise<ImpactOption[]>;
@@ -28,7 +28,8 @@ export class AssessmentService implements IAssessmentService {
 	constructor(
 		private fetchFn: typeof fetch,
 		private log: LoggingService,
-		private userService: UserService
+		private userService: UserService,
+		private dataAPIClient: DataAPIClient
 	) {}
 
 	async createAssessment({
@@ -98,23 +99,8 @@ export class AssessmentService implements IAssessmentService {
 		};
 	}
 	async getLikelihoodOptions(): Promise<LikelihoodOption[]> {
-		const role = (await this.userService.getUser())?.roles.find((r) => r === 'authenticated');
-
-		if (!role) {
-			return [];
-		}
-
-		const response = await this.fetchFn(`/data-api/rest/LikelihoodOption/`, {
-			headers: {
-				'X-MS-API-ROLE': role
-			}
-		});
-
-		if (!response.ok) {
-			return [];
-		}
-
-		const dbLikelihoodOptions = await parseDBResponse<DBLikelihoodOption>(response);
+		const dbLikelihoodOptions =
+			await this.dataAPIClient.get<DBLikelihoodOption>('LikelihoodOption');
 
 		return (
 			dbLikelihoodOptions?.map((o) => ({
@@ -126,23 +112,7 @@ export class AssessmentService implements IAssessmentService {
 	}
 
 	async getImpactOptions(): Promise<ImpactOption[]> {
-		const role = (await this.userService.getUser())?.roles.find((r) => r === 'authenticated');
-
-		if (!role) {
-			return [];
-		}
-
-		const response = await this.fetchFn(`/data-api/rest/ImpactOption/`, {
-			headers: {
-				'X-MS-API-ROLE': role
-			}
-		});
-
-		if (!response.ok) {
-			return [];
-		}
-
-		const dbImpactOptions = await parseDBResponse<DBImpactOption>(response);
+		const dbImpactOptions = await this.dataAPIClient.get<DBImpactOption>('ImpactOption');
 
 		return (
 			dbImpactOptions?.map((o) => ({
@@ -154,23 +124,7 @@ export class AssessmentService implements IAssessmentService {
 	}
 
 	async getResponseOptions(): Promise<ResponseOption[]> {
-		const role = (await this.userService.getUser())?.roles.find((r) => r === 'authenticated');
-
-		if (!role) {
-			return [];
-		}
-
-		const response = await this.fetchFn(`/data-api/rest/ResponseOption/`, {
-			headers: {
-				'X-MS-API-ROLE': role
-			}
-		});
-
-		if (!response.ok) {
-			return [];
-		}
-
-		const dbResponseOptions = await parseDBResponse<DBResponseOption>(response);
+		const dbResponseOptions = await this.dataAPIClient.get<DBResponseOption>('ResponseOption');
 
 		return (
 			dbResponseOptions?.map((o) => ({

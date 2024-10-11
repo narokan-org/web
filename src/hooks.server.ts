@@ -27,7 +27,8 @@ export const handle: Handle = async ({ event, resolve }) => {
 	event.locals.assessmentService = new AssessmentService(
 		event.fetch,
 		event.locals.loggingService,
-		event.locals.userService
+		event.locals.userService,
+		event.locals.dataAPIClient
 	);
 	event.locals.riskService = new RiskService(
 		event.fetch,

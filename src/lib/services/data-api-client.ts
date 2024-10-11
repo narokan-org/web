@@ -3,6 +3,7 @@ import type { UserService } from './user-service';
 import { parseDBResponse } from '$lib/utils/utils';
 export class DataAPIClient {
 	private baseUrl = '/data-api/rest';
+
 	constructor(
 		private fetchFn: typeof fetch,
 		private log: LoggingService,
