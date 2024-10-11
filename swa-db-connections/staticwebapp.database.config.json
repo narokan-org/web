@@ -45,6 +45,10 @@
 				{
 					"actions": ["read", "create"],
 					"role": "authenticated"
+				},
+				{
+					"actions": ["read"],
+					"role": "anonymous"
 				}
 			]
 		},
