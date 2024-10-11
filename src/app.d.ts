@@ -6,6 +6,7 @@ declare global {
 	namespace App {
 		// interface Error {}
 		interface Locals {
+			dataAPIClient: import('$lib/services/data-api-client').DataAPIClient;
 			loggingService: import('$lib/services/logging-service').LoggingService;
 			userService: import('$lib/services/user-service').UserService;
 			companyService: import('$lib/services/company-service').CompanyService;

@@ -16,9 +16,10 @@ import type { LoggingService } from './logging-service';
 import type { UserService } from './user-service';
 import type { Region } from '$lib/common/models/region';
 import type { DBRegion } from '$lib/common/entities/db-region';
+import type { DataAPIClient } from './data-api-client';
+
 export interface ICompanyService {
 	getCompanies(): Promise<Company[]>;
-	getCompany(id: number): Promise<Company | null>;
 	updateCompany(company: Omit<Company, 'regionId'>): Promise<Company>;
 	createCompany(company: Omit<Company, 'id'>): Promise<Company | null>;
 	submitOnboardingSurvey({
@@ -46,27 +47,12 @@ export class CompanyService implements ICompanyService {
 	constructor(
 		private fetchFn: typeof fetch,
 		private log: LoggingService,
-		private userService: UserService
+		private userService: UserService,
+		private dataAPIClient: DataAPIClient
 	) {}
 
 	async getCompanies(): Promise<Company[]> {
-		const role = (await this.userService.getUser())?.roles.find((r) => r === 'authenticated');
-
-		if (!role) {
-			return [];
-		}
-
-		const response = await this.fetchFn('/data-api/rest/Company', {
-			headers: {
-				'X-MS-API-ROLE': role
-			}
-		});
-
-		if (!response.ok) {
-			return [];
-		}
-
-		const dbCompanies = await parseDBResponse<DBCompany>(response);
+		const dbCompanies = await this.dataAPIClient.get<DBCompany>('Company');
 
 		return (
 			dbCompanies?.map((c) => ({
@@ -75,32 +61,6 @@ export class CompanyService implements ICompanyService {
 				regionId: c.RegionId
 			})) ?? []
 		);
-	}
-
-	async getCompany(id: number): Promise<Company | null> {
-		const role = (await this.userService.getUser())?.roles.find((r) => r === 'authenticated');
-
-		if (!role) {
-			return null;
-		}
-
-		const response = await this.fetchFn(`/data-api/rest/Company/Id/${id}`, {
-			headers: {
-				'X-MS-API-ROLE': role
-			}
-		});
-
-		if (!response.ok) {
-			return null;
-		}
-
-		const dbCompany = (await parseDBResponse<DBCompany>(response))?.[0];
-
-		if (!dbCompany) {
-			return null;
-		}
-
-		return mapDBCompanyToCompany(dbCompany);
 	}
 
 	async createCompany(company: Omit<Company, 'id'>): Promise<Company | null> {
@@ -226,41 +186,14 @@ export class CompanyService implements ICompanyService {
 	}
 
 	async getRiskCategories(id: number): Promise<RiskCategory[]> {
-		const role = (await this.userService.getUser())?.roles.find((r) => r === 'authenticated');
-
-		if (!role) {
-			return [];
-		}
-
-		const response = await this.fetchFn(
-			`/data-api/rest/CompanyRiskCategory?$filter=CompanyId eq ${id}`,
-			{
-				headers: {
-					'X-MS-API-ROLE': role
-				}
-			}
+		const dbCompanyRiskCategories = await this.dataAPIClient.get<DBCompanyRiskCategory>(
+			`CompanyRiskCategory?$filter=CompanyId eq ${id}`
 		);
-
-		if (!response.ok) {
-			return [];
-		}
-
-		const dbCompanyRiskCategories = await parseDBResponse<DBCompanyRiskCategory>(response);
-
-		if (!dbCompanyRiskCategories) {
-			return [];
-		}
 
 		return dbCompanyRiskCategories?.map((c) => mapDBCompanyRiskCategoryToRiskCategory(c)) ?? [];
 	}
 
 	async getUserCompanyRelationships(filterCriteria: Record<string, any>) {
-		const role = (await this.userService.getUser())?.roles.find((r) => r === 'authenticated');
-
-		if (!role) {
-			return [];
-		}
-
 		const filter = Object.entries(filterCriteria)
 			.map(
 				([key, value]) =>
@@ -268,27 +201,13 @@ export class CompanyService implements ICompanyService {
 			)
 			.join(' and ');
 
-		const response = await this.fetchFn(
-			`/data-api/rest/UserCompanyRelationship?$filter=${filter}`,
-			{
-				headers: {
-					'X-MS-API-ROLE': role
-				}
-			}
+		const dbUserRelationships = await this.dataAPIClient.get<DBUserCompanyRelationship>(
+			`UserCompanyRelationship?$filter=${filter}`
 		);
 
-		if (!response.ok) {
-			return [];
-		}
-
-		const dbUserRelationships = await parseDBResponse<DBUserCompanyRelationship>(response);
-
-		if (!dbUserRelationships) {
-			return [];
-		}
-
 		return (
-			dbUserRelationships.map((r) => mapDBUserCompanyRelationshipToUserCompanyRelationship(r)) ?? []
+			dbUserRelationships?.map((r) => mapDBUserCompanyRelationshipToUserCompanyRelationship(r)) ??
+			[]
 		);
 	}
 
@@ -316,28 +235,8 @@ export class CompanyService implements ICompanyService {
 	}
 
 	async getRegions(): Promise<Region[]> {
-		const role = (await this.userService.getUser())?.roles.find((r) => r === 'authenticated');
+		const dbRegions = await this.dataAPIClient.get<DBRegion>('Region');
 
-		if (!role) {
-			return [];
-		}
-
-		const response = await this.fetchFn('/data-api/rest/Region', {
-			headers: {
-				'X-MS-API-ROLE': role
-			}
-		});
-
-		if (!response.ok) {
-			return [];
-		}
-
-		const dbRegions = await parseDBResponse<DBRegion>(response);
-
-		if (!dbRegions) {
-			return [];
-		}
-
-		return dbRegions.map((r) => ({ id: r.Id, name: r.Name })) ?? [];
+		return dbRegions?.map((r) => ({ id: r.Id, name: r.Name })) ?? [];
 	}
 }

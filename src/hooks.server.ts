@@ -5,10 +5,15 @@ import { CompanyService } from '$lib/services/company-service';
 import { IdentityService } from '$lib/services/identity-service';
 import { AssessmentService } from '$lib/services/assessment-service';
 import { RiskService } from '$lib/services/risk-service';
-
+import { DataAPIClient } from '$lib/services/data-api-client';
 export const handle: Handle = async ({ event, resolve }) => {
 	event.locals.loggingService = new LoggingService();
 	event.locals.userService = new UserService(event.fetch, event.locals.loggingService);
+	event.locals.dataAPIClient = new DataAPIClient(
+		event.fetch,
+		event.locals.loggingService,
+		event.locals.userService
+	);
 	event.locals.identityService = new IdentityService(
 		event.locals.loggingService,
 		event.locals.userService
@@ -16,7 +21,8 @@ export const handle: Handle = async ({ event, resolve }) => {
 	event.locals.companyService = new CompanyService(
 		event.fetch,
 		event.locals.loggingService,
-		event.locals.userService
+		event.locals.userService,
+		event.locals.dataAPIClient
 	);
 	event.locals.assessmentService = new AssessmentService(
 		event.fetch,
