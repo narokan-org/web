@@ -1,4 +1,11 @@
 <script lang="ts">
+	import HomeOutline from 'flowbite-svelte-icons/HomeOutline.svelte';
+	import ShieldCheckOutline from 'flowbite-svelte-icons/ShieldCheckOutline.svelte';
+	import ShieldOutline from 'flowbite-svelte-icons/ShieldOutline.svelte';
+	import BuildingOutline from 'flowbite-svelte-icons/BuildingOutline.svelte';
+	import ChevronDownOutline from 'flowbite-svelte-icons/ChevronDownOutline.svelte';
+	import CogOutline from 'flowbite-svelte-icons/CogOutline.svelte';
+
 	import { getContext } from 'svelte';
 	import { readable, type Readable } from 'svelte/store';
 	import {
@@ -17,16 +24,6 @@
 		SidebarDropdownItem,
 		SidebarDropdownWrapper
 	} from 'flowbite-svelte';
-	import {
-		ChevronDownOutline,
-		HomeOutline,
-		// InboxOutline,
-		ShieldCheckOutline,
-		ShieldOutline,
-		BuildingOutline,
-		// BookOutline,
-		CogOutline
-	} from 'flowbite-svelte-icons';
 	import UserPopover from '$lib/components/user-popover/index.svelte';
 	import SettingsSidebar from '$lib/components/settings-sidebar/index.svelte';
 

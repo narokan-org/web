@@ -1,6 +1,8 @@
 <script lang="ts">
+	import CheckCircleSolid from 'flowbite-svelte-icons/CheckCircleSolid.svelte';
+	import CloseCircleSolid from 'flowbite-svelte-icons/CloseCircleSolid.svelte';
 	import { Toast } from 'flowbite-svelte';
-	import { CheckCircleSolid, CloseCircleSolid } from 'flowbite-svelte-icons';
+
 	export let dismissable = false;
 	export let icon: 'success' | 'error' = 'success';
 </script>

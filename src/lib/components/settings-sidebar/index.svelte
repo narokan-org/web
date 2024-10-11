@@ -1,7 +1,7 @@
 <script lang="ts">
+	import ArrowLeftOutline from 'flowbite-svelte-icons/ArrowLeftOutline.svelte';
 	import { Sidebar, SidebarWrapper, SidebarGroup, SidebarItem } from 'flowbite-svelte';
 	import { t } from '$lib/translations';
-	import { ArrowLeftOutline } from 'flowbite-svelte-icons';
 	import { onMount } from 'svelte';
 
 	let originalUrl = '/';

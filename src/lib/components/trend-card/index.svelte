@@ -1,6 +1,8 @@
 <script lang="ts">
+	import ArrowUpOutline from 'flowbite-svelte-icons/ArrowUpOutline.svelte';
+	import ArrowDownOutline from 'flowbite-svelte-icons/ArrowDownOutline.svelte';
 	import { Card, P, Badge, type ColorVariant } from 'flowbite-svelte';
-	import { ArrowUpOutline, ArrowDownOutline } from 'flowbite-svelte-icons';
+
 	export let footer: string;
 	export let count: number;
 	export let percentage: number;

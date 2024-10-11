@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { Button, Heading, P, Input, Hr, ButtonGroup } from 'flowbite-svelte';
 	import PlusOutline from 'flowbite-svelte-icons/PlusOutline.svelte';
+	import { Button, Heading, P, Input, Hr, ButtonGroup } from 'flowbite-svelte';
 	import { t } from '$lib/translations';
 
 	let emailInputs = [true, true, true, false, false];

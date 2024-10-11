@@ -1,9 +1,7 @@
 <script lang="ts">
+	import PlusOutline from 'flowbite-svelte-icons/PlusOutline.svelte';
+	import UploadOutline from 'flowbite-svelte-icons/UploadOutline.svelte';
 	import { Heading, P, Img, Input, Button, Table, TableHead, TableHeadCell } from 'flowbite-svelte';
-	import { PlusOutline, UploadOutline } from 'flowbite-svelte-icons';
-	// import BrainSolid from 'flowbite-svelte-icons/BrainSolid.svelte';
-	// import LockSolid from 'flowbite-svelte-icons/LockSolid.svelte';
-	// import FileChartBarSolid from 'flowbite-svelte-icons/FileChartBarSolid.svelte';
 	import ProgressCard from '$lib/components/progress-card/index.svelte';
 	import { getContext } from 'svelte';
 	import { readable } from 'svelte/store';

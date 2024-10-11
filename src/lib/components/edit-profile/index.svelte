@@ -1,6 +1,7 @@
 <script lang="ts">
+	import EyeOutline from 'flowbite-svelte-icons/EyeOutline.svelte';
+	import EyeSlashOutline from 'flowbite-svelte-icons/EyeSlashOutline.svelte';
 	import { Input, Button, Label, Heading, P, Spinner, Helper } from 'flowbite-svelte';
-	import { EyeOutline, EyeSlashOutline } from 'flowbite-svelte-icons';
 	import { enhance } from '$app/forms';
 	import { createFormStore } from '$lib/stores/form-store';
 	import { toastStore } from '$lib/stores/toast-store';
