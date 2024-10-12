@@ -46,7 +46,9 @@ export const load = async ({ locals, cookies }) => {
 		throw error(400, 'No workspace found.');
 	}
 
-	const company = await locals.companyService.getCompany(Number(currentCompany));
+	const company = (await locals.companyService.getCompanies()).filter(
+		(c) => c.id === Number(currentCompany)
+	);
 
 	if (!company) {
 		throw error(400, 'No workspace found.');
